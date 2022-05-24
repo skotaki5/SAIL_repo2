@@ -1,0 +1,167 @@
+{
+    "name": "pl-main-master",
+    "properties": {
+        "activities": [
+            {
+                "name": "Execute Pipeline Bronze Layer",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "pl-ingestion-bronze",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_override_high_watermark": {
+                            "value": "@pipeline().parameters.p_overide_high_watermark",
+                            "type": "Expression"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Execute Databricks Job",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Execute Pipeline Bronze Layer",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "pl-transformation-db-job",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "adb_job_id": {
+                            "value": "@json(string(pipeline().globalParameters.gp_adb_job_id)).sail_load_id",
+                            "type": "Expression"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Send ADF Failure Mail",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Execute Pipeline Bronze Layer",
+                        "dependencyConditions": [
+                            "Failed"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Pl-Email-Alter",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_body": {
+                            "value": "{\n    \"title\": \"FAILED: @{pipeline().globalParameters.gp_env_type}-@{pipeline().globalParameters.gp_adf_tag} PIPELINE RUN\",\n    \"message\":\"@{activity('Execute Pipeline Bronze Layer').error.message}\",\n    \"color\": \"red\",\n    \"dataFactoryName\":\"@{pipeline().DataFactory}\",\n    \"pipelineName\": \"@{pipeline().Pipeline}\",\n    \"pipelineRunId\": \"@{pipeline().RunId}\",\n    \"time\": \"@{utcNow('yyyy-MM-dd hh:mm:ss')}\"\n}",
+                            "type": "Expression"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Send ADB Failure Mail",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Execute Databricks Job",
+                        "dependencyConditions": [
+                            "Failed"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Pl-Email-Alter",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_body": {
+                            "value": "{\n    \"title\": \"FAILED: @{pipeline().globalParameters.gp_env_type}-@{pipeline().globalParameters.gp_adb_tag} PIPELINE RUN\",\n    \"message\":\"@{activity('Execute Databricks Job').error.message}\",\n    \"color\": \"red\",\n    \"dataFactoryName\":\"@{pipeline().DataFactory}\",\n    \"pipelineName\": \"@{pipeline().Pipeline}\",\n    \"pipelineRunId\": \"@{pipeline().RunId}\",\n    \"time\": \"@{utcNow('yyyy-MM-dd hh:mm:ss')}\"\n}",
+                            "type": "Expression"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "For every 4 hours and minutes less 20",
+                "type": "IfCondition",
+                "dependsOn": [
+                    {
+                        "activity": "Execute Databricks Job",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "expression": {
+                        "value": "@or(and(equals(mod(int(utcNow('hh')),4),0),lessOrEquals(int(utcNow('mm')),20)),bool(pipeline().parameters.is_optimize))",
+                        "type": "Expression"
+                    },
+                    "ifTrueActivities": [
+                        {
+                            "name": "Execute Databricks Job Optimize",
+                            "type": "ExecutePipeline",
+                            "dependsOn": [],
+                            "userProperties": [],
+                            "typeProperties": {
+                                "pipeline": {
+                                    "referenceName": "pl-transformation-db-job",
+                                    "type": "PipelineReference"
+                                },
+                                "waitOnCompletion": true,
+                                "parameters": {
+                                    "adb_job_id": {
+                                        "value": "@json(string(pipeline().globalParameters.gp_adb_job_id)).optimize_sail_load_id",
+                                        "type": "Expression"
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        ],
+        "concurrency": 1,
+        "parameters": {
+            "p_schedule_time": {
+                "type": "string"
+            },
+            "is_optimize": {
+                "type": "bool",
+                "defaultValue": false
+            },
+            "p_overide_high_watermark": {
+                "type": "string"
+            }
+        },
+        "folder": {
+            "name": "Main Pipelines"
+        },
+        "annotations": [],
+        "lastPublishTime": "2022-02-25T11:02:00Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

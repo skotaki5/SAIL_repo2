@@ -1,0 +1,54 @@
+{
+    "name": "pl-ingestion-splus-src-deletes",
+    "properties": {
+        "activities": [
+            {
+                "name": "Execute Ingestion Splus Src Deletes",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Pl-Ingestion-From-SQLServer-ADLS2-SrcDeletes",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_metadata_folder_path": "gld360/pipeline/pl_splus_src_deletes/",
+                        "p_metadata_file_name": "splus_src_deletes.json",
+                        "p_debug": {
+                            "value": "@pipeline().parameters.p_debug",
+                            "type": "Expression"
+                        },
+                        "p_metadata_container": "metadata",
+                        "p_override_high_watermark": {
+                            "value": "@pipeline().parameters.p_override_high_watermark\n",
+                            "type": "Expression"
+                        }
+                    }
+                }
+            }
+        ],
+        "parameters": {
+            "p_schedule_time": {
+                "type": "string"
+            },
+            "p_debug": {
+                "type": "string"
+            },
+            "p_override_high_watermark": {
+                "type": "string"
+            }
+        },
+        "folder": {
+            "name": "Execute"
+        },
+        "annotations": [],
+        "lastPublishTime": "2022-02-24T04:35:57Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

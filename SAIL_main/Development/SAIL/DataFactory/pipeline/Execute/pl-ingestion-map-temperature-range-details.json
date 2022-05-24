@@ -1,0 +1,47 @@
+{
+    "name": "pl-ingestion-map-temperature-range-details",
+    "properties": {
+        "activities": [
+            {
+                "name": "Execute Ingestion Master Map Temperature Range Details",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Pl-Ingestion-From-SQLServer-ADLS2-Full-Load_nFilter",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_metadata_folder_path": "gld360/pipeline/pl_map_temperature_range_details/",
+                        "p_metadata_file_name": "map_temperature_range_details.json",
+                        "p_debug": {
+                            "value": "@pipeline().parameters.p_debug",
+                            "type": "Expression"
+                        },
+                        "p_metadata_container": "metadata"
+                    }
+                }
+            }
+        ],
+        "parameters": {
+            "p_schedule_time": {
+                "type": "string"
+            },
+            "p_debug": {
+                "type": "string"
+            }
+        },
+        "folder": {
+            "name": "Execute"
+        },
+        "annotations": [],
+        "lastPublishTime": "2022-03-30T07:34:54Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

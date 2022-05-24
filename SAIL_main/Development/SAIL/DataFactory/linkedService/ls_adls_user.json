@@ -1,0 +1,15 @@
+{
+    "name": "ls_adls2_user",
+    "type": "Microsoft.DataFactory/factories/linkedservices",
+    "properties": {
+        "annotations": [],
+        "type": "AzureBlobFS",
+        "typeProperties": {
+            "url": "https://sasailprodeastus2.dfs.core.windows.net",
+            "credential": {
+                "referenceName": "credentialMiOa2",
+                "type": "CredentialReference"
+            }
+        }
+    }
+}

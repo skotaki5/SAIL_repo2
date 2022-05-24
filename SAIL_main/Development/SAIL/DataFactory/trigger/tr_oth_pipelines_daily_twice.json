@@ -1,0 +1,38 @@
+{
+    "name": "tr_oth_pipelines_daily_twice",
+    "properties": {
+        "annotations": [],
+        "runtimeState": "Stopped",
+        "pipelines": [
+            {
+                "pipelineReference": {
+                    "referenceName": "pl-main-master_with_other_sources",
+                    "type": "PipelineReference"
+                },
+                "parameters": {
+                    "p_schedule_time": "@trigger().scheduledTime",
+                    "is_optimize": true,
+                    "is_othersources": false
+                }
+            }
+        ],
+        "type": "ScheduleTrigger",
+        "typeProperties": {
+            "recurrence": {
+                "frequency": "Day",
+                "interval": 1,
+                "startTime": "2022-04-18T10:31:00",
+                "timeZone": "Eastern Standard Time",
+                "schedule": {
+                    "minutes": [
+                        0
+                    ],
+                    "hours": [
+                        7,
+                        19
+                    ]
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,831 @@
+{
+	"source": {
+        "sourcetype": "rdms",
+        "database": "gld_dw_new",
+		"schema": "dbo",
+		"tblName": "fact_transportation_callcheck",
+		"partColumns": "etl_update_date",
+		"starttms": "20211001120000",
+		"selectQuery": "select [SOURCE_SYSTEM_KEY],[SourceName],[CLIENT_KEY],[WAREHOUSE_KEY],[CARRIER_LOS_KEY],[ORIGIN_LOCATION_KEY],[DESTINATION_LOCATION_KEY],[UPS_ORDER_NUMBER],[BatteryPercent],[LOAD_ID],[ACTIVITYTYPE],[ACTIVITYID],[SUMMARY],[CALLCHECK_PRIORITY],[IS_REQUIRED],[CALLCHECK_STATUS],[ASSIGNEDTO],[PLANNED_DATE],[UTC_PLANNED_DATE],[PERCENTAGECOMPLETE],[COMPLETE_DATE],[UTC_COMPLETE_DATE],[STATUSDETAILTYPE],[STATUSDETAIL],[Latitude],[Longitude],[DeviceTagId],[Humidity],[Light],[LocationMethod],[IsMotionDetected],[Pressure],[ADDRESSTYPE],[ADDRESSISRESIDENTIAL],[ADDRESSISPRIMARY],[ADDRESSLOCATIONCODE],[ADDRESSNAME],[ADDRESSLINE1],[ADDRESSLINE2],[CITY],[STATEPROVINCE],[POSTALCODE],[COUNTRYCODE],[GEOLATDEGREES],[GEOLATDIRECTION],[GEOLONGDEGREES],[GEOLONGDIRECTION],[CONTACTNAME],[TemperatureC],[TemperatureF],[IsButtonPushed],[IsShockExceeded],[CALLCHECK_SDUK],[CLIENT_SDUK],[WAREHOUSE_SDUK],[CARRIER_LOS_SDUK],[ORIGIN_LOCATION_SDUK],[DESTINATION_LOCATION_SDUK],[ETL_INSERT_DATE],[ETL_UPDATE_DATE],[ETL_BATCH_NUMBER],[IS_TEMPERATURE] from dbo.fact_transportation_callcheck (nolock)",
+	
+		"mappings": [
+                     {
+                        "source": {
+                            "name": "SOURCE_SYSTEM_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "SOURCE_SYSTEM_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "SourceName",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "SourceName",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CLIENT_KEY",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 0,
+                            "precision": 18
+                        },
+                        "sink": {
+                            "name": "CLIENT_KEY",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "WAREHOUSE_KEY",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 0,
+                            "precision": 18
+                        },
+                        "sink": {
+                            "name": "WAREHOUSE_KEY",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CARRIER_LOS_KEY",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 0,
+                            "precision": 18
+                        },
+                        "sink": {
+                            "name": "CARRIER_LOS_KEY",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ORIGIN_LOCATION_KEY",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 0,
+                            "precision": 18
+                        },
+                        "sink": {
+                            "name": "ORIGIN_LOCATION_KEY",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "DESTINATION_LOCATION_KEY",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 0,
+                            "precision": 18
+                        },
+                        "sink": {
+                            "name": "DESTINATION_LOCATION_KEY",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "UPS_ORDER_NUMBER",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "UPS_ORDER_NUMBER",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "BatteryPercent",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "BatteryPercent",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LOAD_ID",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "LOAD_ID",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ACTIVITYTYPE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "ACTIVITYTYPE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ACTIVITYID",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "ACTIVITYID",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "SUMMARY",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "SUMMARY",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CALLCHECK_PRIORITY",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "CALLCHECK_PRIORITY",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "IS_REQUIRED",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "IS_REQUIRED",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CALLCHECK_STATUS",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "CALLCHECK_STATUS",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ASSIGNEDTO",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "ASSIGNEDTO",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "PLANNED_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "PLANNED_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "UTC_PLANNED_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "UTC_PLANNED_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "PERCENTAGECOMPLETE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "PERCENTAGECOMPLETE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "COMPLETE_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "COMPLETE_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "UTC_COMPLETE_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "UTC_COMPLETE_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "STATUSDETAILTYPE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "STATUSDETAILTYPE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "STATUSDETAIL",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "STATUSDETAIL",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "Latitude",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 0,
+                            "precision": 18
+                        },
+                        "sink": {
+                            "name": "Latitude",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "Longitude",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 0,
+                            "precision": 18
+                        },
+                        "sink": {
+                            "name": "Longitude",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "DeviceTagId",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "DeviceTagId",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "Humidity",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "Humidity",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "Light",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 0,
+                            "precision": 18
+                        },
+                        "sink": {
+                            "name": "Light",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LocationMethod",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "LocationMethod",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "IsMotionDetected",
+                            "type": "Boolean",
+                            "physicalType": "bit"
+                        },
+                        "sink": {
+                            "name": "IsMotionDetected",
+                            "type": "Boolean",
+                            "physicalType": "BOOLEAN"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "Pressure",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 0,
+                            "precision": 18
+                        },
+                        "sink": {
+                            "name": "Pressure",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ADDRESSTYPE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "ADDRESSTYPE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ADDRESSISRESIDENTIAL",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "ADDRESSISRESIDENTIAL",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ADDRESSISPRIMARY",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "ADDRESSISPRIMARY",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ADDRESSLOCATIONCODE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "ADDRESSLOCATIONCODE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ADDRESSNAME",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "ADDRESSNAME",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ADDRESSLINE1",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "ADDRESSLINE1",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ADDRESSLINE2",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "ADDRESSLINE2",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CITY",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "CITY",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "STATEPROVINCE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "STATEPROVINCE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "POSTALCODE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "POSTALCODE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "COUNTRYCODE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "COUNTRYCODE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "GEOLATDEGREES",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "GEOLATDEGREES",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "GEOLATDIRECTION",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "GEOLATDIRECTION",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "GEOLONGDEGREES",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "GEOLONGDEGREES",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "GEOLONGDIRECTION",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "GEOLONGDIRECTION",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CONTACTNAME",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "CONTACTNAME",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "TemperatureC",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 0,
+                            "precision": 18
+                        },
+                        "sink": {
+                            "name": "TemperatureC",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "TemperatureF",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 0,
+                            "precision": 18
+                        },
+                        "sink": {
+                            "name": "TemperatureF",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "IsButtonPushed",
+                            "type": "Boolean",
+                            "physicalType": "bit"
+                        },
+                        "sink": {
+                            "name": "IsButtonPushed",
+                            "type": "Boolean",
+                            "physicalType": "BOOLEAN"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "IsShockExceeded",
+                            "type": "Boolean",
+                            "physicalType": "bit"
+                        },
+                        "sink": {
+                            "name": "IsShockExceeded",
+                            "type": "Boolean",
+                            "physicalType": "BOOLEAN"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CALLCHECK_SDUK",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "CALLCHECK_SDUK",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CLIENT_SDUK",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "CLIENT_SDUK",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "WAREHOUSE_SDUK",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "WAREHOUSE_SDUK",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CARRIER_LOS_SDUK",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "CARRIER_LOS_SDUK",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ORIGIN_LOCATION_SDUK",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "ORIGIN_LOCATION_SDUK",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "DESTINATION_LOCATION_SDUK",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "DESTINATION_LOCATION_SDUK",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ETL_INSERT_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "ETL_INSERT_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ETL_UPDATE_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "ETL_UPDATE_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ETL_BATCH_NUMBER",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 0,
+                            "precision": 18
+                        },
+                        "sink": {
+                            "name": "ETL_BATCH_NUMBER",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "IS_TEMPERATURE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "IS_TEMPERATURE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    }
+                ]
+	},
+	"bronze": {
+		"processname": "fact_transportation_callcheck_src_to_bronze",
+		"container": "bronze",
+		"system": "gld360",
+		"landingPath": "gld360/inbound/landing/fact_transportation_callcheck",
+		"processedPath": "gld360/inbound/processed/fact_transportation_callcheck",
+		"rejectedPath": "gld360/inbound/rejected/fact_transportation_callcheck",
+    	"partitioncolumns": "etl_update_date"
+	},
+	"silver": {
+		"processname": "fact_transportation_callcheck_brownze_to_silver",
+        "container": "silver",
+		"notebookpath": "/sail/silver/",
+		"path": "gld360/inbound/fact_transportation_callcheck",
+        "errorpath": "gld360/error_files/fact_transportation_callcheck",
+	    "joinColumns":"",
+	    "partitioncolumns":"etl_update_date"
+
+	},
+	"gold": {
+        "processname": "fact_transportation_callcheck_silver_to_gold",
+        "notebookpath": "/symphony-summary-layer/gold_zone/gld360-silver-to-gold",
+		"container": "gold",
+		"path": "gld360/inbound/fact_transportation_callcheck",
+		"errorpath": "gld360/error_files/fact_transportation_callcheck"
+	},
+	"controller": {
+		"schema": "controller",
+		"controlTable": "delta_control"
+	},
+	"email": {
+		"emailto" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtofail" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtosuccess" : ["gd000012732@ups.com","gd000012733@ups.com","gd000011505@ups.com"]
+	},
+	"log": {
+		"logtable":"logs.ups_application_audit_logs"
+	},
+	"processing": {
+		"logpath": "dbfs:/mnt/logs/ups/gld360",
+		"clusterversion": "7.2.x-scala2.12",
+		"nodetype": "standard_ds3_v2",
+		"workercount": "2"
+	},
+	"archive": {
+		"enabled": true,
+        "container": "data-layer",
+		"path": "bronze/gld360/archive/table_name/partition_column"
+	}
+}

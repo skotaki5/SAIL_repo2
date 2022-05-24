@@ -1,0 +1,38 @@
+{
+    "name": "trigger_daily",
+    "properties": {
+        "annotations": [],
+        "runtimeState": "Started",
+        "pipelines": [
+            {
+                "pipelineReference": {
+                    "referenceName": "pl-cosmos-delete-main",
+                    "type": "PipelineReference"
+                }
+            },
+            {
+                "pipelineReference": {
+                    "referenceName": "pl-main-cleanup",
+                    "type": "PipelineReference"
+                }
+            }
+        ],
+        "type": "ScheduleTrigger",
+        "typeProperties": {
+            "recurrence": {
+                "frequency": "Day",
+                "interval": 1,
+                "startTime": "2022-01-10T13:24:00",
+                "timeZone": "India Standard Time",
+                "schedule": {
+                    "minutes": [
+                        30
+                    ],
+                    "hours": [
+                        12
+                    ]
+                }
+            }
+        }
+    }
+}

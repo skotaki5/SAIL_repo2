@@ -1,0 +1,104 @@
+{
+	"source": {
+        "sourcetype": "rdms",
+        "database": "gld_dw_new",
+		"schema": "dbo",
+		"tblName": "dim_source_system",
+		"starttms": "20211001120000",
+		"selectQuery": "select [SOURCE_SYSTEM_KEY],[SOURCE_SYSTEM_NAME],[SOURCE_SYSTEM_GROUP],[DC_FSL_FLAG] FROM dbo.dim_source_system (nolock)",
+	    "mappings":[
+                    {
+                        "source": {
+                            "name": "SOURCE_SYSTEM_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "SOURCE_SYSTEM_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "SOURCE_SYSTEM_NAME",
+                            "type": "String",
+                            "physicalType": "nvarchar"
+                        },
+                        "sink": {
+                            "name": "SOURCE_SYSTEM_NAME",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "SOURCE_SYSTEM_GROUP",
+                            "type": "String",
+                            "physicalType": "nvarchar"
+                        },
+                        "sink": {
+                            "name": "SOURCE_SYSTEM_GROUP",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "DC_FSL_FLAG",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "DC_FSL_FLAG",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    }
+                ]
+	},
+	"bronze": {
+		"processname": "dim_source_system_src_to_bronze",
+		"container": "bronze",
+		"system": "gld360",
+		"landingPath": "gld360/inbound/landing/dim_source_system",
+		"processedPath": "gld360/inbound/processed/dim_source_system",
+		"rejectedPath": "gld360/inbound/rejected/dim_source_system"
+	},
+	"silver": {
+		"processname": "dim_source_system_brownze_to_silver",
+        "container": "silver",
+		"notebookpath": "/symphony-summary-layer/silver_zone/gld360-browze-to-silver",
+		"path": "/SAIL/Silver/",
+        "errorpath": "silver/gld360/error_files/dim_source_system"
+	},
+	"gold": {
+        "processname": "dim_source_system_silver_to_gold",
+        "notebookpath": "/symphony-summary-layer/gold_zone/gld360-silver-to-gold",
+		"path": "gold/gld360/inbound/dim_source_system",
+		"errorpath": "gold/gld360/error_files/dim_source_system"
+	},
+	"controller": {
+		"schema": "controller",
+		"controlTable": "delta_control"
+	},
+	"email": {
+		"emailto" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtofail" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtosuccess" : ["gd000012732@ups.com","gd000012733@ups.com","gd000011505@ups.com"]
+	},
+	"log": {
+		"logtable":"logs.ups_application_audit_logs"
+	},
+	"processing": {
+		"logpath": "dbfs:/mnt/logs/ups/gld360",
+		"clusterversion": "7.2.x-scala2.12",
+		"nodetype": "standard_ds3_v2",
+		"workercount": "2"
+	},
+	"archive": {
+		"enabled": true,
+        "container": "data-layer",
+		"path": "bronze/gld360/archive/table_name/partition_column"
+	}
+}

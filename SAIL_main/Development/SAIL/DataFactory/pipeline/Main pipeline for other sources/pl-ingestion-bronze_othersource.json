@@ -1,0 +1,647 @@
+{
+    "name": "pl-ingestion-bronze_othersource",
+    "properties": {
+        "activities": [
+            {
+                "name": "Execute Fact Order",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "pl-ingestion-fact-order_oth",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_debug": false,
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_override_high_watermark": {
+                            "value": "@pipeline().parameters.p_override_high_watermark",
+                            "type": "Expression"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Execute Dim Customer",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "pl-ingestion-dim-customer_oth",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_debug": false,
+                        "p_override_high_watermark": {
+                            "value": "@pipeline().parameters.p_override_high_watermark",
+                            "type": "Expression"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Execute Dim Warehouse",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "pl-ingestion-dim-warehouse_oth",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_debug": false,
+                        "p_override_high_watermark": {
+                            "value": "@pipeline().parameters.p_override_high_watermark",
+                            "type": "Expression"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Execute Dim Source Systems",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "pl-ingestion-dim-source-systems_oth",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_debug": "false"
+                    }
+                }
+            },
+            {
+                "name": "Execute Dim Carrier Los",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "pl-ingestion-dim-carrier-los_oth",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_debug": "false",
+                        "p_override_high_watermark": {
+                            "value": "@pipeline().parameters.p_override_high_watermark",
+                            "type": "Expression"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Execute Dim Item",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "pl-ingestion-dim-item_oth",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_debug": "false",
+                        "p_override_high_watermark": {
+                            "value": "@pipeline().parameters.p_override_high_watermark",
+                            "type": "Expression"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Execute Dim Service",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "pl-ingestion-dim-service_oth",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_debug": "false",
+                        "p_override_high_watermark": {
+                            "value": "@pipeline().parameters.p_override_high_watermark",
+                            "type": "Expression"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Execute Dim Geo Location",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "pl-ingestion-dim-geo-location_oth",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_debug": "false",
+                        "p_override_high_watermark": {
+                            "value": "@pipeline().parameters.p_override_high_watermark",
+                            "type": "Expression"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Execute Fact Order Line",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "pl-ingestion-fact-order-line_oth",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_debug": false,
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_override_high_watermark": {
+                            "value": "@pipeline().parameters.p_override_high_watermark",
+                            "type": "Expression"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Execute Fact Order Reference",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "pl-ingestion-fact-order-reference_oth",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_debug": false,
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_override_high_watermark": {
+                            "value": "@pipeline().parameters.p_override_high_watermark",
+                            "type": "Expression"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Execute Fact Transportation Callcheck",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "pl-ingestion-fact-transportation-callcheck_oth",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_debug": false,
+                        "p_override_high_watermark": {
+                            "value": "@pipeline().parameters.p_override_high_watermark",
+                            "type": "Expression"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Execute Fact Transportation",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "pl-ingestion-fact-transportation_oth",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_debug": false,
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_override_high_watermark": {
+                            "value": "@pipeline().parameters.p_override_high_watermark",
+                            "type": "Expression"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Execute Fact Transportation Exception",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "pl-ingestion-fact-transportation-exception_oth",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_debug": false,
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_override_high_watermark": {
+                            "value": "@pipeline().parameters.p_override_high_watermark",
+                            "type": "Expression"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Execute Fact Milestone Activity",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "pl-ingestion-fact-milestone-activity_oth",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_debug": false,
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_override_high_watermark": {
+                            "value": "@pipeline().parameters.p_override_high_watermark",
+                            "type": "Expression"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Execute Fact Shipment",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "pl-ingestion-fact-shipment_oth",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_debug": false,
+                        "p_override_high_watermark": {
+                            "value": "@pipeline().parameters.p_override_high_watermark",
+                            "type": "Expression"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Execute Fact Transportation References",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "pl-ingestion-fact-transportation-references_oth",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_debug": false,
+                        "p_override_high_watermark": {
+                            "value": "@pipeline().parameters.p_override_high_watermark",
+                            "type": "Expression"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Execute Fact Order line Details",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "pl-ingestion-fact-order-line-details_oth",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_debug": false,
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_override_high_watermark": {
+                            "value": "@pipeline().parameters.p_override_high_watermark",
+                            "type": "Expression"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Execute Fact Transportation_Rates_Charges",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "pl-ingestion-fact-transportation-rates-charges_oth",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_debug": false,
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_override_high_watermark": {
+                            "value": "@pipeline().parameters.p_override_high_watermark",
+                            "type": "Expression"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Execute Map Milestone Activity",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "pl-ingestion-master-map-milestone-activity_oth",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_debug": "false"
+                    }
+                }
+            },
+            {
+                "name": "Execute ACCOUNT TYPE DIGITAL",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "pl-ingestion-clientsite-account-type-digital_oth",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_debug": "false"
+                    }
+                }
+            },
+            {
+                "name": "Execute Local Courier Service",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "pl-ingestion-master-local-courier-service_oth",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_debug": "false"
+                    }
+                }
+            },
+            {
+                "name": "Execute Map OrderSearchStatus",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "pl-ingestion-master-map-ordersearchstatus_oth",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_debug": "false"
+                    }
+                }
+            },
+            {
+                "name": "Execute Map TransactionType Milestone",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "pl-ingestion-master-map-transactiontype-miles_oth",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_debug": "false"
+                    }
+                }
+            },
+            {
+                "name": "Execute Fact Transport Details",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "pl-ingestion-fact-transport-details_oth",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_debug": false,
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_override_high_watermark": {
+                            "value": "@pipeline().parameters.p_override_high_watermark",
+                            "type": "Expression"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Execute Fact Inbound Line",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "pl-ingestion-fact-inbound-line_oth",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_debug": false,
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_override_high_watermark": {
+                            "value": "@pipeline().parameters.p_override_high_watermark",
+                            "type": "Expression"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Execute Matser wh wip Mapping Activity",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "pl-ingestion-master-wh-wip-mapping-activity_oth",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_debug": "false"
+                    }
+                }
+            },
+            {
+                "name": "Execute Ingestion Fact Inventory Snapshot",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Execute Fact Transportation References",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "pl-ingestion-fact-inventory-snapshot_oth",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_debug": {
+                            "value": "false",
+                            "type": "Expression"
+                        }
+                    }
+                }
+            }
+        ],
+        "parameters": {
+            "p_schedule_time": {
+                "type": "string"
+            },
+            "p_override_high_watermark": {
+                "type": "string"
+            }
+        },
+        "folder": {
+            "name": "Main pipeline for other sources"
+        },
+        "annotations": [],
+        "lastPublishTime": "2022-04-14T15:10:43Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

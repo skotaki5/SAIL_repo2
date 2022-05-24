@@ -1,0 +1,309 @@
+{
+    "name": "pl-trigger-main",
+    "properties": {
+        "activities": [
+            {
+                "name": "Get ETL Log from Source",
+                "type": "Lookup",
+                "dependsOn": [
+                    {
+                        "activity": "Check Success File",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "AzureSqlSource",
+                        "sqlReaderQuery": {
+                            "value": "select DISTINCT ETL_LOG_ID, SOURCE_SYSTEM_KEY, ETL_STATUS, OBJECT_NAME, ETL_START_TIME, ETL_END_TIME \nfrom dbo.etl_log_dwh_hist (nolock)\n    where SOURCE_SYSTEM_KEY in @{pipeline().globalParameters.gp_source_system_keys} \nand ETL_STATUS in ('SUCCESS', 'FAIL')\nand object_name='SPLUS_MASTER'\nand etl_end_time = (select max(etl_end_time) from dbo.etl_log_dwh_hist (nolock)\n\twhere SOURCE_SYSTEM_KEY in @{pipeline().globalParameters.gp_source_system_keys} \nand ETL_STATUS in ('SUCCESS', 'FAIL')\nand object_name in @{pipeline().globalParameters.gp_source_system_obj_names})",
+                            "type": "Expression"
+                        },
+                        "queryTimeout": "02:00:00",
+                        "partitionOption": "None"
+                    },
+                    "dataset": {
+                        "referenceName": "ds_gld_metadata",
+                        "type": "DatasetReference"
+                    },
+                    "firstRowOnly": false
+                }
+            },
+            {
+                "name": "If not etl_end_time and Success file exists",
+                "type": "IfCondition",
+                "dependsOn": [
+                    {
+                        "activity": "Match etl_end_time with Controller",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    },
+                    {
+                        "activity": "Is Sucess File Exists",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "expression": {
+                        "value": "@and(not(variables('etl_log_id_exists')), not(variables('is_success_file_exists')))",
+                        "type": "Expression"
+                    },
+                    "ifTrueActivities": [
+                        {
+                            "name": "Copy Trigger File",
+                            "type": "Copy",
+                            "dependsOn": [],
+                            "policy": {
+                                "timeout": "7.00:00:00",
+                                "retry": 0,
+                                "retryIntervalInSeconds": 30,
+                                "secureOutput": false,
+                                "secureInput": false
+                            },
+                            "userProperties": [],
+                            "typeProperties": {
+                                "source": {
+                                    "type": "ParquetSource",
+                                    "storeSettings": {
+                                        "type": "AzureBlobFSReadSettings",
+                                        "recursive": true,
+                                        "wildcardFileName": "*",
+                                        "enablePartitionDiscovery": false
+                                    }
+                                },
+                                "sink": {
+                                    "type": "ParquetSink",
+                                    "storeSettings": {
+                                        "type": "AzureBlobFSWriteSettings"
+                                    },
+                                    "formatSettings": {
+                                        "type": "ParquetWriteSettings"
+                                    }
+                                },
+                                "enableStaging": false,
+                                "translator": {
+                                    "type": "TabularTranslator",
+                                    "typeConversion": true,
+                                    "typeConversionSettings": {
+                                        "allowDataTruncation": true,
+                                        "treatBooleanAsNumber": false
+                                    }
+                                }
+                            },
+                            "inputs": [
+                                {
+                                    "referenceName": "ds_adls2_data_parquet",
+                                    "type": "DatasetReference",
+                                    "parameters": {
+                                        "p_container": "bronze",
+                                        "p_folder_path": "gld360/inbound/donottouch/"
+                                    }
+                                }
+                            ],
+                            "outputs": [
+                                {
+                                    "referenceName": "ds_adls2_data_parquet_file",
+                                    "type": "DatasetReference",
+                                    "parameters": {
+                                        "p_container": "bronze",
+                                        "p_folder_path": "gld360/inbound/trigger/",
+                                        "p_file_name": "_SUCCESS.txt"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Insert etl log",
+                            "type": "Lookup",
+                            "dependsOn": [
+                                {
+                                    "activity": "Copy Trigger File",
+                                    "dependencyConditions": [
+                                        "Succeeded"
+                                    ]
+                                }
+                            ],
+                            "policy": {
+                                "timeout": "7.00:00:00",
+                                "retry": 0,
+                                "retryIntervalInSeconds": 30,
+                                "secureOutput": false,
+                                "secureInput": false
+                            },
+                            "userProperties": [],
+                            "typeProperties": {
+                                "source": {
+                                    "type": "AzureSqlSource",
+                                    "sqlReaderQuery": {
+                                        "value": "insert into controller.tr_etl_log_dwh\nSELECT \n    @{json(string(activity('Get ETL Log from Source').output.value[0])).ETL_LOG_ID} as ETL_LOG_ID,\n    @{json(string(activity('Get ETL Log from Source').output.value[0])).SOURCE_SYSTEM_KEY} as SOURCE_SYSTEM_KEY,\n    '@{json(string(activity('Get ETL Log from Source').output.value[0])).ETL_STATUS}' as ETL_STATUS,\n    '@{json(string(activity('Get ETL Log from Source').output.value[0])).OBJECT_NAME}' as OBJECT_NAME,\n    '@{json(string(activity('Get ETL Log from Source').output.value[0])).ETL_START_TIME}' as ETL_START_TIME,\n    '@{json(string(activity('Get ETL Log from Source').output.value[0])).ETL_END_TIME}' as ETL_END_TIME,\n    getdate() as INSERT_TIMESTAMP\n;\nSELECT 1;",
+                                        "type": "Expression"
+                                    },
+                                    "queryTimeout": "02:00:00",
+                                    "partitionOption": "None"
+                                },
+                                "dataset": {
+                                    "referenceName": "ds_sqlserver_controller_tbl",
+                                    "type": "DatasetReference",
+                                    "parameters": {
+                                        "p_control_tbl": "tr_etl_log_dwh",
+                                        "p_schema": "controller"
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "Get ETL Log From Controller",
+                "type": "Lookup",
+                "dependsOn": [
+                    {
+                        "activity": "Check Success File",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "AzureSqlSource",
+                        "sqlReaderQuery": {
+                            "value": "select DISTINCT ETL_LOG_ID, SOURCE_SYSTEM_KEY, ETL_STATUS, OBJECT_NAME, ETL_START_TIME, ETL_END_TIME from [controller].[tr_etl_log_dwh]\n    where SOURCE_SYSTEM_KEY in @{pipeline().globalParameters.gp_source_system_keys} \nand ETL_STATUS in ('SUCCESS', 'FAIL')\nand object_name='SPLUS_MASTER'\nand etl_end_time = (select max(etl_end_time) from  [controller].[tr_etl_log_dwh]\n\twhere SOURCE_SYSTEM_KEY in @{pipeline().globalParameters.gp_source_system_keys}\nand ETL_STATUS in ('SUCCESS', 'FAIL')\nand object_name in @{pipeline().globalParameters.gp_source_system_obj_names})",
+                            "type": "Expression"
+                        },
+                        "queryTimeout": "02:00:00",
+                        "partitionOption": "None"
+                    },
+                    "dataset": {
+                        "referenceName": "ds_sqlserver_controller_tbl",
+                        "type": "DatasetReference",
+                        "parameters": {
+                            "p_control_tbl": "tr_etl_log_dwh",
+                            "p_schema": "controller"
+                        }
+                    },
+                    "firstRowOnly": false
+                }
+            },
+            {
+                "name": "Match etl_end_time with Controller",
+                "type": "SetVariable",
+                "dependsOn": [
+                    {
+                        "activity": "Get ETL Log from Source",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    },
+                    {
+                        "activity": "Get ETL Log From Controller",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "variableName": "etl_log_id_exists",
+                    "value": {
+                        "value": "@equals(\n        json(\n            string(activity('Get ETL Log from Source').output.value[0])\n            ).ETL_END_TIME,\n        json(\n            string(activity('Get ETL Log From Controller').output.value[0])\n            ).ETL_END_TIME\n)",
+                        "type": "Expression"
+                    }
+                }
+            },
+            {
+                "name": "Check Success File",
+                "type": "GetMetadata",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.00:10:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "dataset": {
+                        "referenceName": "ds_adls2_data_parquet",
+                        "type": "DatasetReference",
+                        "parameters": {
+                            "p_container": "bronze",
+                            "p_folder_path": "gld360/inbound/trigger/_SUCCESS.txt"
+                        }
+                    },
+                    "fieldList": [
+                        "exists"
+                    ],
+                    "storeSettings": {
+                        "type": "AzureBlobFSReadSettings",
+                        "recursive": true,
+                        "enablePartitionDiscovery": false
+                    }
+                }
+            },
+            {
+                "name": "Is Sucess File Exists",
+                "type": "SetVariable",
+                "dependsOn": [
+                    {
+                        "activity": "Get ETL Log from Source",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    },
+                    {
+                        "activity": "Get ETL Log From Controller",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "variableName": "is_success_file_exists",
+                    "value": {
+                        "value": "@activity('Check Success File').output.exists",
+                        "type": "Expression"
+                    }
+                }
+            }
+        ],
+        "variables": {
+            "etl_log_id_exists": {
+                "type": "Boolean"
+            },
+            "is_success_file_exists": {
+                "type": "Boolean"
+            }
+        },
+        "folder": {
+            "name": "Trigger Pipelines"
+        },
+        "annotations": [],
+        "lastPublishTime": "2022-02-24T04:40:09Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,140 @@
+{
+	"source": {
+        "sourcetype": "rdms",
+        "database": "gld_dw_new",
+		"schema": "master_data",
+		"tblName": "wh_wip_mapping_activity",
+		"starttms": "20211001120000",
+		"selectQuery": "SELECT [Type], [MilestoneName], [ActivityName], [ActivityCode], [WIP_ActivityName], [SOURCE_SYSTEM_KEY], [WIPActivityOrderId] FROM master_data.WH_WIP_MAPPING_Activity (nolock) ",
+		"mappings":[
+            {
+                "source": {
+                    "name": "Type",
+                    "type": "String",
+                    "physicalType": "varchar"
+                },
+                "sink": {
+                    "name": "Type",
+                    "type": "String",
+                    "physicalType": "UTF8"
+                }
+            },
+            {
+                "source": {
+                    "name": "MilestoneName",
+                    "type": "String",
+                    "physicalType": "varchar"
+                },
+                "sink": {
+                    "name": "MilestoneName",
+                    "type": "String",
+                    "physicalType": "UTF8"
+                }
+            },
+            {
+                "source": {
+                    "name": "ActivityName",
+                    "type": "String",
+                    "physicalType": "varchar"
+                },
+                "sink": {
+                    "name": "ActivityName",
+                    "type": "String",
+                    "physicalType": "UTF8"
+                }
+            },
+            {
+                "source": {
+                    "name": "ActivityCode",
+                    "type": "String",
+                    "physicalType": "varchar"
+                },
+                "sink": {
+                    "name": "ActivityCode",
+                    "type": "String",
+                    "physicalType": "UTF8"
+                }
+            },
+            {
+                "source": {
+                    "name": "WIP_ActivityName",
+                    "type": "String",
+                    "physicalType": "varchar"
+                },
+                "sink": {
+                    "name": "WIP_ActivityName",
+                    "type": "String",
+                    "physicalType": "UTF8"
+                }
+            },
+            {
+                "source": {
+                    "name": "SOURCE_SYSTEM_KEY",
+                    "type": "Int32",
+                    "physicalType": "int"
+                },
+                "sink": {
+                    "name": "SOURCE_SYSTEM_KEY",
+                    "type": "Int32",
+                    "physicalType": "INT_32"
+                }
+            },
+            {
+                "source": {
+                    "name": "WIPActivityOrderId",
+                    "type": "Int32",
+                    "physicalType": "int"
+                },
+                "sink": {
+                    "name": "WIPActivityOrderId",
+                    "type": "Int32",
+                    "physicalType": "INT_32"
+                }
+            }
+        ]
+	},
+	"bronze": {
+		"processname": "wh_wip_mapping_activity_src_to_bronze",
+		"container": "bronze",
+		"system": "gld360",
+		"landingPath": "gld360/inbound/landing_oth/wh_wip_mapping_activity",
+		"processedPath": "gld360/inbound/processed/wh_wip_mapping_activity",
+		"rejectedPath": "gld360/inbound/rejected/wh_wip_mapping_activity"
+	},
+	"silver": {
+		"processname": "wh_wip_mapping_activity_brownze_to_silver",
+        "container": "silver",
+		"notebookpath": "/symphony-summary-layer/silver_zone/gld360-browze-to-silver",
+		"path": "gld360/inbound/wh_wip_mapping_activity",
+        "errorpath": "gld360/error_files/wh_wip_mapping_activity"
+	},
+	"gold": {
+        "processname": "wh_wip_mapping_activity_silver_to_gold",
+        "notebookpath": "/symphony-summary-layer/gold_zone/gld360-silver-to-gold",
+		"path": "gld360/inbound/wh_wip_mapping_activity",
+		"errorpath": "gld360/error_files/wh_wip_mapping_activity"
+	},
+	"controller": {
+		"schema": "dbo",
+		"controlTable": "delta_control"
+	},
+	"email": {
+		"emailto" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtofail" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtosuccess" : ["gd000012732@ups.com","gd000012733@ups.com","gd000011505@ups.com"]
+	},
+	"log": {
+		"logtable":"logs.ups_application_audit_logs"
+	},
+	"processing": {
+		"logpath": "dbfs:/mnt/logs/ups/gld360",
+		"clusterversion": "7.2.x-scala2.12",
+		"nodetype": "standard_ds3_v2",
+		"workercount": "2"
+	},
+	"archive": {
+		"enabled": true,
+        "container": "data-layer",
+		"path": "bronze/gld360/archive/table_name/partition_column"
+	}
+}

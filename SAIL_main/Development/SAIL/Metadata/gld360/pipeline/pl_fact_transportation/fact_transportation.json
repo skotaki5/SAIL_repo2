@@ -1,0 +1,1723 @@
+{
+	"source": {
+        "sourcetype": "rdms",
+        "database": "gld_dw_new",
+		"schema": "dbo",
+		"tblName": "fact_transportation",
+		"partColumns": "etl_update_date",
+		"starttms": "20211001120000",
+		"selectQuery": 
+	    "select [SOURCE_SYSTEM_KEY],[CLIENT_KEY],[WAREHOUSE_KEY],[SERVICE_KEY],[ORIGIN_LOCATION_KEY],[DESTINATION_LOCATION_KEY],[PICKUP_CARRIER_LOS_KEY],[DROPOFF_CARRIER_LOS_KEY],[UPS_ORDER_NUMBER],[SOURCE_ORDER_TYPE],[EQUIPMENT_TYPE],[SOURCE_ORDER_SUB_TYPE],[ORIGIN_COMPANY],[DESTINATION_COMPANY],[ORIGIN_TIME_ZONE],[DESTINATION_TIME_ZONE],[SOURCE_ORDER_STATE],[SOURCE_ORDER_STATUS],[ORDER_CANCELLED_FLAG],[ORDER_REC_CREATED_DATE],[UTC_ORDER_REC_CREATED_DATE],[LOFST_REC_CREATED_DATE],[ORDER_PLACED_DATE],[UTC_ORDER_PLACED_DATE],[LOFST_ORDER_PLACED_DATE],[ORDER_CANCELLED_DATE],[UTC_ORDER_CANCELLED_DATE],[LOFST_ORDER_CANCELLED_DATE],[ORDER_SHIPPED_DATE],[UTC_ORDER_SHIPPED_DATE],[LOFST_ORDER_SHIPPED_DATE],[SCHEDULED_SHIPMENT_DATE],[UTC_SCHEDULED_SHIPMENT_DATE],[LOFST_SCHEDULED_SHIPMENT_DATE],[ACTUAL_SHIPMENT_DATE],[UTC_ACTUAL_SHIPMENT_DATE],[LOFST_ACTUAL_SHIPMENT_DATE],[SCHEDULED_DELIVERY_DATE],[UTC_SCHEDULED_DELIVERY_DATE],[LOFST_SCHEDULED_DELIVERY_DATE],[ACTUAL_DELIVERY_DATE],[UTC_ACTUAL_DELIVERY_DATE],[LOFST_ACTUAL_DELIVERY_DATE],[ORDER_REC_CREATED_DATE_KEY],[ORDER_REC_CREATED_TIME_KEY],[ORDER_PLACED_DATE_KEY],[ORDER_PLACED_TIME_KEY],[ORDER_CANCELLED_DATE_KEY],[ORDER_CANCELLED_TIME_KEY],[ORDER_SHIPPED_DATE_KEY],[ORDER_SHIPPED_TIME_KEY],[SCHEDULED_SHIPMENT_DATE_KEY],[SCHEDULED_SHIPMENT_TIME_KEY],[ACTUAL_SHIPMENT_DATE_KEY],[ACTUAL_SHIPMENT_TIME_KEY],[SCHEDULED_DELIVERY_DATE_KEY],[SCHEDULED_DELIVERY_TIME_KEY],[ACTUAL_DELIVERY_DATE_KEY],[ACTUAL_DELIVERY_TIME_KEY],[ORDER_COUNT],[TRANSPORTATION_SDUK],[CLIENT_SDUK],[WAREHOUSE_SDUK],[SERVICE_SDUK],[ORIGIN_LOCATION_SDUK],[DESTINATION_LOCATION_SDUK],[PICKUP_CARRIER_LOS_SDUK],[DROPOFF_CARRIER_LOS_SDUK],[ETL_INSERT_DATE],[ETL_UPDATE_DATE],[ETL_BATCH_NUMBER],[UPS_WMS_ORDER_NUMBER],[UPS_WMS_SOURCE_SYSTEM_KEY],[ORIGINAL_SCHEDULED_DELIVERY_DATE],[UTC_ORIGINAL_SCHEDULED_DELIVERY_DATE],[LOFST_ORIGINAL_SCHEDULED_DELIVERY_DATE],[ORIGINAL_SCHEDULED_DELIVERY_DATE_KEY],[ORIGINAL_SCHEDULED_DELIVERY_TIME_KEY],[LOAD_ID],[LOAD_EARLIEST_PICKUP_DATE],[LOAD_LATEST_PICKUP_DATE],[LOAD_EARLIEST_DELIVERY_DATE],[LOAD_LATEST_DELIVERY_DATE],[LOAD_CREATION_DATE],[LOAD_UPDATE_DATE],[TRANSPORT_MILESTONE_1],[TRANSPORT_MILESTONEDATE_1],[UTC_TRANSPORT_MILESTONEDATE_1],[LOFST_TRANSPORT_MILESTONEDATE_1],[TRANSPORT_MILESTONEDATE_1_DATE_KEY],[TRANSPORT_MILESTONEDATE_1_TIME_KEY],[TRANSPORT_MILESTONE_2],[TRANSPORT_MILESTONEDATE_2],[UTC_TRANSPORT_MILESTONEDATE_2],[LOFST_TRANSPORT_MILESTONEDATE_2],[TRANSPORT_MILESTONEDATE_2_DATE_KEY],[TRANSPORT_MILESTONEDATE_2_TIME_KEY],[TRANSPORT_MILESTONE_3],[TRANSPORT_MILESTONEDATE_3],[UTC_TRANSPORT_MILESTONEDATE_3],[LOFST_TRANSPORT_MILESTONEDATE_3],[TRANSPORT_MILESTONEDATE_3_DATE_KEY],[TRANSPORT_MILESTONEDATE_3_TIME_KEY],[TRANSPORT_MILESTONE_4],[TRANSPORT_MILESTONEDATE_4],[UTC_TRANSPORT_MILESTONEDATE_4],[LOFST_TRANSPORT_MILESTONEDATE_4],[TRANSPORT_MILESTONEDATE_4_DATE_KEY],[TRANSPORT_MILESTONEDATE_4_TIME_KEY],[TRANSPORT_MILESTONE_5],[TRANSPORT_MILESTONEDATE_5],[UTC_TRANSPORT_MILESTONEDATE_5],[LOFST_TRANSPORT_MILESTONEDATE_5],[TRANSPORT_MILESTONEDATE_5_DATE_KEY],[TRANSPORT_MILESTONEDATE_5_TIME_KEY],[TRANSPORT_MILESTONE_6],[TRANSPORT_MILESTONEDATE_6],[UTC_TRANSPORT_MILESTONEDATE_6],[LOFST_TRANSPORT_MILESTONEDATE_6],[TRANSPORT_MILESTONEDATE_6_DATE_KEY],[TRANSPORT_MILESTONEDATE_6_TIME_KEY],[CARRIER_CODE],[LEVEL_OF_SERVICE_CODE],[WMS_PO_NUMBER],[CARRIER_MODE],[TRANS_ONLY_FLAG],[SHIPMENT_NOTES],[COMMENTS],[GFF_SHIPMENT_NUMBER],[GFF_SHIPMENT_INSTANCE_NUMBER],[PROOF_OF_DELIVERY_NAME],[SCOPE],[SECTOR],[DIRECTION],[AUTHORIZER_NAME],[DELIVERY_INSTRUCTIONS],[DESTINATION_CONTACT] from dbo.fact_transportation (nolock)",
+	
+		"mappings": [
+                    {
+                        "source": {
+                            "name": "SOURCE_SYSTEM_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "SOURCE_SYSTEM_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CLIENT_KEY",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 0,
+                            "precision": 18
+                        },
+                        "sink": {
+                            "name": "CLIENT_KEY",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "WAREHOUSE_KEY",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 0,
+                            "precision": 18
+                        },
+                        "sink": {
+                            "name": "WAREHOUSE_KEY",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "SERVICE_KEY",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 0,
+                            "precision": 18
+                        },
+                        "sink": {
+                            "name": "SERVICE_KEY",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ORIGIN_LOCATION_KEY",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 0,
+                            "precision": 18
+                        },
+                        "sink": {
+                            "name": "ORIGIN_LOCATION_KEY",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "DESTINATION_LOCATION_KEY",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 0,
+                            "precision": 18
+                        },
+                        "sink": {
+                            "name": "DESTINATION_LOCATION_KEY",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "PICKUP_CARRIER_LOS_KEY",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 0,
+                            "precision": 18
+                        },
+                        "sink": {
+                            "name": "PICKUP_CARRIER_LOS_KEY",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "DROPOFF_CARRIER_LOS_KEY",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 0,
+                            "precision": 18
+                        },
+                        "sink": {
+                            "name": "DROPOFF_CARRIER_LOS_KEY",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "UPS_ORDER_NUMBER",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "UPS_ORDER_NUMBER",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "SOURCE_ORDER_TYPE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "SOURCE_ORDER_TYPE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "EQUIPMENT_TYPE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "EQUIPMENT_TYPE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "SOURCE_ORDER_SUB_TYPE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "SOURCE_ORDER_SUB_TYPE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ORIGIN_COMPANY",
+                            "type": "String",
+                            "physicalType": "nvarchar"
+                        },
+                        "sink": {
+                            "name": "ORIGIN_COMPANY",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "DESTINATION_COMPANY",
+                            "type": "String",
+                            "physicalType": "nvarchar"
+                        },
+                        "sink": {
+                            "name": "DESTINATION_COMPANY",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ORIGIN_TIME_ZONE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "ORIGIN_TIME_ZONE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "DESTINATION_TIME_ZONE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "DESTINATION_TIME_ZONE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "SOURCE_ORDER_STATE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "SOURCE_ORDER_STATE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "SOURCE_ORDER_STATUS",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "SOURCE_ORDER_STATUS",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ORDER_CANCELLED_FLAG",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "ORDER_CANCELLED_FLAG",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ORDER_REC_CREATED_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "ORDER_REC_CREATED_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "UTC_ORDER_REC_CREATED_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "UTC_ORDER_REC_CREATED_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LOFST_REC_CREATED_DATE",
+                            "type": "DateTimeOffset",
+                            "physicalType": "datetimeoffset"
+                        },
+                        "sink": {
+                            "name": "LOFST_REC_CREATED_DATE",
+                            "type": "DateTimeOffset",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ORDER_PLACED_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "ORDER_PLACED_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "UTC_ORDER_PLACED_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "UTC_ORDER_PLACED_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LOFST_ORDER_PLACED_DATE",
+                            "type": "DateTimeOffset",
+                            "physicalType": "datetimeoffset"
+                        },
+                        "sink": {
+                            "name": "LOFST_ORDER_PLACED_DATE",
+                            "type": "DateTimeOffset",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ORDER_CANCELLED_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "ORDER_CANCELLED_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "UTC_ORDER_CANCELLED_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "UTC_ORDER_CANCELLED_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LOFST_ORDER_CANCELLED_DATE",
+                            "type": "DateTimeOffset",
+                            "physicalType": "datetimeoffset"
+                        },
+                        "sink": {
+                            "name": "LOFST_ORDER_CANCELLED_DATE",
+                            "type": "DateTimeOffset",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ORDER_SHIPPED_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "ORDER_SHIPPED_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "UTC_ORDER_SHIPPED_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "UTC_ORDER_SHIPPED_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LOFST_ORDER_SHIPPED_DATE",
+                            "type": "DateTimeOffset",
+                            "physicalType": "datetimeoffset"
+                        },
+                        "sink": {
+                            "name": "LOFST_ORDER_SHIPPED_DATE",
+                            "type": "DateTimeOffset",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "SCHEDULED_SHIPMENT_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "SCHEDULED_SHIPMENT_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "UTC_SCHEDULED_SHIPMENT_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "UTC_SCHEDULED_SHIPMENT_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LOFST_SCHEDULED_SHIPMENT_DATE",
+                            "type": "DateTimeOffset",
+                            "physicalType": "datetimeoffset"
+                        },
+                        "sink": {
+                            "name": "LOFST_SCHEDULED_SHIPMENT_DATE",
+                            "type": "DateTimeOffset",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ACTUAL_SHIPMENT_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "ACTUAL_SHIPMENT_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "UTC_ACTUAL_SHIPMENT_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "UTC_ACTUAL_SHIPMENT_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LOFST_ACTUAL_SHIPMENT_DATE",
+                            "type": "DateTimeOffset",
+                            "physicalType": "datetimeoffset"
+                        },
+                        "sink": {
+                            "name": "LOFST_ACTUAL_SHIPMENT_DATE",
+                            "type": "DateTimeOffset",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "SCHEDULED_DELIVERY_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "SCHEDULED_DELIVERY_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "UTC_SCHEDULED_DELIVERY_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "UTC_SCHEDULED_DELIVERY_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LOFST_SCHEDULED_DELIVERY_DATE",
+                            "type": "DateTimeOffset",
+                            "physicalType": "datetimeoffset"
+                        },
+                        "sink": {
+                            "name": "LOFST_SCHEDULED_DELIVERY_DATE",
+                            "type": "DateTimeOffset",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ACTUAL_DELIVERY_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "ACTUAL_DELIVERY_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "UTC_ACTUAL_DELIVERY_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "UTC_ACTUAL_DELIVERY_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LOFST_ACTUAL_DELIVERY_DATE",
+                            "type": "DateTimeOffset",
+                            "physicalType": "datetimeoffset"
+                        },
+                        "sink": {
+                            "name": "LOFST_ACTUAL_DELIVERY_DATE",
+                            "type": "DateTimeOffset",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ORDER_REC_CREATED_DATE_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "ORDER_REC_CREATED_DATE_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ORDER_REC_CREATED_TIME_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "ORDER_REC_CREATED_TIME_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ORDER_PLACED_DATE_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "ORDER_PLACED_DATE_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ORDER_PLACED_TIME_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "ORDER_PLACED_TIME_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ORDER_CANCELLED_DATE_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "ORDER_CANCELLED_DATE_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ORDER_CANCELLED_TIME_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "ORDER_CANCELLED_TIME_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ORDER_SHIPPED_DATE_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "ORDER_SHIPPED_DATE_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ORDER_SHIPPED_TIME_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "ORDER_SHIPPED_TIME_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "SCHEDULED_SHIPMENT_DATE_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "SCHEDULED_SHIPMENT_DATE_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "SCHEDULED_SHIPMENT_TIME_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "SCHEDULED_SHIPMENT_TIME_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ACTUAL_SHIPMENT_DATE_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "ACTUAL_SHIPMENT_DATE_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ACTUAL_SHIPMENT_TIME_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "ACTUAL_SHIPMENT_TIME_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "SCHEDULED_DELIVERY_DATE_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "SCHEDULED_DELIVERY_DATE_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "SCHEDULED_DELIVERY_TIME_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "SCHEDULED_DELIVERY_TIME_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ACTUAL_DELIVERY_DATE_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "ACTUAL_DELIVERY_DATE_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ACTUAL_DELIVERY_TIME_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "ACTUAL_DELIVERY_TIME_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ORDER_COUNT",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "ORDER_COUNT",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "TRANSPORTATION_SDUK",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "TRANSPORTATION_SDUK",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CLIENT_SDUK",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "CLIENT_SDUK",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "WAREHOUSE_SDUK",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "WAREHOUSE_SDUK",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "SERVICE_SDUK",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "SERVICE_SDUK",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ORIGIN_LOCATION_SDUK",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "ORIGIN_LOCATION_SDUK",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "DESTINATION_LOCATION_SDUK",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "DESTINATION_LOCATION_SDUK",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "PICKUP_CARRIER_LOS_SDUK",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "PICKUP_CARRIER_LOS_SDUK",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "DROPOFF_CARRIER_LOS_SDUK",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "DROPOFF_CARRIER_LOS_SDUK",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ETL_INSERT_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "ETL_INSERT_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ETL_UPDATE_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "ETL_UPDATE_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ETL_BATCH_NUMBER",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 0,
+                            "precision": 18
+                        },
+                        "sink": {
+                            "name": "ETL_BATCH_NUMBER",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "UPS_WMS_ORDER_NUMBER",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "UPS_WMS_ORDER_NUMBER",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "UPS_WMS_SOURCE_SYSTEM_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "UPS_WMS_SOURCE_SYSTEM_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ORIGINAL_SCHEDULED_DELIVERY_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime2"
+                        },
+                        "sink": {
+                            "name": "ORIGINAL_SCHEDULED_DELIVERY_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "UTC_ORIGINAL_SCHEDULED_DELIVERY_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime2"
+                        },
+                        "sink": {
+                            "name": "UTC_ORIGINAL_SCHEDULED_DELIVERY_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LOFST_ORIGINAL_SCHEDULED_DELIVERY_DATE",
+                            "type": "DateTimeOffset",
+                            "physicalType": "datetimeoffset"
+                        },
+                        "sink": {
+                            "name": "LOFST_ORIGINAL_SCHEDULED_DELIVERY_DATE",
+                            "type": "DateTimeOffset",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ORIGINAL_SCHEDULED_DELIVERY_DATE_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "ORIGINAL_SCHEDULED_DELIVERY_DATE_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ORIGINAL_SCHEDULED_DELIVERY_TIME_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "ORIGINAL_SCHEDULED_DELIVERY_TIME_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LOAD_ID",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "LOAD_ID",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LOAD_EARLIEST_PICKUP_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "LOAD_EARLIEST_PICKUP_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LOAD_LATEST_PICKUP_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "LOAD_LATEST_PICKUP_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LOAD_EARLIEST_DELIVERY_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "LOAD_EARLIEST_DELIVERY_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LOAD_LATEST_DELIVERY_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "LOAD_LATEST_DELIVERY_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LOAD_CREATION_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "LOAD_CREATION_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LOAD_UPDATE_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "LOAD_UPDATE_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "TRANSPORT_MILESTONE_1",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "TRANSPORT_MILESTONE_1",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "TRANSPORT_MILESTONEDATE_1",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "TRANSPORT_MILESTONEDATE_1",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "UTC_TRANSPORT_MILESTONEDATE_1",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "UTC_TRANSPORT_MILESTONEDATE_1",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LOFST_TRANSPORT_MILESTONEDATE_1",
+                            "type": "DateTimeOffset",
+                            "physicalType": "datetimeoffset"
+                        },
+                        "sink": {
+                            "name": "LOFST_TRANSPORT_MILESTONEDATE_1",
+                            "type": "DateTimeOffset",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "TRANSPORT_MILESTONEDATE_1_DATE_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "TRANSPORT_MILESTONEDATE_1_DATE_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "TRANSPORT_MILESTONEDATE_1_TIME_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "TRANSPORT_MILESTONEDATE_1_TIME_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "TRANSPORT_MILESTONE_2",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "TRANSPORT_MILESTONE_2",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "TRANSPORT_MILESTONEDATE_2",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "TRANSPORT_MILESTONEDATE_2",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "UTC_TRANSPORT_MILESTONEDATE_2",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "UTC_TRANSPORT_MILESTONEDATE_2",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LOFST_TRANSPORT_MILESTONEDATE_2",
+                            "type": "DateTimeOffset",
+                            "physicalType": "datetimeoffset"
+                        },
+                        "sink": {
+                            "name": "LOFST_TRANSPORT_MILESTONEDATE_2",
+                            "type": "DateTimeOffset",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "TRANSPORT_MILESTONEDATE_2_DATE_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "TRANSPORT_MILESTONEDATE_2_DATE_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "TRANSPORT_MILESTONEDATE_2_TIME_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "TRANSPORT_MILESTONEDATE_2_TIME_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "TRANSPORT_MILESTONE_3",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "TRANSPORT_MILESTONE_3",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "TRANSPORT_MILESTONEDATE_3",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "TRANSPORT_MILESTONEDATE_3",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "UTC_TRANSPORT_MILESTONEDATE_3",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "UTC_TRANSPORT_MILESTONEDATE_3",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LOFST_TRANSPORT_MILESTONEDATE_3",
+                            "type": "DateTimeOffset",
+                            "physicalType": "datetimeoffset"
+                        },
+                        "sink": {
+                            "name": "LOFST_TRANSPORT_MILESTONEDATE_3",
+                            "type": "DateTimeOffset",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "TRANSPORT_MILESTONEDATE_3_DATE_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "TRANSPORT_MILESTONEDATE_3_DATE_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "TRANSPORT_MILESTONEDATE_3_TIME_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "TRANSPORT_MILESTONEDATE_3_TIME_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "TRANSPORT_MILESTONE_4",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "TRANSPORT_MILESTONE_4",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "TRANSPORT_MILESTONEDATE_4",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "TRANSPORT_MILESTONEDATE_4",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "UTC_TRANSPORT_MILESTONEDATE_4",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "UTC_TRANSPORT_MILESTONEDATE_4",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LOFST_TRANSPORT_MILESTONEDATE_4",
+                            "type": "DateTimeOffset",
+                            "physicalType": "datetimeoffset"
+                        },
+                        "sink": {
+                            "name": "LOFST_TRANSPORT_MILESTONEDATE_4",
+                            "type": "DateTimeOffset",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "TRANSPORT_MILESTONEDATE_4_DATE_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "TRANSPORT_MILESTONEDATE_4_DATE_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "TRANSPORT_MILESTONEDATE_4_TIME_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "TRANSPORT_MILESTONEDATE_4_TIME_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "TRANSPORT_MILESTONE_5",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "TRANSPORT_MILESTONE_5",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "TRANSPORT_MILESTONEDATE_5",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "TRANSPORT_MILESTONEDATE_5",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "UTC_TRANSPORT_MILESTONEDATE_5",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "UTC_TRANSPORT_MILESTONEDATE_5",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LOFST_TRANSPORT_MILESTONEDATE_5",
+                            "type": "DateTimeOffset",
+                            "physicalType": "datetimeoffset"
+                        },
+                        "sink": {
+                            "name": "LOFST_TRANSPORT_MILESTONEDATE_5",
+                            "type": "DateTimeOffset",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "TRANSPORT_MILESTONEDATE_5_DATE_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "TRANSPORT_MILESTONEDATE_5_DATE_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "TRANSPORT_MILESTONEDATE_5_TIME_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "TRANSPORT_MILESTONEDATE_5_TIME_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "TRANSPORT_MILESTONE_6",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "TRANSPORT_MILESTONE_6",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "TRANSPORT_MILESTONEDATE_6",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "TRANSPORT_MILESTONEDATE_6",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "UTC_TRANSPORT_MILESTONEDATE_6",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "UTC_TRANSPORT_MILESTONEDATE_6",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LOFST_TRANSPORT_MILESTONEDATE_6",
+                            "type": "DateTimeOffset",
+                            "physicalType": "datetimeoffset"
+                        },
+                        "sink": {
+                            "name": "LOFST_TRANSPORT_MILESTONEDATE_6",
+                            "type": "DateTimeOffset",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "TRANSPORT_MILESTONEDATE_6_DATE_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "TRANSPORT_MILESTONEDATE_6_DATE_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "TRANSPORT_MILESTONEDATE_6_TIME_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "TRANSPORT_MILESTONEDATE_6_TIME_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CARRIER_CODE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "CARRIER_CODE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LEVEL_OF_SERVICE_CODE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "LEVEL_OF_SERVICE_CODE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "WMS_PO_NUMBER",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "WMS_PO_NUMBER",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CARRIER_MODE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "CARRIER_MODE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "TRANS_ONLY_FLAG",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "TRANS_ONLY_FLAG",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "SHIPMENT_NOTES",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "SHIPMENT_NOTES",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "COMMENTS",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "COMMENTS",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "GFF_SHIPMENT_NUMBER",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "GFF_SHIPMENT_NUMBER",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "GFF_SHIPMENT_INSTANCE_NUMBER",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "GFF_SHIPMENT_INSTANCE_NUMBER",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "PROOF_OF_DELIVERY_NAME",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "PROOF_OF_DELIVERY_NAME",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "SCOPE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "SCOPE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "SECTOR",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "SECTOR",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "DIRECTION",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "DIRECTION",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "AUTHORIZER_NAME",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "AUTHORIZER_NAME",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "DELIVERY_INSTRUCTIONS",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "DELIVERY_INSTRUCTIONS",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "DESTINATION_CONTACT",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "DESTINATION_CONTACT",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    }
+                ]
+	},
+	"bronze": {
+		"processname": "fact_transportation_src_to_bronze",
+		"container": "bronze",
+		"system": "gld360",
+		"landingPath": "gld360/inbound/landing/fact_transportation",
+		"processedPath": "gld360/inbound/processed/fact_transportation",
+		"rejectedPath": "gld360/inbound/rejected/fact_transportation",
+    	"partitioncolumns": "etl_update_date"
+	},
+	"silver": {
+		"processname": "fact_transportation_brownze_to_silver",
+        "container": "silver",
+		"notebookpath": "/sail/silver/",
+		"path": "gld360/inbound/fact_transportation",
+        "errorpath": "gld360/error_files/fact_transportation",
+	    "joinColumns":["[SOURCE_SYSTEM_KEY]","[TRANSPORTATION_SDUK]"],
+	    "partitioncolumns":"etl_update_date"
+	},
+	"gold": {
+        "processname": "fact_transportation_silver_to_gold",
+        "notebookpath": "/symphony-summary-layer/gold_zone/gld360-silver-to-gold",
+		"container": "gold",
+		"path": "gld360/inbound/fact_transportation",
+		"errorpath": "gld360/error_files/fact_transportation"
+	},
+	"controller": {
+		"schema": "controller",
+		"controlTable": "delta_control"
+	},
+	"email": {
+		"emailto" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtofail" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtosuccess" : ["gd000012732@ups.com","gd000012733@ups.com","gd000011505@ups.com"]
+	},
+	"log": {
+		"logtable":"logs.ups_application_audit_logs"
+	},
+	"processing": {
+		"logpath": "dbfs:/mnt/logs/ups/gld360",
+		"clusterversion": "7.2.x-scala2.12",
+		"nodetype": "standard_ds3_v2",
+		"workercount": "2"
+	},
+	"archive": {
+		"enabled": true,
+        "container": "data-layer",
+		"path": "bronze/gld360/archive/table_name/partition_column"
+	}
+}

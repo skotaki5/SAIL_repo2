@@ -1,0 +1,268 @@
+{
+    "name": "pl-transformation-db-job",
+    "properties": {
+        "activities": [
+            {
+                "name": "Db Job Trigger",
+                "type": "WebActivity",
+                "dependsOn": [
+                    {
+                        "activity": "Get Azure Databrikcs URL",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    },
+                    {
+                        "activity": "Get Azure Databricks Token",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "url": {
+                        "value": "@concat(activity('Get Azure Databrikcs URL').output.value,'api/2.1/jobs/run-now')",
+                        "type": "Expression"
+                    },
+                    "method": "POST",
+                    "headers": {
+                        "Authorization": {
+                            "value": "@activity('Get Azure Databricks Token').output.value",
+                            "type": "Expression"
+                        }
+                    },
+                    "body": {
+                        "value": "@concat('{\"job_id\":',pipeline().parameters.adb_job_id,'}')",
+                        "type": "Expression"
+                    },
+                    "disableCertValidation": false
+                }
+            },
+            {
+                "name": "capture job status",
+                "type": "Until",
+                "dependsOn": [
+                    {
+                        "activity": "Db Job Trigger",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "expression": {
+                        "value": "@variables('v_status')",
+                        "type": "Expression"
+                    },
+                    "activities": [
+                        {
+                            "name": "Check job status",
+                            "type": "WebActivity",
+                            "dependsOn": [
+                                {
+                                    "activity": "Wait",
+                                    "dependencyConditions": [
+                                        "Succeeded"
+                                    ]
+                                }
+                            ],
+                            "policy": {
+                                "timeout": "7.00:00:00",
+                                "retry": 0,
+                                "retryIntervalInSeconds": 30,
+                                "secureOutput": false,
+                                "secureInput": false
+                            },
+                            "userProperties": [],
+                            "typeProperties": {
+                                "url": {
+                                    "value": "@concat(activity('Get Azure Databrikcs URL').output.value,'api/2.0/jobs/runs/get?run_id=',activity('Db Job Trigger').output.run_id)",
+                                    "type": "Expression"
+                                },
+                                "method": "GET",
+                                "headers": {
+                                    "Authorization": {
+                                        "value": "@activity('Get Azure Databricks Token').output.value",
+                                        "type": "Expression"
+                                    }
+                                },
+                                "body": "",
+                                "disableCertValidation": false
+                            }
+                        },
+                        {
+                            "name": "Set job finish status",
+                            "type": "SetVariable",
+                            "dependsOn": [
+                                {
+                                    "activity": "Check job status",
+                                    "dependencyConditions": [
+                                        "Succeeded"
+                                    ]
+                                }
+                            ],
+                            "userProperties": [],
+                            "typeProperties": {
+                                "variableName": "v_status",
+                                "value": {
+                                    "value": "@if(\r\n    or(or(\r\n        equals(activity('Check job status').output.state.life_cycle_state,'TERMINATED'),\r\n        equals(activity('Check job status').output.state.life_cycle_state,'INTERNAL_ERROR')\r\n        ), equals(activity('Check job status').output.state.life_cycle_state,'SKIPPED')),true,\r\n    false)",
+                                    "type": "Expression"
+                                }
+                            }
+                        },
+                        {
+                            "name": "Wait",
+                            "type": "Wait",
+                            "dependsOn": [],
+                            "userProperties": [],
+                            "typeProperties": {
+                                "waitTimeInSeconds": 60
+                            }
+                        },
+                        {
+                            "name": "Cant Track status",
+                            "type": "SetVariable",
+                            "dependsOn": [
+                                {
+                                    "activity": "Check job status",
+                                    "dependencyConditions": [
+                                        "Failed"
+                                    ]
+                                }
+                            ],
+                            "userProperties": [],
+                            "typeProperties": {
+                                "variableName": "v_status",
+                                "value": {
+                                    "value": "@bool(true)",
+                                    "type": "Expression"
+                                }
+                            }
+                        }
+                    ],
+                    "timeout": "7.00:00:00"
+                }
+            },
+            {
+                "name": "check Success",
+                "type": "IfCondition",
+                "dependsOn": [
+                    {
+                        "activity": "capture job status",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "expression": {
+                        "value": "@or(equals(activity('Check job status').output.state.life_cycle_state,'SKIPPED'),\n        equals(activity('Check job status').output.state.result_state,'SUCCESS')        \n        )",
+                        "type": "Expression"
+                    },
+                    "ifFalseActivities": [
+                        {
+                            "name": "DB job failed",
+                            "type": "Fail",
+                            "dependsOn": [],
+                            "userProperties": [],
+                            "typeProperties": {
+                                "message": {
+                                    "value": "@activity('Check job status').output.state.state_message",
+                                    "type": "Expression"
+                                },
+                                "errorCode": {
+                                    "value": "@activity('Check job status').output.run_page_url",
+                                    "type": "Expression"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "Get Azure Databrikcs URL",
+                "type": "WebActivity",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "url": {
+                        "value": "@pipeline().globalParameters.gp_akv_secret_adb_url",
+                        "type": "Expression"
+                    },
+                    "method": "GET",
+                    "authentication": {
+                        "resource": "https://vault.azure.net",
+                        "credential": {
+                            "referenceName": "credentialMiOa2",
+                            "type": "CredentialReference"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Get Azure Databricks Token",
+                "type": "WebActivity",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "url": {
+                        "value": "@pipeline().globalParameters.gp_akv_secret_adb_token",
+                        "type": "Expression"
+                    },
+                    "method": "GET",
+                    "authentication": {
+                        "resource": "https://vault.azure.net",
+                        "credential": {
+                            "referenceName": "credentialMiOa2",
+                            "type": "CredentialReference"
+                        }
+                    }
+                }
+            }
+        ],
+        "parameters": {
+            "adb_job_id": {
+                "type": "string"
+            }
+        },
+        "variables": {
+            "v_status": {
+                "type": "Boolean",
+                "defaultValue": false
+            },
+            "v_test": {
+                "type": "String"
+            }
+        },
+        "folder": {
+            "name": "Main Pipelines"
+        },
+        "annotations": [],
+        "lastPublishTime": "2022-02-24T04:40:09Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

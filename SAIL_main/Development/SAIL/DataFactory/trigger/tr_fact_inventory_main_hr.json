@@ -1,0 +1,27 @@
+{
+    "name": "tr_fact_inventory_main_hr",
+    "properties": {
+        "annotations": [],
+        "runtimeState": "Started",
+        "pipelines": [
+            {
+                "pipelineReference": {
+                    "referenceName": "pl-fact-inventory-main-master",
+                    "type": "PipelineReference"
+                },
+                "parameters": {
+                    "p_schedule_time": "@trigger().scheduledTime"
+                }
+            }
+        ],
+        "type": "ScheduleTrigger",
+        "typeProperties": {
+            "recurrence": {
+                "frequency": "Minute",
+                "interval": 90,
+                "startTime": "2022-02-25T21:30:00",
+                "timeZone": "India Standard Time"
+            }
+        }
+    }
+}

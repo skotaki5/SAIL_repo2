@@ -1,0 +1,19 @@
+{
+    "name": "ls_sqlserver_controller",
+    "type": "Microsoft.DataFactory/factories/linkedservices",
+    "properties": {
+        "annotations": [],
+        "type": "AzureSqlDatabase",
+        "typeProperties": {
+            "connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=sqlsvr-sail-prod-eastus2.database.windows.net;Initial Catalog=sailprod;User ID=sail",
+            "password": {
+                "type": "AzureKeyVaultSecret",
+                "store": {
+                    "referenceName": "ls_akv",
+                    "type": "LinkedServiceReference"
+                },
+                "secretName": "SqlAdminPassword"
+            }
+        }
+    }
+}

@@ -1,0 +1,553 @@
+{
+	"source": {
+        "sourcetype": "rdms",
+        "database": "gld_dw_new",
+		"schema": "dbo",
+		"tblName": "fact_shipment",
+		"tblName_hwm": "fact_shipment_oth",
+		"partColumns": "etl_update_date",
+		"starttms": "20211001120000",
+		"selectQuery": 
+          "select [SOURCE_SYSTEM_KEY],[SHIPMENT_NUMBER],[UPS_ORDER_NUMBER],[SHIPMENT_SEQUENCE_NUMBER],[TRACKING_NUMBER],[CARRIER_CODE],[LEVEL_OF_SERVICE_CODE],[SHIPMENT_CREATION_DATE],[UTC_SHIPMENT_CREATION_DATE],[LOFST_SHIPMENT_CREATION_DATE],[SHIPMENT_CREATION_DATE_KEY],[SHIPMENT_CREATION_TIME_KEY],[SHIPMENT_LENGTH],[SHIPMENT_WIDTH],[SHIPMENT_HEIGHT],[SHIPMENT_WEIGHT],[SHIPMENT_QUANTITY],[SHIPMENT_SDUK],[ORDER_SDUK],[LOAD_ID],[CARRIER_TYPE],[ETL_INSERT_DATE],[ETL_UPDATE_DATE],[ETL_BATCH_NUMBER],[DML_DATE],[DML_DATE_KEY],[CUBAGE],[TemperatureRange_Min],[TemperatureRange_Max],[TemperatureRange_UOM],[TemperatureRange_Code],[Actual_Weight_UOM],[Dimension_UOM],[SHIPMENT_DESCRIPTION],[LOAD_AREA],[UOM] from dbo.fact_shipment (nolock) ",
+	"mappings": [
+                        {
+                            "source": {
+                                "name": "SOURCE_SYSTEM_KEY",
+                                "type": "Int32",
+                                "physicalType": "int"
+                            },
+                            "sink": {
+                                "name": "SOURCE_SYSTEM_KEY",
+                                "type": "Int32",
+                                "physicalType": "INT_32"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "SHIPMENT_NUMBER",
+                                "type": "String",
+                                "physicalType": "varchar"
+                            },
+                            "sink": {
+                                "name": "SHIPMENT_NUMBER",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "UPS_ORDER_NUMBER",
+                                "type": "String",
+                                "physicalType": "varchar"
+                            },
+                            "sink": {
+                                "name": "UPS_ORDER_NUMBER",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "SHIPMENT_SEQUENCE_NUMBER",
+                                "type": "String",
+                                "physicalType": "varchar"
+                            },
+                            "sink": {
+                                "name": "SHIPMENT_SEQUENCE_NUMBER",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "TRACKING_NUMBER",
+                                "type": "String",
+                                "physicalType": "varchar"
+                            },
+                            "sink": {
+                                "name": "TRACKING_NUMBER",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "CARRIER_CODE",
+                                "type": "String",
+                                "physicalType": "varchar"
+                            },
+                            "sink": {
+                                "name": "CARRIER_CODE",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "LEVEL_OF_SERVICE_CODE",
+                                "type": "String",
+                                "physicalType": "varchar"
+                            },
+                            "sink": {
+                                "name": "LEVEL_OF_SERVICE_CODE",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "SHIPMENT_CREATION_DATE",
+                                "type": "DateTime",
+                                "physicalType": "datetime"
+                            },
+                            "sink": {
+                                "name": "SHIPMENT_CREATION_DATE",
+                                "type": "DateTime",
+                                "physicalType": "INT_96"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "UTC_SHIPMENT_CREATION_DATE",
+                                "type": "DateTime",
+                                "physicalType": "datetime"
+                            },
+                            "sink": {
+                                "name": "UTC_SHIPMENT_CREATION_DATE",
+                                "type": "DateTime",
+                                "physicalType": "INT_96"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "LOFST_SHIPMENT_CREATION_DATE",
+                                "type": "DateTimeOffset",
+                                "physicalType": "datetimeoffset"
+                            },
+                            "sink": {
+                                "name": "LOFST_SHIPMENT_CREATION_DATE",
+                                "type": "DateTimeOffset",
+                                "physicalType": "INT_96"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "SHIPMENT_CREATION_DATE_KEY",
+                                "type": "Int32",
+                                "physicalType": "int"
+                            },
+                            "sink": {
+                                "name": "SHIPMENT_CREATION_DATE_KEY",
+                                "type": "Int32",
+                                "physicalType": "INT_32"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "SHIPMENT_CREATION_TIME_KEY",
+                                "type": "Int32",
+                                "physicalType": "int"
+                            },
+                            "sink": {
+                                "name": "SHIPMENT_CREATION_TIME_KEY",
+                                "type": "Int32",
+                                "physicalType": "INT_32"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "SHIPMENT_LENGTH",
+                                "type": "Decimal",
+                                "physicalType": "decimal",
+                                "scale": 4,
+                                "precision": 22
+                            },
+                            "sink": {
+                                "name": "SHIPMENT_LENGTH",
+                                "type": "Decimal",
+                                "physicalType": "DECIMAL"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "SHIPMENT_WIDTH",
+                                "type": "Decimal",
+                                "physicalType": "decimal",
+                                "scale": 4,
+                                "precision": 22
+                            },
+                            "sink": {
+                                "name": "SHIPMENT_WIDTH",
+                                "type": "Decimal",
+                                "physicalType": "DECIMAL"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "SHIPMENT_HEIGHT",
+                                "type": "Decimal",
+                                "physicalType": "decimal",
+                                "scale": 4,
+                                "precision": 22
+                            },
+                            "sink": {
+                                "name": "SHIPMENT_HEIGHT",
+                                "type": "Decimal",
+                                "physicalType": "DECIMAL"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "SHIPMENT_WEIGHT",
+                                "type": "Decimal",
+                                "physicalType": "decimal",
+                                "scale": 4,
+                                "precision": 22
+                            },
+                            "sink": {
+                                "name": "SHIPMENT_WEIGHT",
+                                "type": "Decimal",
+                                "physicalType": "DECIMAL"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "SHIPMENT_QUANTITY",
+                                "type": "Decimal",
+                                "physicalType": "decimal",
+                                "scale": 4,
+                                "precision": 22
+                            },
+                            "sink": {
+                                "name": "SHIPMENT_QUANTITY",
+                                "type": "Decimal",
+                                "physicalType": "DECIMAL"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "SHIPMENT_SDUK",
+                                "type": "String",
+                                "physicalType": "varchar"
+                            },
+                            "sink": {
+                                "name": "SHIPMENT_SDUK",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "ORDER_SDUK",
+                                "type": "String",
+                                "physicalType": "varchar"
+                            },
+                            "sink": {
+                                "name": "ORDER_SDUK",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "LOAD_ID",
+                                "type": "String",
+                                "physicalType": "varchar"
+                            },
+                            "sink": {
+                                "name": "LOAD_ID",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "CARRIER_TYPE",
+                                "type": "String",
+                                "physicalType": "varchar"
+                            },
+                            "sink": {
+                                "name": "CARRIER_TYPE",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "ETL_INSERT_DATE",
+                                "type": "DateTime",
+                                "physicalType": "datetime"
+                            },
+                            "sink": {
+                                "name": "ETL_INSERT_DATE",
+                                "type": "DateTime",
+                                "physicalType": "INT_96"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "ETL_UPDATE_DATE",
+                                "type": "DateTime",
+                                "physicalType": "datetime"
+                            },
+                            "sink": {
+                                "name": "ETL_UPDATE_DATE",
+                                "type": "DateTime",
+                                "physicalType": "INT_96"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "ETL_BATCH_NUMBER",
+                                "type": "Decimal",
+                                "physicalType": "decimal",
+                                "scale": 0,
+                                "precision": 18
+                            },
+                            "sink": {
+                                "name": "ETL_BATCH_NUMBER",
+                                "type": "Decimal",
+                                "physicalType": "DECIMAL"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "DML_DATE",
+                                "type": "DateTime",
+                                "physicalType": "datetime2"
+                            },
+                            "sink": {
+                                "name": "DML_DATE",
+                                "type": "DateTime",
+                                "physicalType": "INT_96"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "DML_DATE_KEY",
+                                "type": "Int32",
+                                "physicalType": "int"
+                            },
+                            "sink": {
+                                "name": "DML_DATE_KEY",
+                                "type": "Int32",
+                                "physicalType": "INT_32"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "CUBAGE",
+                                "type": "Decimal",
+                                "physicalType": "decimal",
+                                "scale": 4,
+                                "precision": 22
+                            },
+                            "sink": {
+                                "name": "CUBAGE",
+                                "type": "Decimal",
+                                "physicalType": "DECIMAL"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "TemperatureRange_Min",
+                                "type": "String",
+                                "physicalType": "varchar"
+                            },
+                            "sink": {
+                                "name": "TemperatureRange_Min",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "TemperatureRange_Max",
+                                "type": "String",
+                                "physicalType": "varchar"
+                            },
+                            "sink": {
+                                "name": "TemperatureRange_Max",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "TemperatureRange_UOM",
+                                "type": "String",
+                                "physicalType": "varchar"
+                            },
+                            "sink": {
+                                "name": "TemperatureRange_UOM",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "TemperatureRange_Code",
+                                "type": "String",
+                                "physicalType": "varchar"
+                            },
+                            "sink": {
+                                "name": "TemperatureRange_Code",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Actual_Weight_UOM",
+                                "type": "String",
+                                "physicalType": "varchar"
+                            },
+                            "sink": {
+                                "name": "Actual_Weight_UOM",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "Dimension_UOM",
+                                "type": "String",
+                                "physicalType": "varchar"
+                            },
+                            "sink": {
+                                "name": "Dimension_UOM",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "SHIPMENT_DESCRIPTION",
+                                "type": "String",
+                                "physicalType": "varchar"
+                            },
+                            "sink": {
+                                "name": "SHIPMENT_DESCRIPTION",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "LOAD_AREA",
+                                "type": "Decimal",
+                                "physicalType": "decimal",
+                                "scale": 6,
+                                "precision": 38
+                            },
+                            "sink": {
+                                "name": "LOAD_AREA",
+                                "type": "Decimal",
+                                "physicalType": "DECIMAL"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "UOM",
+                                "type": "String",
+                                "physicalType": "varchar"
+                            },
+                            "sink": {
+                                "name": "UOM",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        }
+                    ]	
+	},
+	"bronze": {
+		"processname": "fact_shipment_src_to_bronze",
+		"container": "bronze",
+		"system": "gld360",
+		"landingPath": "gld360/inbound/landing_oth/fact_shipment",
+		"processedPath": "gld360/inbound/processed/fact_shipment",
+		"rejectedPath": "gld360/inbound/rejected/fact_shipment",
+    	"partitioncolumn": "etl_update_date"
+	},
+	"silver": {
+		"processname": "fact_shipment_brownze_to_silver",
+        "container": "silver",
+		"notebookpath": "/symphony-summary-layer/silver_zone/gld360-browze-to-silver",
+		"path": "gld360/inbound/fact_shipment",
+        "errorpath": "gld360/error_files/fact_shipment",
+        "insertColumns": [
+            "SOURCE_SYSTEM_KEY",
+            "SHIPMENT_NUMBER",
+            "UPS_ORDER_NUMBER",
+            "SHIPMENT_SEQUENCE_NUMBER",
+            "TRACKING_NUMBER",
+            "CARRIER_CODE",
+            "LEVEL_OF_SERVICE_CODE",
+            "SHIPMENT_CREATION_DATE",
+            "UTC_SHIPMENT_CREATION_DATE",
+            "LOFST_SHIPMENT_CREATION_DATE",
+            "SHIPMENT_CREATION_DATE_KEY",
+            "SHIPMENT_CREATION_TIME_KEY",
+            "SHIPMENT_LENGTH",
+            "SHIPMENT_WIDTH",
+            "SHIPMENT_HEIGHT",
+            "SHIPMENT_WEIGHT",
+            "SHIPMENT_QUANTITY",
+            "SHIPMENT_SDUK",
+            "ORDER_SDUK",
+            "LOAD_ID",
+            "CARRIER_TYPE",
+            "ETL_INSERT_DATE",
+            "ETL_UPDATE_DATE",
+            "ETL_BATCH_NUMBER",
+            "DML_DATE",
+            "DML_DATE_KEY",
+            "CUBAGE",
+            "TemperatureRange_Min",
+            "TemperatureRange_Max",
+            "TemperatureRange_UOM",
+            "TemperatureRange_Code",
+            "Actual_Weight_UOM",
+            "Dimension_UOM",
+            "SHIPMENT_DESCRIPTION",
+            "LOAD_AREA",
+            "UOM"
+        ],
+		"updateColumns": [
+
+        ],
+		"joinColumns": [
+            "SOURCE_SYSTEM_KEY", 
+            "SHIPMENT_SDUK"
+        ]
+	},
+	"gold": {
+        "processname": "fact_shipment_silver_to_gold",
+        "notebookpath": "/symphony-summary-layer/gold_zone/gld360-silver-to-gold",
+		"path": "gld360/inbound/fact_shipment",
+		"errorpath": "gld360/error_files/fact_shipment"
+	},
+	"controller": {
+		"schema": "controller",
+		"controlTable": "delta_control"
+	},
+	"email": {
+		"emailto" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtofail" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtosuccess" : ["gd000012732@ups.com","gd000012733@ups.com","gd000011505@ups.com"]
+	},
+	"log": {
+		"logtable":"logs.ups_application_audit_logs"
+	},
+	"processing": {
+		"logpath": "dbfs:/mnt/logs/ups/gld360",
+		"clusterversion": "7.2.x-scala2.12",
+		"nodetype": "standard_ds3_v2",
+		"workercount": "2"
+	},
+	"archive": {
+		"enabled": true,
+        "container": "data-layer",
+		"path": "bronze/gld360/archive/table_name/partition_column"
+	}
+}

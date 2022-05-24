@@ -1,0 +1,20 @@
+{
+    "name": "ds_gld_metadata",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "ls_sqlserver_gld_metadata",
+            "type": "LinkedServiceReference"
+        },
+        "folder": {
+            "name": "Source"
+        },
+        "annotations": [],
+        "type": "AzureSqlTable",
+        "schema": [],
+        "typeProperties": {
+            "schema": "dbo",
+            "table": "ETL_LOG_DWH"
+        }
+    },
+    "type": "Microsoft.DataFactory/factories/datasets"
+}

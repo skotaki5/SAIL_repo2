@@ -1,0 +1,29 @@
+{
+    "name": "trigger_job_10_min",
+    "properties": {
+        "annotations": [],
+        "runtimeState": "Started",
+        "pipelines": [
+            {
+                "pipelineReference": {
+                    "referenceName": "pl-main-master",
+                    "type": "PipelineReference"
+                },
+                "parameters": {
+                    "p_schedule_time": "@trigger().scheduledTime",
+                    "is_optimize": false,
+                    "p_overide_high_watermark": "@string('')"
+                }
+            }
+        ],
+        "type": "ScheduleTrigger",
+        "typeProperties": {
+            "recurrence": {
+                "frequency": "Minute",
+                "interval": 10,
+                "startTime": "2022-02-23T11:08:00Z",
+                "timeZone": "UTC"
+            }
+        }
+    }
+}

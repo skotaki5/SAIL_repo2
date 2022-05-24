@@ -1,0 +1,113 @@
+{
+
+        "timeout_seconds": 0,
+        "email_notifications": {},
+        "name": "sail_inventory_load",
+        "max_concurrent_runs": 1,
+        "tasks": [
+            {
+                "job_cluster_key": "silver_fact_inventory_snapshot_cluster",
+                "libraries": [
+                    {
+                        "maven": {
+                            "coordinates": "com.azure.cosmos.spark:azure-cosmos-spark_3-1_2-12:4.6.0"
+                        }
+                    },
+                    {
+                        "pypi": {
+                            "package": "azure-cosmos==4.2.0"
+                        }
+                    }
+                ],
+                "notebook_task": {
+                    "notebook_path": "/SAIL/silver/autoloader_fact_inventory_transform_bronze_to_silver",
+                    "base_parameters": {
+                        "log_debug_mode": "N",
+                        "checkpoint_location": "/mnt/sail/bronze/gld360/inbound/checkpoint/fact_inventory_snapshot/",
+                        "src_folder_path": "/mnt/sail/bronze/gld360/inbound/landing/fact_inventory_snapshot/",
+                        "target_folder_path": "/mnt/sail/silver/gld360/inbound/fact_inventory_snapshot",
+                        "src_schema": "{\"fields\":[{\"metadata\":{},\"name\":\"SOURCE_SYSTEM_KEY\",\"nullable\":true,\"type\":\"integer\"},{\"metadata\":{},\"name\":\"CLIENT_KEY\",\"nullable\":true,\"type\":\"decimal(18,0)\"},{\"metadata\":{},\"name\":\"WAREHOUSE_KEY\",\"nullable\":true,\"type\":\"decimal(18,0)\"},{\"metadata\":{},\"name\":\"ITEM_KEY\",\"nullable\":true,\"type\":\"decimal(18,0)\"},{\"metadata\":{},\"name\":\"LPN_NUMBER\",\"nullable\":true,\"type\":\"string\"},{\"metadata\":{},\"name\":\"DISPOSITION_CODE\",\"nullable\":true,\"type\":\"string\"},{\"metadata\":{},\"name\":\"SERIAL_OR_LOT\",\"nullable\":true,\"type\":\"string\"},{\"metadata\":{},\"name\":\"LPN_HDR_CREATION_DATE\",\"nullable\":true,\"type\":\"timestamp\"},{\"metadata\":{},\"name\":\"UTC_LPN_HDR_CREATION_DATE\",\"nullable\":true,\"type\":\"timestamp\"},{\"metadata\":{},\"name\":\"LOFST_LPN_HDR_CREATION_DATE\",\"nullable\":true,\"type\":\"timestamp\"},{\"metadata\":{},\"name\":\"RECEIVED_DATE\",\"nullable\":true,\"type\":\"timestamp\"},{\"metadata\":{},\"name\":\"UTC_RECEIVED_DATE\",\"nullable\":true,\"type\":\"timestamp\"},{\"metadata\":{},\"name\":\"LOFST_RECEIVED_DATE\",\"nullable\":true,\"type\":\"timestamp\"},{\"metadata\":{},\"name\":\"EXPIRATION_DATE\",\"nullable\":true,\"type\":\"timestamp\"},{\"metadata\":{},\"name\":\"UTC_EXPIRATION_DATE\",\"nullable\":true,\"type\":\"timestamp\"},{\"metadata\":{},\"name\":\"LOFST_EXPIRATION_DATE\",\"nullable\":true,\"type\":\"timestamp\"},{\"metadata\":{},\"name\":\"RECEIVED_QUANTITY\",\"nullable\":true,\"type\":\"decimal(22,4)\"},{\"metadata\":{},\"name\":\"ON_HAND_QUANTITY\",\"nullable\":true,\"type\":\"decimal(22,4)\"},{\"metadata\":{},\"name\":\"ON_HOLD_QUANTITY\",\"nullable\":true,\"type\":\"decimal(22,4)\"},{\"metadata\":{},\"name\":\"ALLOCATED_QUANTITY\",\"nullable\":true,\"type\":\"decimal(22,4)\"},{\"metadata\":{},\"name\":\"AVAILABLE_QUANTITY\",\"nullable\":true,\"type\":\"decimal(22,4)\"},{\"metadata\":{},\"name\":\"UNALLOCATABLE_QUANTITY\",\"nullable\":true,\"type\":\"decimal(22,4)\"},{\"metadata\":{},\"name\":\"PRN_QUANTITY\",\"nullable\":true,\"type\":\"decimal(22,4)\"},{\"metadata\":{},\"name\":\"QUARANTINE_QUANTITY\",\"nullable\":true,\"type\":\"decimal(22,4)\"},{\"metadata\":{},\"name\":\"POTENTIAL_VARIANCE_QUANTITY\",\"nullable\":true,\"type\":\"decimal(22,4)\"},{\"metadata\":{},\"name\":\"GOOD_QUANTITY\",\"nullable\":true,\"type\":\"decimal(22,4)\"},{\"metadata\":{},\"name\":\"NEW_QUANTITY\",\"nullable\":true,\"type\":\"decimal(22,4)\"},{\"metadata\":{},\"name\":\"INVENTORY_SDUK\",\"nullable\":true,\"type\":\"string\"},{\"metadata\":{},\"name\":\"CLIENT_SDUK\",\"nullable\":true,\"type\":\"string\"},{\"metadata\":{},\"name\":\"WAREHOUSE_SDUK\",\"nullable\":true,\"type\":\"string\"},{\"metadata\":{},\"name\":\"ITEM_SDUK\",\"nullable\":true,\"type\":\"string\"},{\"metadata\":{},\"name\":\"AVAILABLE_FLAG\",\"nullable\":true,\"type\":\"string\"},{\"metadata\":{},\"name\":\"ETL_INSERT_DATE\",\"nullable\":true,\"type\":\"timestamp\"},{\"metadata\":{},\"name\":\"ETL_UPDATE_DATE\",\"nullable\":true,\"type\":\"timestamp\"},{\"metadata\":{},\"name\":\"ETL_BATCH_NUMBER\",\"nullable\":true,\"type\":\"decimal(18,0)\"},{\"metadata\":{},\"name\":\"DESIGNATOR\",\"nullable\":true,\"type\":\"string\"},{\"metadata\":{},\"name\":\"VENDOR_SERIAL_NUMBER\",\"nullable\":true,\"type\":\"string\"},{\"metadata\":{},\"name\":\"VENDOR_LOT_NUMBER\",\"nullable\":true,\"type\":\"string\"},{\"metadata\":{},\"name\":\"INV_REF_1\",\"nullable\":true,\"type\":\"string\"},{\"metadata\":{},\"name\":\"INV_REF_2\",\"nullable\":true,\"type\":\"string\"},{\"metadata\":{},\"name\":\"INV_REF_3\",\"nullable\":true,\"type\":\"string\"},{\"metadata\":{},\"name\":\"INV_REF_4\",\"nullable\":true,\"type\":\"string\"},{\"metadata\":{},\"name\":\"INV_REF_5\",\"nullable\":true,\"type\":\"string\"},{\"metadata\":{},\"name\":\"HOLD_CODE\",\"nullable\":true,\"type\":\"string\"},{\"metadata\":{},\"name\":\"PRODUCT_STATUS\",\"nullable\":true,\"type\":\"string\"},{\"metadata\":{},\"name\":\"BATCH_STATUS\",\"nullable\":true,\"type\":\"string\"},{\"metadata\":{},\"name\":\"SHELF_LIFE\",\"nullable\":true,\"type\":\"integer\"},{\"metadata\":{},\"name\":\"STORAGE_TYPE\",\"nullable\":true,\"type\":\"string\"},{\"metadata\":{},\"name\":\"BATCH_HOLD_REASON\",\"nullable\":true,\"type\":\"string\"},{\"metadata\":{},\"name\":\"HOLD_DESCRIPTION\",\"nullable\":true,\"type\":\"string\"},{\"metadata\":{},\"name\":\"NET_AVAILABLE_UNITS\",\"nullable\":true,\"type\":\"integer\"}],\"type\":\"struct\"}",
+                        "tgt_table_name": "fact_inventory_snapshot"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "silver_fact_inventory_snapshot"
+            },
+            {
+                "job_cluster_key": "silver_fact_inventory_snapshot_cluster",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/gold/pr_load_summary_inventory",
+                    "base_parameters": {
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "gold_digital_summary_inventory",
+                "depends_on": [
+                    {
+                        "task_key": "silver_fact_inventory_snapshot"
+                    }
+                ]
+            },
+            {
+                "job_cluster_key": "silver_fact_inventory_snapshot_cluster",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/cosmos/load_digital_summary_inventory_Container",
+                    "base_parameters": {
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "cosmos_digital_inventory_snapshot",
+                "depends_on": [
+                    {
+                        "task_key": "gold_digital_summary_inventory"
+                    }
+                ]
+            },
+            {
+                "job_cluster_key": "silver_fact_inventory_snapshot_cluster",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/cosmos/load_digital_summary_inventory_agg_Container",
+                    "base_parameters": {
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "cosmos_digital_inventory_agg",
+                "depends_on": [
+                    {
+                        "task_key": "cosmos_digital_inventory_snapshot"
+                    }
+                ]
+            }
+        ],
+        "job_clusters": [
+            {
+                "job_cluster_key": "silver_fact_inventory_snapshot_cluster",
+                "new_cluster": {
+                    "cluster_name": "",
+                    "spark_version": "9.1.x-scala2.12",
+                    "spark_conf": {
+                        "spark.databricks.delta.preview.enabled": "true"
+                    },
+                    "azure_attributes": {
+                        "availability": "ON_DEMAND_AZURE",
+                        "first_on_demand": 1,
+                        "spot_bid_max_price": -1
+                    },
+                    "node_type_id": "Standard_E16ds_v4",
+                    "spark_env_vars": {
+                        "PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+                    },
+                    "enable_elastic_disk": true,
+                    "num_workers": 4
+                }
+            }
+        ]
+    
+}

@@ -1,0 +1,272 @@
+{
+	"source": {
+        "sourcetype": "rdms",
+        "database": "gld_dw_new",
+		"schema": "dbo",
+		"tblName": "dim_carrier_los",
+		"partColumns": "etl_update_date",
+		"starttms": "20211001120000",
+		"selectQuery": "SELECT [CARRIER_LOS_KEY],[SOURCE_SYSTEM_KEY],[CARRIER_CODE],[CARRIER_NAME],[CARRIER_TYPE],[LEVEL_OF_SERVICE_CODE],[LEVEL_OF_SERVICE_DESC],[WAREHOUSE_CODE],[CARRIER_NUMERIC_ID],[EXT_CARRIER_CODE],[CARRIER_GROUP],[CARRIER_LOS_SDUK],[GLD_CARRIER_MAPPED_KEY],[ETL_INSERT_DATE],[ETL_UPDATE_DATE],[ETL_BATCH_NUMBER],[CARRIER_HUB_FLAG]FROM [dbo].[DIM_CARRIER_LOS] (nolock)",
+	    "mappings": [
+                        {
+                        "source": {
+                            "name": "CARRIER_LOS_KEY",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 0,
+                            "precision": 18
+                        },
+                        "sink": {
+                            "name": "CARRIER_LOS_KEY",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "SOURCE_SYSTEM_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "SOURCE_SYSTEM_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CARRIER_CODE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "CARRIER_CODE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CARRIER_NAME",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "CARRIER_NAME",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CARRIER_TYPE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "CARRIER_TYPE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LEVEL_OF_SERVICE_CODE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "LEVEL_OF_SERVICE_CODE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LEVEL_OF_SERVICE_DESC",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "LEVEL_OF_SERVICE_DESC",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "WAREHOUSE_CODE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "WAREHOUSE_CODE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CARRIER_NUMERIC_ID",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "CARRIER_NUMERIC_ID",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "EXT_CARRIER_CODE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                    },
+                        "sink": {
+                            "name": "EXT_CARRIER_CODE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CARRIER_GROUP",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "CARRIER_GROUP",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CARRIER_LOS_SDUK",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "CARRIER_LOS_SDUK",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "GLD_CARRIER_MAPPED_KEY",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "GLD_CARRIER_MAPPED_KEY",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ETL_INSERT_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "ETL_INSERT_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ETL_UPDATE_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "ETL_UPDATE_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ETL_BATCH_NUMBER",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 0,
+                            "precision": 18
+                        },
+                        "sink": {
+                            "name": "ETL_BATCH_NUMBER",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CARRIER_HUB_FLAG",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "CARRIER_HUB_FLAG",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    }
+                ]
+	},
+	"bronze": {
+		"processname": "dim_carrier_los_src_to_bronze",
+		"container": "bronze",
+		"system": "gld360",
+		"landingPath": "gld360/inbound/landing/dim_carrier_los",
+		"processedPath": "gld360/inbound/processed/dim_carrier_los",
+		"rejectedPath": "gld360/inbound/rejected/dim_carrier_los",
+    	"partitioncolumns": "etl_update_date"
+	},
+	"silver": {
+		"processname": "dim_carrier_los_brownze_to_silver",
+        "container": "silver",
+		"notebookpath": "/symphony-summary-layer/silver_zone/gld360-browze-to-silver",
+		"path": "gld360/inbound/dim_carrier_los",
+        "errorpath": "gld360/error_files/dim_carrier_los",
+		"joinColumns": [
+		"[CARRIER_LOS_KEY]",
+		"[SOURCE_SYSTEM_KEY]"
+	],
+	"partitioncolumns": "etl_update_date"
+	},
+	"gold": {
+        "processname": "dim_carrier_los_silver_to_gold",
+		"container": "gold",
+        "notebookpath": "/symphony-summary-layer/gold_zone/gld360-silver-to-gold",
+		"path": "gld360/inbound/dim_carrier_los",
+		"errorpath": "gld360/error_files/dim_carrier_los"
+	},
+	"controller": {
+		"schema": "controller",
+		"controlTable": "delta_control"
+	},
+	"email": {
+		"emailto" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtofail" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtosuccess" : ["gd000012732@ups.com","gd000012733@ups.com","gd000011505@ups.com"]
+	},
+	"log": {
+		"logtable":"logs.ups_application_audit_logs"
+	},
+	"processing": {
+		"logpath": "dbfs:/mnt/logs/ups/gld360",
+		"clusterversion": "7.2.x-scala2.12",
+		"nodetype": "standard_ds3_v2",
+		"workercount": "2"
+	},
+	"archive": {
+		"enabled": true,
+        "container": "bronze",
+		"path": "gld360/archive/dim_carrier_los"
+	}
+}

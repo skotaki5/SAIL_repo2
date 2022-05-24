@@ -1,0 +1,439 @@
+{
+    
+        "timeout_seconds": 0,
+        "email_notifications": {},
+        "name": "optimize_sail_load",
+        "max_concurrent_runs": 1,
+        "tasks": [
+            {
+                "existing_cluster_id": "0128-054529-mjlo1439",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/optimize/optimize",
+                    "base_parameters": {
+                        "table_name": "fact_milestone_activity",
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "fact_milestone_activity"
+            },
+            {
+                "existing_cluster_id": "0128-054529-mjlo1439",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/optimize/optimize",
+                    "base_parameters": {
+                        "table_name": "fact_order",
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "fact_order"
+            },
+            {
+                "existing_cluster_id": "0128-054529-mjlo1439",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/optimize/optimize",
+                    "base_parameters": {
+                        "table_name": "fact_shipment",
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "fact_shipment"
+            },
+            {
+                "existing_cluster_id": "0128-054529-mjlo1439",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/optimize/optimize",
+                    "base_parameters": {
+                        "table_name": "fact_order_line_details",
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "fact_order_line_details"
+            },
+            {
+                "existing_cluster_id": "0128-054529-mjlo1439",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/optimize/optimize",
+                    "base_parameters": {
+                        "table_name": "fact_transportation",
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "fact_transportation"
+            },
+            {
+                "existing_cluster_id": "0128-054529-mjlo1439",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/optimize/optimize",
+                    "base_parameters": {
+                        "table_name": "fact_transportation_exception",
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "fact_transportation_exception"
+            },
+            {
+                "existing_cluster_id": "0128-054529-mjlo1439",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/optimize/optimize",
+                    "base_parameters": {
+                        "table_name": "fact_order_reference",
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "fact_order_reference"
+            },
+            {
+                "existing_cluster_id": "0128-054529-mjlo1439",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/optimize/optimize",
+                    "base_parameters": {
+                        "table_name": "fact_order_line",
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "fact_order_line"
+            },
+            {
+                "existing_cluster_id": "0128-054529-mjlo1439",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/optimize/optimize",
+                    "base_parameters": {
+                        "table_name": "fact_inbound_line",
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "fact_inbound_line"
+            },
+            {
+                "existing_cluster_id": "0128-054529-mjlo1439",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/optimize/optimize",
+                    "base_parameters": {
+                        "table_name": "fact_transportation_callcheck",
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "fact_transportation_callcheck"
+            },
+            {
+                "existing_cluster_id": "0128-054529-mjlo1439",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/optimize/optimize",
+                    "base_parameters": {
+                        "table_name": "fact_transportation_rates_charges",
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "fact_transportation_rates_charges"
+            },
+            {
+                "existing_cluster_id": "0128-054529-mjlo1439",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/optimize/optimize",
+                    "base_parameters": {
+                        "table_name": "fact_transportation_references",
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "fact_transportation_references"
+            },
+            {
+                "existing_cluster_id": "0128-054529-mjlo1439",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/optimize/optimize",
+                    "base_parameters": {
+                        "table_name": "fact_transport_details",
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "fact_transport_details"
+            },
+            {
+                "existing_cluster_id": "0128-054910-wswj3pxg",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/optimize/optimize",
+                    "base_parameters": {
+                        "table_name": "dim_customer",
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "dim_customer"
+            },
+            {
+                "existing_cluster_id": "0128-054910-wswj3pxg",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/optimize/optimize",
+                    "base_parameters": {
+                        "table_name": "dim_warehouse",
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "dim_warehouse"
+            },
+            {
+                "existing_cluster_id": "0128-054910-wswj3pxg",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/optimize/optimize",
+                    "base_parameters": {
+                        "table_name": "dim_item",
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "dim_item"
+            },
+            {
+                "existing_cluster_id": "0128-054910-wswj3pxg",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/optimize/optimize",
+                    "base_parameters": {
+                        "table_name": "dim_carrier_los",
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "dim_carrier_los"
+            },
+            {
+                "existing_cluster_id": "0128-054910-wswj3pxg",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/optimize/optimize",
+                    "base_parameters": {
+                        "table_name": "dim_service",
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "dim_service"
+            },
+            {
+                "existing_cluster_id": "0128-054910-wswj3pxg",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/optimize/optimize",
+                    "base_parameters": {
+                        "table_name": "dim_geo_location",
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "dim_geo_location"
+            },
+            {
+                "existing_cluster_id": "0128-054144-ntul2kh8",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/optimize/optimize",
+                    "base_parameters": {
+                        "table_name": "fact_order_dim_inc",
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "fact_order_dim_inc"
+            },
+            {
+                "existing_cluster_id": "0128-054144-ntul2kh8",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/optimize/optimize",
+                    "base_parameters": {
+                        "table_name": "digital_summary_order_lines",
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "digital_summary_order_lines"
+            },
+            {
+                "existing_cluster_id": "0128-054144-ntul2kh8",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/optimize/optimize",
+                    "base_parameters": {
+                        "table_name": "digital_summary_milestone",
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "digital_summary_milestone"
+            },
+            {
+                "existing_cluster_id": "0128-054144-ntul2kh8",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/optimize/optimize",
+                    "base_parameters": {
+                        "table_name": "digital_summary_transport_details",
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "digital_summary_transport_details"
+            },
+            {
+                "existing_cluster_id": "0128-054910-wswj3pxg",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/optimize/optimize",
+                    "base_parameters": {
+                        "table_name": "digital_summary_milestone_activity",
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "digital_summary_milestone_activity"
+            },
+            {
+                "existing_cluster_id": "0128-054910-wswj3pxg",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/optimize/optimize",
+                    "base_parameters": {
+                        "table_name": "digital_summary_transportation_callcheck",
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "digital_summary_transportation_callcheck"
+            },
+            {
+                "existing_cluster_id": "0128-054910-wswj3pxg",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/optimize/optimize",
+                    "base_parameters": {
+                        "table_name": "digital_summary_transportation_references",
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "digital_summary_transportation_references"
+            },
+            {
+                "existing_cluster_id": "0128-054910-wswj3pxg",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/optimize/optimize",
+                    "base_parameters": {
+                        "table_name": "digital_summary_transportation_rates_charges",
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "digital_summary_transportation_rates_charges"
+            },
+            {
+                "existing_cluster_id": "0128-054910-wswj3pxg",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/optimize/optimize",
+                    "base_parameters": {
+                        "table_name": "digital_summary_order_tracking",
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "digital_summary_order_tracking"
+            },
+            {
+                "existing_cluster_id": "0128-054144-ntul2kh8",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/optimize/optimize",
+                    "base_parameters": {
+                        "table_name": "digital_summary_orders",
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "digital_summary_orders"
+            },
+            {
+                "existing_cluster_id": "0128-054529-mjlo1439",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/optimize/optimize",
+                    "base_parameters": {
+                        "table_name": "digital_summary_transportation",
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "digital_summary_transportation"
+            },
+            {
+                "existing_cluster_id": "0128-054144-ntul2kh8",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/optimize/optimize",
+                    "base_parameters": {
+                        "table_name": "digital_summary_order_lines_details",
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "digital_summary_order_lines_details"
+            },
+            {
+                "existing_cluster_id": "0128-054144-ntul2kh8",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/optimize/optimize",
+                    "base_parameters": {
+                        "table_name": "digital_summary_exceptions",
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "digital_summary_exceptions"
+            },
+            {
+                "existing_cluster_id": "0128-054144-ntul2kh8",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/optimize/optimize",
+                    "base_parameters": {
+                        "table_name": "digital_summary_inbound_line",
+                        "log_debug_mode": "N"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "digital_summary_inbound_line"
+            }
+        ]
+    
+}

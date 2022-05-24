@@ -1,0 +1,93 @@
+{
+	"source": {
+        "sourcetype": "rdms",
+        "database": "gld_dw_new",
+		"schema": "clientsite",
+		"tblName": "account_type_digital",
+		"tblName_hwm":"account_type_digital_oth",
+		"starttms": "20211001120000",
+		"selectQuery": "SELECT [Account_ID],[Account_TYPE],[Account_Name] FROM [clientsite].[account_type_digital] (nolock) ",
+		"mappings": [
+                    {
+                        "source": {
+                            "name": "Account_ID",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "Account_ID",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "Account_TYPE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "Account_TYPE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "Account_Name",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "Account_Name",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    }
+                ]
+	},
+	"bronze": {
+		"processname": "account_type_digital_src_to_bronze",
+		"container": "bronze",
+		"system": "gld360",
+		"landingPath": "gld360/inbound/landing_oth/account_type_digital",
+		"processedPath": "gld360/inbound/processed/account_type_digital",
+		"rejectedPath": "gld360/inbound/rejected/account_type_digital"
+	},
+	"silver": {
+		"processname": "account_type_digital_brownze_to_silver",
+        "container": "silver",
+		"notebookpath": "/symphony-summary-layer/silver_zone/gld360-browze-to-silver",
+		"path": "gld360/inbound/account_type_digital",
+        "errorpath": "gld360/error_files/account_type_digital"
+	},
+	"gold": {
+        "processname": "account_type_digital_silver_to_gold",
+        "notebookpath": "/symphony-summary-layer/gold_zone/gld360-silver-to-gold",
+		"path": "gld360/inbound/account_type_digital",
+		"errorpath": "gld360/error_files/account_type_digital"
+	},
+	"controller": {
+		"schema": "dbo",
+		"controlTable": "delta_control"
+	},
+	"email": {
+		"emailto" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtofail" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtosuccess" : ["gd000012732@ups.com","gd000012733@ups.com","gd000011505@ups.com"]
+	},
+	"log": {
+		"logtable":"logs.ups_application_audit_logs"
+	},
+	"processing": {
+		"logpath": "dbfs:/mnt/logs/ups/gld360",
+		"clusterversion": "7.2.x-scala2.12",
+		"nodetype": "standard_ds3_v2",
+		"workercount": "2"
+	},
+	"archive": {
+		"enabled": true,
+        "container": "data-layer",
+		"path": "bronze/gld360/archive/table_name/partition_column"
+	}
+}

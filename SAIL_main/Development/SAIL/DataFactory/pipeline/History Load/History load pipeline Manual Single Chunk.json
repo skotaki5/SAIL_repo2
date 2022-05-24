@@ -1,0 +1,209 @@
+{
+    "name": "History load pipeline Manual Single Chunk",
+    "properties": {
+        "activities": [
+            {
+                "name": "Validate Metdata File Path",
+                "type": "Validation",
+                "dependsOn": [
+                    {
+                        "activity": "Get Metadata",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "dataset": {
+                        "referenceName": "ds_adls2_metadata_json",
+                        "type": "DatasetReference",
+                        "parameters": {
+                            "p_metadata_container": {
+                                "value": "@pipeline().parameters.p_metadata_container",
+                                "type": "Expression"
+                            },
+                            "p_metadata_folder_Path": {
+                                "value": "@pipeline().parameters.p_metadata_folder_path",
+                                "type": "Expression"
+                            },
+                            "p_metadata_file_name": {
+                                "value": "@pipeline().parameters.p_metadata_file_name",
+                                "type": "Expression"
+                            }
+                        }
+                    },
+                    "timeout": "0.00:02:00",
+                    "sleep": 10
+                }
+            },
+            {
+                "name": "Get Metadata",
+                "type": "Lookup",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.00:10:00",
+                    "retry": 3,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "JsonSource",
+                        "storeSettings": {
+                            "type": "AzureBlobFSReadSettings",
+                            "recursive": false,
+                            "enablePartitionDiscovery": false
+                        },
+                        "formatSettings": {
+                            "type": "JsonReadSettings"
+                        }
+                    },
+                    "dataset": {
+                        "referenceName": "ds_adls2_metadata_json",
+                        "type": "DatasetReference",
+                        "parameters": {
+                            "p_metadata_container": {
+                                "value": "@pipeline().parameters.p_metadata_container",
+                                "type": "Expression"
+                            },
+                            "p_metadata_folder_Path": {
+                                "value": "@pipeline().parameters.p_metadata_folder_path",
+                                "type": "Expression"
+                            },
+                            "p_metadata_file_name": {
+                                "value": "@pipeline().parameters.p_metadata_file_name",
+                                "type": "Expression"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Set Select Query",
+                "type": "SetVariable",
+                "dependsOn": [
+                    {
+                        "activity": "Validate Metdata File Path",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "variableName": "v_select_query",
+                    "value": {
+                        "value": "@{activity('Get Metadata').output.firstRow.source.selectQuery} where @{pipeline().parameters.p_filter_condition}",
+                        "type": "Expression"
+                    }
+                }
+            },
+            {
+                "name": "Copy data SqlServer To ADLS2",
+                "type": "Copy",
+                "dependsOn": [
+                    {
+                        "activity": "Set Select Query",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.05:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "AzureSqlSource",
+                        "sqlReaderQuery": {
+                            "value": "@variables('v_select_query')",
+                            "type": "Expression"
+                        },
+                        "queryTimeout": "02:00:00",
+                        "partitionOption": "None"
+                    },
+                    "sink": {
+                        "type": "ParquetSink",
+                        "storeSettings": {
+                            "type": "AzureBlobFSWriteSettings"
+                        },
+                        "formatSettings": {
+                            "type": "ParquetWriteSettings"
+                        }
+                    },
+                    "enableStaging": false,
+                    "parallelCopies": 32,
+                    "validateDataConsistency": true,
+                    "dataIntegrationUnits": 64,
+                    "translator": {
+                        "value": "@activity('Get Metadata').output.firstRow.source.mappings",
+                        "type": "Expression"
+                    }
+                },
+                "inputs": [
+                    {
+                        "referenceName": "ds_gld_dw_new_tbl_query",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "ds_adls2_data_parquet_file",
+                        "type": "DatasetReference",
+                        "parameters": {
+                            "p_container": {
+                                "value": "@activity('Get Metadata').output.firstRow.bronze.container",
+                                "type": "Expression"
+                            },
+                            "p_folder_path": {
+                                "value": "@activity('Get Metadata').output.firstRow.bronze.landingPath",
+                                "type": "Expression"
+                            },
+                            "p_file_name": {
+                                "value": "@{concat(\nactivity('Get Metadata').output.firstRow.source.schema, '_',\nactivity('Get Metadata').output.firstRow.source.tblName, '_',\nformatDateTime(utcnow(), 'yyyyMMddHHmmss')\n)}",
+                                "type": "Expression"
+                            }
+                        }
+                    }
+                ]
+            }
+        ],
+        "parameters": {
+            "p_metadata_container": {
+                "type": "string",
+                "defaultValue": "metadata"
+            },
+            "p_metadata_folder_path": {
+                "type": "string",
+                "defaultValue": "gld360/pipeline_oth/pl_fact_inbound_line/"
+            },
+            "p_metadata_file_name": {
+                "type": "string",
+                "defaultValue": "fact_inbound_line.json"
+            },
+            "p_filter_condition": {
+                "type": "string",
+                "defaultValue": "ETL_UPDATE_DATE < convert(datetime,'03-23-2021',110)"
+            }
+        },
+        "variables": {
+            "v_select_query": {
+                "type": "String"
+            }
+        },
+        "folder": {
+            "name": "History load"
+        },
+        "annotations": [],
+        "lastPublishTime": "2022-03-16T12:20:34Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

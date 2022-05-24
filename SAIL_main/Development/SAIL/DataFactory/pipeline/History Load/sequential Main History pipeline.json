@@ -1,0 +1,448 @@
+{
+    "name": "sequential Main History pipeline",
+    "properties": {
+        "activities": [
+            {
+                "name": "Execute dim_customer",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "automate history load",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_metadata_container": "metadata",
+                        "p_metadata_folder_path": "gld360/pipeline_oth/pl_dim_customer/",
+                        "p_metadata_file_name": "dim_customer.json",
+                        "p_filter_condition": "1=1"
+                    }
+                }
+            },
+            {
+                "name": "Execute fact_inbound_line",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Execute fact_transport_details",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "automate history load",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_metadata_container": "metadata",
+                        "p_metadata_folder_path": "gld360/pipeline_oth/pl_fact_inbound_line/",
+                        "p_metadata_file_name": "fact_inbound_line.json",
+                        "p_filter_condition": "ETL_UPDATE_DATE < convert(datetime,'03-20-2021',110) $ ETL_UPDATE_DATE between convert(datetime,'03-20-2021',110) and convert(datetime,'03-23-2021',110) $   ETL_UPDATE_DATE >= convert(datetime,'03-23-2021',110)"
+                    }
+                }
+            },
+            {
+                "name": "Execute dim_carrier_los",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Execute dim_customer",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "automate history load",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_metadata_container": "metadata",
+                        "p_metadata_folder_path": "gld360/pipeline_oth/pl_dim_carrier_los/",
+                        "p_metadata_file_name": "dim_carrier_los.json",
+                        "p_filter_condition": "1=1"
+                    }
+                }
+            },
+            {
+                "name": "Execute fact_transportation_callcheck",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Execute dim_carrier_los",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "automate history load",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_metadata_container": "metadata",
+                        "p_metadata_folder_path": "gld360/pipeline_oth/pl_fact_transportation_callcheck/",
+                        "p_metadata_file_name": "fact_transportation_callcheck.json",
+                        "p_filter_condition": "1=1"
+                    }
+                }
+            },
+            {
+                "name": "Execute fact_transportation_exception",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Execute fact_transportation_callcheck",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "automate history load",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_metadata_container": "metadata",
+                        "p_metadata_folder_path": "gld360/pipeline_oth/pl_fact_transportation_exception/",
+                        "p_metadata_file_name": "fact_transportation_exception.json",
+                        "p_filter_condition": "1=1"
+                    }
+                }
+            },
+            {
+                "name": "Execute fact_transportation_rates_charges",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Execute fact_transportation_exception",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "automate history load",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_metadata_container": "metadata",
+                        "p_metadata_folder_path": "gld360/pipeline_oth/pl_fact_transportation_rates_charges/",
+                        "p_metadata_file_name": "fact_transportation_rates_charges.json",
+                        "p_filter_condition": "1=1"
+                    }
+                }
+            },
+            {
+                "name": "Execute fact_transportation_references",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Execute fact_transportation_rates_charges",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "automate history load",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_metadata_container": "metadata",
+                        "p_metadata_folder_path": "gld360/pipeline_oth/pl_fact_transportation_references/",
+                        "p_metadata_file_name": "fact_transportation_references.json",
+                        "p_filter_condition": "1=1"
+                    }
+                }
+            },
+            {
+                "name": "Execute fact_transport_details",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Execute fact_transportation_references",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "automate history load",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_metadata_container": "metadata",
+                        "p_metadata_folder_path": "gld360/pipeline_oth/pl_fact_transport_details/",
+                        "p_metadata_file_name": "fact_transport_details.json",
+                        "p_filter_condition": "1=1"
+                    }
+                }
+            },
+            {
+                "name": "Execute dim_geo_location",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Execute fact_inbound_line",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "automate history load",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_metadata_container": "metadata",
+                        "p_metadata_folder_path": "gld360/pipeline_oth/pl_dim_geo_location/",
+                        "p_metadata_file_name": "dim_geo_location.json",
+                        "p_filter_condition": "ETL_UPDATE_DATE < convert(datetime,'2019-05-22 10:55:00',20) $ ETL_UPDATE_DATE between convert(datetime,'2019-05-22 10:55:00',20) and convert(datetime,'2019-05-22 11:31:00',20) $ ETL_UPDATE_DATE between convert(datetime,'2019-05-22 11:31:00',20) and convert(datetime,'06-01-2019',110) $ ETL_UPDATE_DATE between convert(datetime,'06-01-2019',110) and convert(datetime,'05-01-2020',110) $ ETL_UPDATE_DATE between convert(datetime,'05-01-2020',110) and convert(datetime,'08-01-2020',110) $ ETL_UPDATE_DATE between convert(datetime,'08-01-2020',110) and convert(datetime,'03-01-2021',110) $ ETL_UPDATE_DATE between convert(datetime,'03-01-2021',110) and convert(datetime,'05-01-2021',110) $ ETL_UPDATE_DATE between convert(datetime,'05-01-2021',110) and convert(datetime,'10-01-2021',110) $ ETL_UPDATE_DATE between convert(datetime,'10-01-2021',110) and convert(datetime,'01-01-2022',110) $ ETL_UPDATE_DATE >= convert(datetime,'01-01-2022',110)"
+                    }
+                }
+            },
+            {
+                "name": "Execute fact_order_line_details",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Execute dim_geo_location",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "automate history load",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_metadata_container": "metadata",
+                        "p_metadata_folder_path": "gld360/pipeline_oth/pl_fact_order_line_details/",
+                        "p_metadata_file_name": "fact_order_line_details.json",
+                        "p_filter_condition": "ETL_UPDATE_DATE < convert(datetime,'2021-03-20 18:01:00',20) $  ETL_UPDATE_DATE between convert(datetime,'2021-03-20 18:01:00',20) and convert(datetime,'03-21-2021',110) $ ETL_UPDATE_DATE between convert(datetime,'03-21-2021',110) and convert(datetime,'07-01-2021',110) $ ETL_UPDATE_DATE between convert(datetime,'07-01-2021',110) and convert(datetime,'09-17-2021',110) $ ETL_UPDATE_DATE between convert(datetime,'09-17-2021',110) and convert(datetime,'10-01-2021',110) $ ETL_UPDATE_DATE between convert(datetime,'10-01-2021',110) and convert(datetime,'01-01-2022',110) $ ETL_UPDATE_DATE >= convert(datetime,'01-01-2022',110)"
+                    }
+                }
+            },
+            {
+                "name": "Execute dim_item",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Execute fact_order_line_details",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "automate history load",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_metadata_container": "metadata",
+                        "p_metadata_folder_path": "gld360/pipeline_oth/pl_dim_item/",
+                        "p_metadata_file_name": "dim_item.json",
+                        "p_filter_condition": "ETL_UPDATE_DATE < convert(datetime,'2019-05-22 10:40:00',20) $ ETL_UPDATE_DATE between convert(datetime,'2019-05-22 10:40:00',20) and convert(datetime,'2019-05-22 11:05:00',20) $  ETL_UPDATE_DATE between convert(datetime,'2019-05-22 11:05:00',20) and convert(datetime,'05-23-2019',110) $ ETL_UPDATE_DATE between convert(datetime,'05-23-2019',110) and convert(datetime,'05-01-2021',110) $ ETL_UPDATE_DATE >= convert(datetime,'05-01-2021',110)"
+                    }
+                }
+            },
+            {
+                "name": "Execute fact_shipment",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Execute dim_item",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "automate history load",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_metadata_container": "metadata",
+                        "p_metadata_folder_path": "gld360/pipeline_oth/pl_fact_shipment/",
+                        "p_metadata_file_name": "fact_shipment.json",
+                        "p_filter_condition": "ETL_UPDATE_DATE < convert(datetime,'12-01-2020',110) $ ETL_UPDATE_DATE between convert(datetime,'12-01-2020',110) and convert(datetime,'05-01-2021',110) $ ETL_UPDATE_DATE between convert(datetime,'05-01-2021',110) and convert(datetime,'10-01-2021',110) $ ETL_UPDATE_DATE between convert(datetime,'10-01-2021',110) and convert(datetime,'11-20-2021',110) $ ETL_UPDATE_DATE between convert(datetime,'11-20-2021',110) and convert(datetime,'12-01-2021',110) $ ETL_UPDATE_DATE >= convert(datetime,'12-01-2021',110)"
+                    }
+                }
+            },
+            {
+                "name": "Execute fact_order_reference",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Execute fact_shipment",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "automate history load",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_metadata_container": "metadata",
+                        "p_metadata_folder_path": "gld360/pipeline_oth/pl_fact_order_reference/",
+                        "p_metadata_file_name": "fact_order_reference.json",
+                        "p_filter_condition": "ETL_UPDATE_DATE < convert(datetime,'07-01-2019',110) $ ETL_UPDATE_DATE between convert(datetime,'07-01-2019',110) and convert(datetime,'02-18-2020',110) $ ETL_UPDATE_DATE between convert(datetime,'02-18-2020',110) and convert(datetime,'03-01-2020',110) $ ETL_UPDATE_DATE between convert(datetime,'03-01-2020',110) and convert(datetime,'03-01-2021',110) $ ETL_UPDATE_DATE between convert(datetime,'03-01-2021',110) and convert(datetime,'09-01-2021',110) $ ETL_UPDATE_DATE >= convert(datetime,'09-01-2021',110)"
+                    }
+                }
+            },
+            {
+                "name": "Execute fact_transportation",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Execute fact_order_reference",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "automate history load",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_metadata_container": "metadata",
+                        "p_metadata_folder_path": "gld360/pipeline_oth/pl_fact_transportation/",
+                        "p_metadata_file_name": "fact_transportation.json",
+                        "p_filter_condition": "ETL_UPDATE_DATE < convert(datetime,'2020-02-04 09:11:00',20) $ ETL_UPDATE_DATE between convert(datetime,'2020-02-04 09:11:00',20) and convert(datetime,'12-01-2020',110) $ ETL_UPDATE_DATE between convert(datetime,'12-01-2020',110) and convert(datetime,'04-01-2021',110) $ ETL_UPDATE_DATE >= convert(datetime,'04-01-2021',110)"
+                    }
+                }
+            },
+            {
+                "name": "Execute fact_order",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Execute fact_transportation",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "automate history load",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_metadata_container": "metadata",
+                        "p_metadata_folder_path": "gld360/pipeline_oth/pl_fact_order/",
+                        "p_metadata_file_name": "fact_order.json",
+                        "p_filter_condition": "ETL_UPDATE_DATE < convert(datetime,'05-23-2019',110) $ ETL_UPDATE_DATE between convert(datetime,'05-23-2019',110) and convert(datetime,'08-01-2019',110) $ ETL_UPDATE_DATE between convert(datetime,'08-01-2019',110) and convert(datetime,'03-20-2021',110) $ ETL_UPDATE_DATE between convert(datetime,'03-20-2021',110) and convert(datetime,'04-01-2021',110) $ ETL_UPDATE_DATE between convert(datetime,'04-01-2021',110) and convert(datetime,'12-01-2021',110) $ ETL_UPDATE_DATE >= convert(datetime,'12-01-2021',110)"
+                    }
+                }
+            },
+            {
+                "name": "Execute fact_order_line",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Execute fact_order",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "automate history load",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_metadata_container": "metadata",
+                        "p_metadata_folder_path": "gld360/pipeline_oth/pl_fact_order_line/",
+                        "p_metadata_file_name": "fact_order_line.json",
+                        "p_filter_condition": " ETL_UPDATE_DATE < convert(datetime,'2019-05-22 20:40:00',20) $ ETL_UPDATE_DATE between convert(datetime,'2019-05-22 20:40:00',20) and convert(datetime,'2019-05-23 00:00:00',20) $ ETL_UPDATE_DATE between convert(datetime,'2019-05-23 00:00:00',20) and convert(datetime,'2019-05-23 14:50:00',20) $  ETL_UPDATE_DATE between convert(datetime,'2019-05-23 14:50:00',20) and convert(datetime,'2019-05-23 15:00:00',20) $ ETL_UPDATE_DATE between convert(datetime,'2019-05-23 15:00:00',20) and convert(datetime,'05-24-2019',110) $ ETL_UPDATE_DATE between convert(datetime,'05-24-2019',110) and convert(datetime,'06-01-2020',110) $ ETL_UPDATE_DATE between convert(datetime,'06-01-2020',110) and convert(datetime,'12-01-2020',110) $ ETL_UPDATE_DATE between convert(datetime,'12-01-2020',110) and convert(datetime,'03-20-2021',110) $ ETL_UPDATE_DATE between convert(datetime,'03-20-2021',110) and convert(datetime,'04-05-2021',110) $ ETL_UPDATE_DATE between convert(datetime,'04-05-2021',110) and convert(datetime,'11-01-2021',110) $ ETL_UPDATE_DATE between convert(datetime,'11-01-2021',110) and convert(datetime,'12-05-2021',110) $ ETL_UPDATE_DATE >= convert(datetime,'12-05-2021',110)"
+                    }
+                }
+            },
+            {
+                "name": "Execute fact_milestone_activity",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Execute fact_order_line",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "automate history load",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_metadata_container": "metadata",
+                        "p_metadata_folder_path": "gld360/pipeline_oth/pl_fact_milestone_activity/",
+                        "p_metadata_file_name": "fact_milestone_activity.json",
+                        "p_filter_condition": "ETL_UPDATE_DATE < convert(datetime,'11-04-2020',110) $  ETL_UPDATE_DATE between convert(datetime,'11-04-2020',110) and convert(datetime,'01-10-2021',110) $ ETL_UPDATE_DATE between convert(datetime,'01-10-2021',110) and convert(datetime,'03-15-2021',110) $  ETL_UPDATE_DATE between convert(datetime,'03-15-2021',110) and convert(datetime,'2021-03-20 17:30:00',20) $ ETL_UPDATE_DATE between convert(datetime,'2021-03-20 17:30:00',20) and convert(datetime,'03-21-2021',110) $ ETL_UPDATE_DATE between convert(datetime,'03-21-2021',110) and convert(datetime,'03-25-2021',110) $ ETL_UPDATE_DATE between convert(datetime,'03-25-2021',110) and convert(datetime,'04-15-2021',110) $ ETL_UPDATE_DATE between convert(datetime,'04-15-2021',110) and convert(datetime,'2021-05-12 03:12:00',20) $ ETL_UPDATE_DATE between convert(datetime,'2021-05-12 03:12:00',20) and convert(datetime,'06-01-2021',110) $ ETL_UPDATE_DATE between convert(datetime,'06-01-2021',110) and convert(datetime,'08-01-2021',110) $ ETL_UPDATE_DATE between convert(datetime,'08-01-2021',110) and convert(datetime,'10-01-2021',110) $ ETL_UPDATE_DATE between convert(datetime,'10-01-2021',110) and convert(datetime,'11-15-2021',110) $  ETL_UPDATE_DATE between convert(datetime,'11-15-2021',110) and convert(datetime,'11-21-2021',110) $ ETL_UPDATE_DATE between convert(datetime,'11-21-2021',110) and convert(datetime,'11-25-2021',110) $  ETL_UPDATE_DATE between convert(datetime,'11-25-2021',110) and convert(datetime,'01-01-2022',110) $ ETL_UPDATE_DATE between convert(datetime,'01-01-2022',110) and convert(datetime,'02-01-2022',110) $ ETL_UPDATE_DATE between convert(datetime,'02-01-2022',110) and convert(datetime,'03-05-2022',110) $ ETL_UPDATE_DATE >= convert(datetime,'03-05-2022',110)"
+                    }
+                }
+            }
+        ],
+        "folder": {
+            "name": "History load"
+        },
+        "annotations": [],
+        "lastPublishTime": "2022-03-16T10:12:54Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

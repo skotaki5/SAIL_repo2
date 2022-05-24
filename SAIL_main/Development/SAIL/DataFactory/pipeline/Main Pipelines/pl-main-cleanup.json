@@ -1,0 +1,31 @@
+{
+    "name": "pl-main-cleanup",
+    "properties": {
+        "activities": [
+            {
+                "name": "cleanup-delta_control",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "pl-cleanup-controller",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "Table_Name": "delta_control",
+                        "schemaName": "controller",
+                        "column_name": "insert_ts"
+                    }
+                }
+            }
+        ],
+        "folder": {
+            "name": "Main Pipelines"
+        },
+        "annotations": [],
+        "lastPublishTime": "2022-02-24T10:28:14Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

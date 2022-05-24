@@ -1,0 +1,331 @@
+{
+	"source": {
+        "sourcetype": "rdms",
+        "database": "gld_dw_new",
+		"schema": "dbo",
+		"tblName": "fact_transportation_rates_charges",
+		"partColumns": "etl_update_date",
+		"starttms": "20211001120000",
+		"selectQuery": "select [SOURCE_SYSTEM_KEY],[CLIENT_KEY],[LOAD_ID],[UPS_ORDER_NUMBER],[CLIENT_SDUK],[SEQUENCE_NUMBER],[CHARGE_TYPE],[RATE],[RATE_QUALIFER],[CHARGE],[CHARGE_DESCRIPTION],[CHARGE_LEVEL],[EDI_CODE],[FREIGHT_CLASS],[FAK_FREIGHT_CLASS],[CHARGE_SDUK],[ETL_INSERT_DATE],[ETL_UPDATE_DATE],[ETL_BATCH_NUMBER],[CONTRACT_NAME],[CURRENCY_CODE],[INVOICE_NUMBER] from dbo.fact_transportation_rates_charges (nolock)",
+		"mappings": [
+                    {
+                        "source": {
+                            "name": "SOURCE_SYSTEM_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "SOURCE_SYSTEM_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CLIENT_KEY",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 0,
+                            "precision": 18
+                        },
+                        "sink": {
+                            "name": "CLIENT_KEY",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LOAD_ID",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "LOAD_ID",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "UPS_ORDER_NUMBER",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "UPS_ORDER_NUMBER",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CLIENT_SDUK",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "CLIENT_SDUK",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "SEQUENCE_NUMBER",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "SEQUENCE_NUMBER",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CHARGE_TYPE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "CHARGE_TYPE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "RATE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "RATE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "RATE_QUALIFER",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "RATE_QUALIFER",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CHARGE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "CHARGE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CHARGE_DESCRIPTION",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "CHARGE_DESCRIPTION",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CHARGE_LEVEL",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "CHARGE_LEVEL",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "EDI_CODE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "EDI_CODE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "FREIGHT_CLASS",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "FREIGHT_CLASS",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "FAK_FREIGHT_CLASS",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "FAK_FREIGHT_CLASS",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CHARGE_SDUK",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "CHARGE_SDUK",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ETL_INSERT_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "ETL_INSERT_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ETL_UPDATE_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "ETL_UPDATE_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ETL_BATCH_NUMBER",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 0,
+                            "precision": 18
+                        },
+                        "sink": {
+                            "name": "ETL_BATCH_NUMBER",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CONTRACT_NAME",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "CONTRACT_NAME",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CURRENCY_CODE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "CURRENCY_CODE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "INVOICE_NUMBER",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "INVOICE_NUMBER",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    }
+                ]
+	},
+	"bronze": {
+		"processname": "fact_transportation_rates_charges_src_to_bronze",
+		"container": "bronze",
+		"system": "gld360",
+		"landingPath": "gld360/inbound/landing/fact_transportation_rates_charges",
+		"processedPath": "gld360/inbound/processed/fact_transportation_rates_charges",
+		"rejectedPath": "gld360/inbound/rejected/fact_transportation_rates_charges",
+    	"partitioncolumns": "etl_update_date"
+	},
+	"silver": {
+		"processname": "fact_transportation_rates_charges_brownze_to_silver",
+        "container": "silver",
+		"notebookpath": "/sail/silver/",
+		"path": "gld360/inbound/fact_transportation_rates_charges",
+        "errorpath": "gld360/error_files/fact_transportation_rates_charges",
+		"joinColumns": [
+			"[SOURCE_SYSTEM_KEY]","[CHARGE_SDUK]"	
+		],
+		"partitioncolumns": "etl_update_date"
+	},
+	"gold": {
+        "processname": "fact_transportation_rates_charges_silver_to_gold",
+		"container": "gold",
+        "notebookpath": "/symphony-summary-layer/gold_zone/gld360-silver-to-gold",
+		"path": "gld360/inbound/fact_transportation_rates_charges",
+		"errorpath": "gld360/error_files/fact_transportation_rates_charges"
+	},
+	"controller": {
+		"schema": "controller",
+		"controlTable": "delta_control"
+	},
+	"email": {
+		"emailto" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtofail" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtosuccess" : ["gd000012732@ups.com","gd000012733@ups.com","gd000011505@ups.com"]
+	},
+	"log": {
+		"logtable":"logs.ups_application_audit_logs"
+	},
+	"processing": {
+		"logpath": "dbfs:/mnt/logs/ups/gld360",
+		"clusterversion": "7.2.x-scala2.12",
+		"nodetype": "standard_ds3_v2",
+		"workercount": "2"
+	},
+	"archive": {
+		"enabled": true,
+        "container": "bronze",
+		"path": "gld360/archive/fact_transportation_rates_charges"
+	}
+}

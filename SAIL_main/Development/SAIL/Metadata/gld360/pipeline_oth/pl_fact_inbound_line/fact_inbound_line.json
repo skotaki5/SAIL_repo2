@@ -1,0 +1,834 @@
+{
+	"source": {
+        "sourcetype": "rdms",
+        "database": "gld_dw_new",
+		"schema": "dbo",
+		"tblName": "fact_inbound_line",
+		"partColumns": "etl_update_date",
+		"starttms": "20211001120000",
+		"selectQuery":
+	        "SELECT [SOURCE_SYSTEM_KEY], [CLIENT_KEY], [WAREHOUSE_KEY], [ITEM_KEY], [SOURCE_INBOUND_HEADER_NUMBER], [SOURCE_INBOUND_LINE_NUMBER], [ASN_HEADER_NUMBER], [ASN_LINE_NUMBER], [PO_HEADER_NUMBER], [PO_LINE_NUMBER], [RCPT_HEADER_NUMBER], [RCPT_LINE_NUMBER], [SOURCE_INBOUND_HEADER_TYPE], [SOURCE_INBOUND_HEADER_STATUS], [SOURCE_INBOUND_LINE_STATUS], [INBND_CARRIER_NAME], [INBND_HDR_CREATION_DATE], [UTC_INBND_HDR_CREATION_DATE], [LOFST_INBND_HDR_CREATION_DATE], [INBND_LINE_CREATION_DATE], [UTC_INBND_LINE_CREATION_DATE], [LOFST_INBND_LINE_CREATION_DATE], [INBND_HDR_SHIPPED_DATE], [UTC_INBND_HDR_SHIPPED_DATE], [LOFST_INBND_HDR_SHIPPED_DATE], [IL_FIRST_RCVD_DATE], [UTC_IL_FIRST_RCVD_DATE], [LOFST_IL_FIRST_RCVD_DATE], [IL_LAST_PUTAWAY_DATE], [UTC_IL_LAST_PUTAWAY_DATE], [LOFST_IL_LAST_PUTAWAY_DATE], [INBND_LINE_SHIPPED_QTY], [INBND_LINE_RECEIVED_QTY], [INBOUND_LINE_SDUK], [CLIENT_SDUK], [WAREHOUSE_SDUK], [ITEM_SDUK], [ETL_INSERT_DATE], [ETL_UPDATE_DATE], [ETL_BATCH_NUMBER], [INBND_HDR_CREATION_DATE_KEY], [INBND_HDR_CREATION_TIME_KEY], [INBND_LINE_CREATION_DATE_KEY], [INBND_LINE_CREATION_TIME_KEY], [INBND_HDR_SHIPPED_DATE_KEY], [INBND_HDR_SHIPPED_TIME_KEY], [IL_FIRST_RCVD_DATE_KEY], [IL_FIRST_RCVD_TIME_KEY], [IL_LAST_PUTAWAY_DATE_KEY], [IL_LAST_PUTAWAY_TIME_KEY], [SOURCE_PO_STATUS], [SOURCE_PO_SUB_STATUS], [INBND_LINE_RECEIVED_CASES], [DML_DATE], [DML_DATE_KEY], [SOURCE_INBOUND_LINE_REFERENCE_2], [SOURCE_INBOUND_LINE_REFERENCE_10], [SOURCE_INBOUND_LINE_REFERENCE_11], [SOURCE_INBOUND_LINE_REFERENCE_1], [SOURCE_INBOUND_LINE_REFERENCE_3], [SOURCE_INBOUND_LINE_REFERENCE_4], [SOURCE_INBOUND_LINE_REFERENCE_5],[CASES] FROM [dbo].[FACT_INBOUND_LINE] (nolock)",
+	    "mappings": [
+            {
+                "source": {
+                    "name": "SOURCE_SYSTEM_KEY",
+                    "type": "Int32",
+                    "physicalType": "int"
+                },
+                "sink": {
+                    "name": "SOURCE_SYSTEM_KEY",
+                    "type": "Int32",
+                    "physicalType": "INT_32"
+                }
+            },
+            {
+                "source": {
+                    "name": "CLIENT_KEY",
+                    "type": "Decimal",
+                    "physicalType": "decimal",
+                    "scale": 0,
+                    "precision": 18
+                },
+                "sink": {
+                    "name": "CLIENT_KEY",
+                    "type": "Decimal",
+                    "physicalType": "DECIMAL"
+                }
+            },
+            {
+                "source": {
+                    "name": "WAREHOUSE_KEY",
+                    "type": "Decimal",
+                    "physicalType": "decimal",
+                    "scale": 0,
+                    "precision": 18
+                },
+                "sink": {
+                    "name": "WAREHOUSE_KEY",
+                    "type": "Decimal",
+                    "physicalType": "DECIMAL"
+                }
+            },
+            {
+                "source": {
+                    "name": "ITEM_KEY",
+                    "type": "Decimal",
+                    "physicalType": "decimal",
+                    "scale": 0,
+                    "precision": 18
+                },
+                "sink": {
+                    "name": "ITEM_KEY",
+                    "type": "Decimal",
+                    "physicalType": "DECIMAL"
+                }
+            },
+            {
+                "source": {
+                    "name": "SOURCE_INBOUND_HEADER_NUMBER",
+                    "type": "String",
+                    "physicalType": "varchar"
+                },
+                "sink": {
+                    "name": "SOURCE_INBOUND_HEADER_NUMBER",
+                    "type": "String",
+                    "physicalType": "UTF8"
+                }
+            },
+            {
+                "source": {
+                    "name": "SOURCE_INBOUND_LINE_NUMBER",
+                    "type": "String",
+                    "physicalType": "varchar"
+                },
+                "sink": {
+                    "name": "SOURCE_INBOUND_LINE_NUMBER",
+                    "type": "String",
+                    "physicalType": "UTF8"
+                }
+            },
+            {
+                "source": {
+                    "name": "ASN_HEADER_NUMBER",
+                    "type": "String",
+                    "physicalType": "varchar"
+                },
+                "sink": {
+                    "name": "ASN_HEADER_NUMBER",
+                    "type": "String",
+                    "physicalType": "UTF8"
+                }
+            },
+            {
+                "source": {
+                    "name": "ASN_LINE_NUMBER",
+                    "type": "String",
+                    "physicalType": "varchar"
+                },
+                "sink": {
+                    "name": "ASN_LINE_NUMBER",
+                    "type": "String",
+                    "physicalType": "UTF8"
+                }
+            },
+            {
+                "source": {
+                    "name": "PO_HEADER_NUMBER",
+                    "type": "String",
+                    "physicalType": "varchar"
+                },
+                "sink": {
+                    "name": "PO_HEADER_NUMBER",
+                    "type": "String",
+                    "physicalType": "UTF8"
+                }
+            },
+            {
+                "source": {
+                    "name": "PO_LINE_NUMBER",
+                    "type": "String",
+                    "physicalType": "varchar"
+                },
+                "sink": {
+                    "name": "PO_LINE_NUMBER",
+                    "type": "String",
+                    "physicalType": "UTF8"
+                }
+            },
+            {
+                "source": {
+                    "name": "RCPT_HEADER_NUMBER",
+                    "type": "String",
+                    "physicalType": "varchar"
+                },
+                "sink": {
+                    "name": "RCPT_HEADER_NUMBER",
+                    "type": "String",
+                    "physicalType": "UTF8"
+                }
+            },
+            {
+                "source": {
+                    "name": "RCPT_LINE_NUMBER",
+                    "type": "String",
+                    "physicalType": "varchar"
+                },
+                "sink": {
+                    "name": "RCPT_LINE_NUMBER",
+                    "type": "String",
+                    "physicalType": "UTF8"
+                }
+            },
+            {
+                "source": {
+                    "name": "SOURCE_INBOUND_HEADER_TYPE",
+                    "type": "String",
+                    "physicalType": "varchar"
+                },
+                "sink": {
+                    "name": "SOURCE_INBOUND_HEADER_TYPE",
+                    "type": "String",
+                    "physicalType": "UTF8"
+                }
+            },
+            {
+                "source": {
+                    "name": "SOURCE_INBOUND_HEADER_STATUS",
+                    "type": "String",
+                    "physicalType": "varchar"
+                },
+                "sink": {
+                    "name": "SOURCE_INBOUND_HEADER_STATUS",
+                    "type": "String",
+                    "physicalType": "UTF8"
+                }
+            },
+            {
+                "source": {
+                    "name": "SOURCE_INBOUND_LINE_STATUS",
+                    "type": "String",
+                    "physicalType": "varchar"
+                },
+                "sink": {
+                    "name": "SOURCE_INBOUND_LINE_STATUS",
+                    "type": "String",
+                    "physicalType": "UTF8"
+                }
+            },
+            {
+                "source": {
+                    "name": "INBND_CARRIER_NAME",
+                    "type": "String",
+                    "physicalType": "varchar"
+                },
+                "sink": {
+                    "name": "INBND_CARRIER_NAME",
+                    "type": "String",
+                    "physicalType": "UTF8"
+                }
+            },
+            {
+                "source": {
+                    "name": "INBND_HDR_CREATION_DATE",
+                    "type": "DateTime",
+                    "physicalType": "datetime"
+                },
+                "sink": {
+                    "name": "INBND_HDR_CREATION_DATE",
+                    "type": "DateTime",
+                    "physicalType": "INT_96"
+                }
+            },
+            {
+                "source": {
+                    "name": "UTC_INBND_HDR_CREATION_DATE",
+                    "type": "DateTime",
+                    "physicalType": "datetime"
+                },
+                "sink": {
+                    "name": "UTC_INBND_HDR_CREATION_DATE",
+                    "type": "DateTime",
+                    "physicalType": "INT_96"
+                }
+            },
+            {
+                "source": {
+                    "name": "LOFST_INBND_HDR_CREATION_DATE",
+                    "type": "DateTimeOffset",
+                    "physicalType": "datetimeoffset"
+                },
+                "sink": {
+                    "name": "LOFST_INBND_HDR_CREATION_DATE",
+                    "type": "DateTimeOffset",
+                    "physicalType": "INT_96"
+                }
+            },
+            {
+                "source": {
+                    "name": "INBND_LINE_CREATION_DATE",
+                    "type": "DateTime",
+                    "physicalType": "datetime"
+                },
+                "sink": {
+                    "name": "INBND_LINE_CREATION_DATE",
+                    "type": "DateTime",
+                    "physicalType": "INT_96"
+                }
+            },
+            {
+                "source": {
+                    "name": "UTC_INBND_LINE_CREATION_DATE",
+                    "type": "DateTime",
+                    "physicalType": "datetime"
+                },
+                "sink": {
+                    "name": "UTC_INBND_LINE_CREATION_DATE",
+                    "type": "DateTime",
+                    "physicalType": "INT_96"
+                }
+            },
+            {
+                "source": {
+                    "name": "LOFST_INBND_LINE_CREATION_DATE",
+                    "type": "DateTimeOffset",
+                    "physicalType": "datetimeoffset"
+                },
+                "sink": {
+                    "name": "LOFST_INBND_LINE_CREATION_DATE",
+                    "type": "DateTimeOffset",
+                    "physicalType": "INT_96"
+                }
+            },
+            {
+                "source": {
+                    "name": "INBND_HDR_SHIPPED_DATE",
+                    "type": "DateTime",
+                    "physicalType": "datetime"
+                },
+                "sink": {
+                    "name": "INBND_HDR_SHIPPED_DATE",
+                    "type": "DateTime",
+                    "physicalType": "INT_96"
+                }
+            },
+            {
+                "source": {
+                    "name": "UTC_INBND_HDR_SHIPPED_DATE",
+                    "type": "DateTime",
+                    "physicalType": "datetime"
+                },
+                "sink": {
+                    "name": "UTC_INBND_HDR_SHIPPED_DATE",
+                    "type": "DateTime",
+                    "physicalType": "INT_96"
+                }
+            },
+            {
+                "source": {
+                    "name": "LOFST_INBND_HDR_SHIPPED_DATE",
+                    "type": "DateTimeOffset",
+                    "physicalType": "datetimeoffset"
+                },
+                "sink": {
+                    "name": "LOFST_INBND_HDR_SHIPPED_DATE",
+                    "type": "DateTimeOffset",
+                    "physicalType": "INT_96"
+                }
+            },
+            {
+                "source": {
+                    "name": "IL_FIRST_RCVD_DATE",
+                    "type": "DateTime",
+                    "physicalType": "datetime"
+                },
+                "sink": {
+                    "name": "IL_FIRST_RCVD_DATE",
+                    "type": "DateTime",
+                    "physicalType": "INT_96"
+                }
+            },
+            {
+                "source": {
+                    "name": "UTC_IL_FIRST_RCVD_DATE",
+                    "type": "DateTime",
+                    "physicalType": "datetime"
+                },
+                "sink": {
+                    "name": "UTC_IL_FIRST_RCVD_DATE",
+                    "type": "DateTime",
+                    "physicalType": "INT_96"
+                }
+            },
+            {
+                "source": {
+                    "name": "LOFST_IL_FIRST_RCVD_DATE",
+                    "type": "DateTimeOffset",
+                    "physicalType": "datetimeoffset"
+                },
+                "sink": {
+                    "name": "LOFST_IL_FIRST_RCVD_DATE",
+                    "type": "DateTimeOffset",
+                    "physicalType": "INT_96"
+                }
+            },
+            {
+                "source": {
+                    "name": "IL_LAST_PUTAWAY_DATE",
+                    "type": "DateTime",
+                    "physicalType": "datetime"
+                },
+                "sink": {
+                    "name": "IL_LAST_PUTAWAY_DATE",
+                    "type": "DateTime",
+                    "physicalType": "INT_96"
+                }
+            },
+            {
+                "source": {
+                    "name": "UTC_IL_LAST_PUTAWAY_DATE",
+                    "type": "DateTime",
+                    "physicalType": "datetime"
+                },
+                "sink": {
+                    "name": "UTC_IL_LAST_PUTAWAY_DATE",
+                    "type": "DateTime",
+                    "physicalType": "INT_96"
+                }
+            },
+            {
+                "source": {
+                    "name": "LOFST_IL_LAST_PUTAWAY_DATE",
+                    "type": "DateTimeOffset",
+                    "physicalType": "datetimeoffset"
+                },
+                "sink": {
+                    "name": "LOFST_IL_LAST_PUTAWAY_DATE",
+                    "type": "DateTimeOffset",
+                    "physicalType": "INT_96"
+                }
+            },
+            {
+                "source": {
+                    "name": "INBND_LINE_SHIPPED_QTY",
+                    "type": "Decimal",
+                    "physicalType": "decimal",
+                    "scale": 4,
+                    "precision": 22
+                },
+                "sink": {
+                    "name": "INBND_LINE_SHIPPED_QTY",
+                    "type": "Decimal",
+                    "physicalType": "DECIMAL"
+                }
+            },
+            {
+                "source": {
+                    "name": "INBND_LINE_RECEIVED_QTY",
+                    "type": "Decimal",
+                    "physicalType": "decimal",
+                    "scale": 4,
+                    "precision": 22
+                },
+                "sink": {
+                    "name": "INBND_LINE_RECEIVED_QTY",
+                    "type": "Decimal",
+                    "physicalType": "DECIMAL"
+                }
+            },
+            {
+                "source": {
+                    "name": "INBOUND_LINE_SDUK",
+                    "type": "String",
+                    "physicalType": "varchar"
+                },
+                "sink": {
+                    "name": "INBOUND_LINE_SDUK",
+                    "type": "String",
+                    "physicalType": "UTF8"
+                }
+            },
+            {
+                "source": {
+                    "name": "CLIENT_SDUK",
+                    "type": "String",
+                    "physicalType": "varchar"
+                },
+                "sink": {
+                    "name": "CLIENT_SDUK",
+                    "type": "String",
+                    "physicalType": "UTF8"
+                }
+            },
+            {
+                "source": {
+                    "name": "WAREHOUSE_SDUK",
+                    "type": "String",
+                    "physicalType": "varchar"
+                },
+                "sink": {
+                    "name": "WAREHOUSE_SDUK",
+                    "type": "String",
+                    "physicalType": "UTF8"
+                }
+            },
+            {
+                "source": {
+                    "name": "ITEM_SDUK",
+                    "type": "String",
+                    "physicalType": "varchar"
+                },
+                "sink": {
+                    "name": "ITEM_SDUK",
+                    "type": "String",
+                    "physicalType": "UTF8"
+                }
+            },
+            {
+                "source": {
+                    "name": "ETL_INSERT_DATE",
+                    "type": "DateTime",
+                    "physicalType": "datetime"
+                },
+                "sink": {
+                    "name": "ETL_INSERT_DATE",
+                    "type": "DateTime",
+                    "physicalType": "INT_96"
+                }
+            },
+            {
+                "source": {
+                    "name": "ETL_UPDATE_DATE",
+                    "type": "DateTime",
+                    "physicalType": "datetime"
+                },
+                "sink": {
+                    "name": "ETL_UPDATE_DATE",
+                    "type": "DateTime",
+                    "physicalType": "INT_96"
+                }
+            },
+            {
+                "source": {
+                    "name": "ETL_BATCH_NUMBER",
+                    "type": "Decimal",
+                    "physicalType": "decimal",
+                    "scale": 0,
+                    "precision": 18
+                },
+                "sink": {
+                    "name": "ETL_BATCH_NUMBER",
+                    "type": "Decimal",
+                    "physicalType": "DECIMAL"
+                }
+            },
+            {
+                "source": {
+                    "name": "INBND_HDR_CREATION_DATE_KEY",
+                    "type": "Int32",
+                    "physicalType": "int"
+                },
+                "sink": {
+                    "name": "INBND_HDR_CREATION_DATE_KEY",
+                    "type": "Int32",
+                    "physicalType": "INT_32"
+                }
+            },
+            {
+                "source": {
+                    "name": "INBND_HDR_CREATION_TIME_KEY",
+                    "type": "Int32",
+                    "physicalType": "int"
+                },
+                "sink": {
+                    "name": "INBND_HDR_CREATION_TIME_KEY",
+                    "type": "Int32",
+                    "physicalType": "INT_32"
+                }
+            },
+            {
+                "source": {
+                    "name": "INBND_LINE_CREATION_DATE_KEY",
+                    "type": "Int32",
+                    "physicalType": "int"
+                },
+                "sink": {
+                    "name": "INBND_LINE_CREATION_DATE_KEY",
+                    "type": "Int32",
+                    "physicalType": "INT_32"
+                }
+            },
+            {
+                "source": {
+                    "name": "INBND_LINE_CREATION_TIME_KEY",
+                    "type": "Int32",
+                    "physicalType": "int"
+                },
+                "sink": {
+                    "name": "INBND_LINE_CREATION_TIME_KEY",
+                    "type": "Int32",
+                    "physicalType": "INT_32"
+                }
+            },
+            {
+                "source": {
+                    "name": "INBND_HDR_SHIPPED_DATE_KEY",
+                    "type": "Int32",
+                    "physicalType": "int"
+                },
+                "sink": {
+                    "name": "INBND_HDR_SHIPPED_DATE_KEY",
+                    "type": "Int32",
+                    "physicalType": "INT_32"
+                }
+            },
+            {
+                "source": {
+                    "name": "INBND_HDR_SHIPPED_TIME_KEY",
+                    "type": "Int32",
+                    "physicalType": "int"
+                },
+                "sink": {
+                    "name": "INBND_HDR_SHIPPED_TIME_KEY",
+                    "type": "Int32",
+                    "physicalType": "INT_32"
+                }
+            },
+            {
+                "source": {
+                    "name": "IL_FIRST_RCVD_DATE_KEY",
+                    "type": "Int32",
+                    "physicalType": "int"
+                },
+                "sink": {
+                    "name": "IL_FIRST_RCVD_DATE_KEY",
+                    "type": "Int32",
+                    "physicalType": "INT_32"
+                }
+            },
+            {
+                "source": {
+                    "name": "IL_FIRST_RCVD_TIME_KEY",
+                    "type": "Int32",
+                    "physicalType": "int"
+                },
+                "sink": {
+                    "name": "IL_FIRST_RCVD_TIME_KEY",
+                    "type": "Int32",
+                    "physicalType": "INT_32"
+                }
+            },
+            {
+                "source": {
+                    "name": "IL_LAST_PUTAWAY_DATE_KEY",
+                    "type": "Int32",
+                    "physicalType": "int"
+                },
+                "sink": {
+                    "name": "IL_LAST_PUTAWAY_DATE_KEY",
+                    "type": "Int32",
+                    "physicalType": "INT_32"
+                }
+            },
+            {
+                "source": {
+                    "name": "IL_LAST_PUTAWAY_TIME_KEY",
+                    "type": "Int32",
+                    "physicalType": "int"
+                },
+                "sink": {
+                    "name": "IL_LAST_PUTAWAY_TIME_KEY",
+                    "type": "Int32",
+                    "physicalType": "INT_32"
+                }
+            },
+            {
+                "source": {
+                    "name": "SOURCE_PO_STATUS",
+                    "type": "String",
+                    "physicalType": "varchar"
+                },
+                "sink": {
+                    "name": "SOURCE_PO_STATUS",
+                    "type": "String",
+                    "physicalType": "UTF8"
+                }
+            },
+            {
+                "source": {
+                    "name": "SOURCE_PO_SUB_STATUS",
+                    "type": "String",
+                    "physicalType": "varchar"
+                },
+                "sink": {
+                    "name": "SOURCE_PO_SUB_STATUS",
+                    "type": "String",
+                    "physicalType": "UTF8"
+                }
+            },
+            {
+                "source": {
+                    "name": "INBND_LINE_RECEIVED_CASES",
+                    "type": "Decimal",
+                    "physicalType": "decimal",
+                    "scale": 0,
+                    "precision": 18
+                },
+                "sink": {
+                    "name": "INBND_LINE_RECEIVED_CASES",
+                    "type": "Decimal",
+                    "physicalType": "DECIMAL"
+                }
+            },
+            {
+                "source": {
+                    "name": "DML_DATE",
+                    "type": "DateTime",
+                    "physicalType": "datetime2"
+                },
+                "sink": {
+                    "name": "DML_DATE",
+                    "type": "DateTime",
+                    "physicalType": "INT_96"
+                }
+            },
+            {
+                "source": {
+                    "name": "DML_DATE_KEY",
+                    "type": "Int32",
+                    "physicalType": "int"
+                },
+                "sink": {
+                    "name": "DML_DATE_KEY",
+                    "type": "Int32",
+                    "physicalType": "INT_32"
+                }
+            },
+            {
+                "source": {
+                    "name": "SOURCE_INBOUND_LINE_REFERENCE_2",
+                    "type": "String",
+                    "physicalType": "varchar"
+                },
+                "sink": {
+                    "name": "SOURCE_INBOUND_LINE_REFERENCE_2",
+                    "type": "String",
+                    "physicalType": "UTF8"
+                }
+            },
+            {
+                "source": {
+                    "name": "SOURCE_INBOUND_LINE_REFERENCE_10",
+                    "type": "String",
+                    "physicalType": "varchar"
+                },
+                "sink": {
+                    "name": "SOURCE_INBOUND_LINE_REFERENCE_10",
+                    "type": "String",
+                    "physicalType": "UTF8"
+                }
+            },
+            {
+                "source": {
+                    "name": "SOURCE_INBOUND_LINE_REFERENCE_11",
+                    "type": "String",
+                    "physicalType": "varchar"
+                },
+                "sink": {
+                    "name": "SOURCE_INBOUND_LINE_REFERENCE_11",
+                    "type": "String",
+                    "physicalType": "UTF8"
+                }
+            },
+            {
+                "source": {
+                    "name": "SOURCE_INBOUND_LINE_REFERENCE_1",
+                    "type": "String",
+                    "physicalType": "varchar"
+                },
+                "sink": {
+                    "name": "SOURCE_INBOUND_LINE_REFERENCE_1",
+                    "type": "String",
+                    "physicalType": "UTF8"
+                }
+            },
+            {
+                "source": {
+                    "name": "SOURCE_INBOUND_LINE_REFERENCE_3",
+                    "type": "String",
+                    "physicalType": "varchar"
+                },
+                "sink": {
+                    "name": "SOURCE_INBOUND_LINE_REFERENCE_3",
+                    "type": "String",
+                    "physicalType": "UTF8"
+                }
+            },
+            {
+                "source": {
+                    "name": "SOURCE_INBOUND_LINE_REFERENCE_4",
+                    "type": "String",
+                    "physicalType": "varchar"
+                },
+                "sink": {
+                    "name": "SOURCE_INBOUND_LINE_REFERENCE_4",
+                    "type": "String",
+                    "physicalType": "UTF8"
+                }
+            },
+            {
+                "source": {
+                    "name": "SOURCE_INBOUND_LINE_REFERENCE_5",
+                    "type": "String",
+                    "physicalType": "varchar"
+                },
+                "sink": {
+                    "name": "SOURCE_INBOUND_LINE_REFERENCE_5",
+                    "type": "String",
+                    "physicalType": "UTF8"
+                }
+            },
+			{
+                "source": {
+                    "name": "CASES",
+                    "type": "Int32",
+                    "physicalType": "int"
+                },
+                "sink": {
+                    "name": "CASES",
+                    "type": "Int32",
+                    "physicalType": "Int32"
+                }
+            }
+        ]
+	},
+	"bronze": {
+		"processname": "fact_inbound_line_src_to_bronze",
+		"container": "bronze",
+		"system": "gld360",
+		"landingPath": "gld360/inbound/landing_oth/fact_inbound_line",
+		"processedPath": "gld360/inbound/processed/fact_inbound_line",
+		"rejectedPath": "gld360/inbound/rejected/fact_inbound_line",
+    	"partitioncolumns": "etl_update_date"
+	},
+	"silver": {
+		"processname": "fact_inbound_line_brownze_to_silver",
+        "container": "silver",
+		"notebookpath": "/sail/silver/",
+		"path": "gld360/inbound/fact_inbound_line",
+        "errorpath": "gld360/error_files/fact_inbound_line",
+		"joinColumns": [
+				
+		],
+		"partitioncolumns": "etl_update_date"
+	},
+	"gold": {
+        "processname": "fact_inbound_line_silver_to_gold",
+		"container": "gold",
+        "notebookpath": "/symphony-summary-layer/gold_zone/gld360-silver-to-gold",
+		"path": "gld360/inbound/fact_inbound_line",
+		"errorpath": "gld360/error_files/fact_inbound_line"
+	},
+	"controller": {
+		"schema": "controller",
+		"controlTable": "delta_control"
+	},
+	"email": {
+		"emailto" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtofail" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtosuccess" : ["gd000012732@ups.com","gd000012733@ups.com","gd000011505@ups.com"]
+	},
+	"log": {
+		"logtable":"logs.ups_application_audit_logs"
+	},
+	"processing": {
+		"logpath": "dbfs:/mnt/logs/ups/gld360",
+		"clusterversion": "7.2.x-scala2.12",
+		"nodetype": "standard_ds3_v2",
+		"workercount": "2"
+	},
+	"archive": {
+		"enabled": true,
+        "container": "bronze",
+		"path": "gld360/archive/fact_inbound_line"
+	}
+}

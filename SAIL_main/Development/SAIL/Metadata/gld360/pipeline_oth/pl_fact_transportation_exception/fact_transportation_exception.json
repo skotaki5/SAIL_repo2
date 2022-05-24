@@ -1,0 +1,341 @@
+{
+	"source": {
+        "sourcetype": "rdms",
+        "database": "gld_dw_new",
+		"schema": "dbo",
+		"tblName": "fact_transportation_exception",
+		"tblName_hwm": "fact_transportation_exception_oth",
+		"partColumns": "etl_update_date",
+		"starttms": "20211001120000",
+		"selectQuery": 
+	   "select [SOURCE_SYSTEM_KEY],[UPS_ORDER_NUMBER],[UTC_EXCEPTION_CREATED_DATE],[EXCEPTION_CREATED_DATE_OTZ],[LOFST_EXCEPTION_CREATED_DATE_OTZ],[EXCEPTION_CREATED_DATE_DTZ],[LOFST_EXCEPTION_CREATED_DATE_DTZ],[EXCEPTION_DESCRIPTION],[EXCEPTION_EVENT],[EXCEPTION_REASON],[EXCEPTION_REASON_TYPE],[EXCEPTION_CATEGORY],[RESPONSIBLE_PARTY],[EXCEPTION_PRIMARY_INDICATOR],[EXCEPTION_COUNT],[TRANSPORTATION_EXCEPTION_SDUK],[ETL_INSERT_DATE],[ETL_UPDATE_DATE],[ETL_BATCH_NUMBER],[UPS_WMS_SOURCE_SYSTEM_KEY],[UPS_WMS_ORDER_NUMBER],[CLIENT_SDUK],[WAREHOUSE_SDUK] from dbo.fact_transportation_exception (nolock) ",
+		"mappings": [
+                    {
+                        "source": {
+                            "name": "SOURCE_SYSTEM_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "SOURCE_SYSTEM_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "UPS_ORDER_NUMBER",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "UPS_ORDER_NUMBER",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "UTC_EXCEPTION_CREATED_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "UTC_EXCEPTION_CREATED_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "EXCEPTION_CREATED_DATE_OTZ",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "EXCEPTION_CREATED_DATE_OTZ",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LOFST_EXCEPTION_CREATED_DATE_OTZ",
+                            "type": "DateTimeOffset",
+                            "physicalType": "datetimeoffset"
+                        },
+                        "sink": {
+                            "name": "LOFST_EXCEPTION_CREATED_DATE_OTZ",
+                            "type": "DateTimeOffset",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "EXCEPTION_CREATED_DATE_DTZ",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "EXCEPTION_CREATED_DATE_DTZ",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LOFST_EXCEPTION_CREATED_DATE_DTZ",
+                            "type": "DateTimeOffset",
+                            "physicalType": "datetimeoffset"
+                        },
+                        "sink": {
+                            "name": "LOFST_EXCEPTION_CREATED_DATE_DTZ",
+                            "type": "DateTimeOffset",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "EXCEPTION_DESCRIPTION",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "EXCEPTION_DESCRIPTION",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "EXCEPTION_EVENT",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "EXCEPTION_EVENT",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "EXCEPTION_REASON",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "EXCEPTION_REASON",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "EXCEPTION_REASON_TYPE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "EXCEPTION_REASON_TYPE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "EXCEPTION_CATEGORY",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "EXCEPTION_CATEGORY",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "RESPONSIBLE_PARTY",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "RESPONSIBLE_PARTY",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "EXCEPTION_PRIMARY_INDICATOR",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 0,
+                            "precision": 1
+                        },
+                        "sink": {
+                            "name": "EXCEPTION_PRIMARY_INDICATOR",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "EXCEPTION_COUNT",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "EXCEPTION_COUNT",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "TRANSPORTATION_EXCEPTION_SDUK",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "TRANSPORTATION_EXCEPTION_SDUK",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ETL_INSERT_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "ETL_INSERT_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ETL_UPDATE_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "ETL_UPDATE_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ETL_BATCH_NUMBER",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 0,
+                            "precision": 18
+                        },
+                        "sink": {
+                            "name": "ETL_BATCH_NUMBER",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "UPS_WMS_SOURCE_SYSTEM_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "UPS_WMS_SOURCE_SYSTEM_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "UPS_WMS_ORDER_NUMBER",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "UPS_WMS_ORDER_NUMBER",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CLIENT_SDUK",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "CLIENT_SDUK",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "WAREHOUSE_SDUK",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "WAREHOUSE_SDUK",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    }
+                ]
+	},
+	"bronze": {
+		"processname": "fact_transportation_exception_src_to_bronze",
+		"container": "bronze",
+		"system": "gld360",
+		"landingPath": "gld360/inbound/landing_oth/fact_transportation_exception",
+		"processedPath": "gld360/inbound/processed/fact_transportation_exception",
+		"rejectedPath": "gld360/inbound/rejected/fact_transportation_exception",
+    	"partitioncolumns": "etl_update_date"
+	},
+	"silver": {
+		"processname": "fact_transportation_exception_brownze_to_silver",
+        "container": "silver",
+		"notebookpath": "/symphony-summary-layer/silver_zone/gld360-browze-to-silver",
+		"path": "gld360/inbound/fact_transportation_exception",
+        "errorpath": "gld360/error_files/fact_transportation_exception"
+	},
+	"gold": {
+        "processname": "fact_transportation_exception_silver_to_gold",
+        "notebookpath": "/symphony-summary-layer/gold_zone/gld360-silver-to-gold",
+		"container": "gold",
+		"path": "gld360/inbound/fact_transportation_exception",
+		"errorpath": "gld360/error_files/fact_transportation_exception"
+	},
+	"controller": {
+		"schema": "controller",
+		"controlTable": "delta_control"
+	},
+	"email": {
+		"emailto" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtofail" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtosuccess" : ["gd000012732@ups.com","gd000012733@ups.com","gd000011505@ups.com"]
+	},
+	"log": {
+		"logtable":"logs.ups_application_audit_logs"
+	},
+	"processing": {
+		"logpath": "dbfs:/mnt/logs/ups/gld360",
+		"clusterversion": "7.2.x-scala2.12",
+		"nodetype": "standard_ds3_v2",
+		"workercount": "2"
+	},
+	"archive": {
+		"enabled": true,
+        "container": "data-layer",
+		"path": "gld360/archive/table_name/partition_column"
+	}
+}

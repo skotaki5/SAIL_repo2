@@ -1,0 +1,15 @@
+{
+    "name": "ls_sqlserver_gld_dw_new",
+    "type": "Microsoft.DataFactory/factories/linkedservices",
+    "properties": {
+        "annotations": [],
+        "type": "AzureSqlDatabase",
+        "typeProperties": {
+            "connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=gtsdatawarehouse-prod.database.windows.net;Initial Catalog=GLD_DW_NEW",
+            "credential": {
+                "referenceName": "credentialMiOa2",
+                "type": "CredentialReference"
+            }
+        }
+    }
+}

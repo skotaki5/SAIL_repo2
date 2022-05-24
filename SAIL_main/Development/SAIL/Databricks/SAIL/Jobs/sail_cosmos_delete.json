@@ -1,0 +1,221 @@
+{
+
+        "timeout_seconds": 0,
+        "email_notifications": {},
+        "name": "sail_cosmos_delete",
+        "max_concurrent_runs": 1,
+        "tasks": [
+            {
+                "job_cluster_key": "cosmos_delete_jobcluster",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/cosmos/delete_cosmos_documents",
+                    "base_parameters": {
+                        "cosmos_database_name": "SAIL",
+                        "log_debug_mode": "N",
+                        "cosmos_container_name": "digital_summary_orders",
+                        "other_del_cond": "c.is_deleted = 1",
+                        "date_column": "DateTimeReceived",
+                        "partition_key": "AccountId",
+                        "days_back_to_del": "100"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "del_digital_summary_orders",
+                "depends_on": [
+                    {
+                        "task_key": "del_digital_summary_order_lines"
+                    }
+                ]
+            },
+            {
+                "job_cluster_key": "cosmos_delete_jobcluster",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/cosmos/delete_cosmos_documents",
+                    "base_parameters": {
+                        "cosmos_database_name": "SAIL",
+                        "log_debug_mode": "N",
+                        "cosmos_container_name": "digital_summary_inventory",
+                        "other_del_cond": "c.is_deleted = 1",
+                        "date_column": "NA",
+                        "partition_key": "AccountId",
+                        "days_back_to_del": "365"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "del_digital_summary_inventory",
+                "depends_on": [
+                    {
+                        "task_key": "del_digital_summary_milestone_activity"
+                    }
+                ]
+            },
+            {
+                "job_cluster_key": "cosmos_delete_jobcluster",
+                "libraries": [
+                    {
+                        "maven": {
+                            "coordinates": "com.azure.cosmos.spark:azure-cosmos-spark_3-1_2-12:4.6.0"
+                        }
+                    },
+                    {
+                        "pypi": {
+                            "package": "azure-cosmos==4.2.0"
+                        }
+                    }
+                ],
+                "notebook_task": {
+                    "notebook_path": "/SAIL/cosmos/delete_cosmos_documents",
+                    "base_parameters": {
+                        "cosmos_database_name": "SAIL",
+                        "log_debug_mode": "N",
+                        "cosmos_container_name": "digital_summary_milestone_activity",
+                        "other_del_cond": "c.is_deleted = 1",
+                        "date_column": "ActivityDate",
+                        "partition_key": "UpsOrderNumber",
+                        "days_back_to_del": "100"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "del_digital_summary_milestone_activity"
+            },
+            {
+                "job_cluster_key": "cosmos_delete_jobcluster",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/cosmos/delete_cosmos_documents",
+                    "base_parameters": {
+                        "cosmos_database_name": "SAIL",
+                        "log_debug_mode": "N",
+                        "cosmos_container_name": "digital_summary_order_lines",
+                        "other_del_cond": "c.is_deleted = 1",
+                        "date_column": "SummaryDateTimeReceived",
+                        "partition_key": "UpsOrderNumber",
+                        "days_back_to_del": "100"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "del_digital_summary_order_lines",
+                "depends_on": [
+                    {
+                        "task_key": "del_digital_summary_inventory"
+                    }
+                ]
+            },
+            {
+                "job_cluster_key": "cosmos_delete_jobcluster",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/cosmos/delete_cosmos_documents",
+                    "base_parameters": {
+                        "cosmos_database_name": "SAIL",
+                        "log_debug_mode": "N",
+                        "cosmos_container_name": "digital_summary_transport_details",
+                        "other_del_cond": "c.is_deleted = 1",
+                        "date_column": "NA",
+                        "partition_key": "UpsOrderNumber",
+                        "days_back_to_del": "365"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "del_digital_summary_transport_details",
+                "depends_on": [
+                    {
+                        "task_key": "del_digital_summary_transportation_callcheck"
+                    }
+                ]
+            },
+            {
+                "job_cluster_key": "cosmos_delete_jobcluster",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/cosmos/delete_cosmos_documents",
+                    "base_parameters": {
+                        "cosmos_database_name": "SAIL",
+                        "log_debug_mode": "N",
+                        "cosmos_container_name": "digital_summary_transportation_callcheck",
+                        "other_del_cond": "c.is_deleted = 1",
+                        "date_column": "TemperatureDateTime",
+                        "partition_key": "UPSOrderNumber",
+                        "days_back_to_del": "100"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "del_digital_summary_transportation_callcheck",
+                "depends_on": [
+                    {
+                        "task_key": "del_digital_summary_orders"
+                    }
+                ]
+            },
+            {
+                "job_cluster_key": "cosmos_delete_jobcluster",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/cosmos/delete_cosmos_documents",
+                    "base_parameters": {
+                        "cosmos_database_name": "SAIL",
+                        "log_debug_mode": "N",
+                        "cosmos_container_name": "digital_summary_transportation_rates_charges",
+                        "other_del_cond": "1=2",
+                        "date_column": "invoiceDateTime",
+                        "partition_key": "UpsOrderNumber",
+                        "days_back_to_del": "100"
+                    }
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "del_digital_summary_transportation_rates_charges",
+                "depends_on": [
+                    {
+                        "task_key": "del_digital_summary_transport_details"
+                    }
+                ]
+            },
+            {
+                "job_cluster_key": "cosmos_delete_jobcluster",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/sail_vacuum"
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "sail_vacuum"
+            },
+            {
+                "job_cluster_key": "cosmos_delete_jobcluster",
+                "notebook_task": {
+                    "notebook_path": "/SAIL/includes/sail analyze"
+                },
+                "timeout_seconds": 0,
+                "email_notifications": {},
+                "task_key": "sail_analyze",
+                "depends_on": [
+                    {
+                        "task_key": "sail_vacuum"
+                    }
+                ]
+            }
+        ],
+        "job_clusters": [
+            {
+                "job_cluster_key": "cosmos_delete_jobcluster",
+                "new_cluster": {
+                    "cluster_name": "",
+                    "spark_version": "10.1.x-scala2.12",
+                    "spark_conf": {
+                        "spark.databricks.delta.preview.enabled": "true"
+                    },
+                    "azure_attributes": {
+                        "availability": "ON_DEMAND_AZURE",
+                        "first_on_demand": 1,
+                        "spot_bid_max_price": -1
+                    },
+                    "node_type_id": "Standard_F4",
+                    "enable_elastic_disk": true,
+                    "num_vcpus": 0
+                }
+            }
+        ]
+    
+}
