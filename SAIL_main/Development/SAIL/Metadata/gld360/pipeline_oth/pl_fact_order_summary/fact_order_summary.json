@@ -1,0 +1,612 @@
+{
+	"source": {
+        "sourcetype": "rdms",
+        "database": "gld_dw_new",
+		"schema": "dbo",
+		"tblName": "fact_order_summary",
+		"tblName_hwm": "fact_order_summary_oth",
+		"partColumns": "etl_update_date",
+		"starttms": "20211001120000",
+		"selectQuery": 
+		    "select [UPS_ORDER_NUMBER],[CUSTOMER_ORDER_NUMBER],[SOURCE_SYSTEM_KEY],[WAREHOUSE_KEY],[IS_INBOUND],[CUSTOMER_PO_NUMBER],[REFERENCE_ORDER_NUMBER],[SERVICE_KEY],[CARRIER_LOS_KEY],[ORIGIN_LOCATION_KEY],[DESTINATION_LOCATION_KEY],[CLIENT_KEY],[ORDER_PLACED_DATE],[TRANSACTION_TYPE_ID],[IS_MANAGED],[IS_ASN],[SOURCE_ORDER_SUB_TYPE],[UTC_ORDER_PLACED_DATE],[ORDER_LATEST_ACTIVITY_DATE],[UTC_ORDER_LATEST_ACTIVITY_DATE],[ORDER_CANCELLED_FLAG],[ORDER_CANCELLED_DATE],[UTC_ORDER_CANCELLED_DATE],[ORDER_SHIPPED_DATE],[UTC_ORDER_SHIPPED_DATE],[LOFST_ORDER_LATEST_ACTIVITY_DATE],[SHIPMENT_COUNT],[STO_ORDER_COUNT],[ORDER_LATEST_ACTIVITY_DATE_KEY],[SOURCE_ORDER_STATUS],[SOURCE_ORDER_TYPE],[FREIGHT_CARRIER_CODE],[WAYBILL_AIRBILL_NUM],[DONOT_SHIP_BEFORE_DATE],[GLD_ACCOUNT_MAPPED_KEY],[DP_SERVICELINE_KEY],[DP_ORGENTITY_KEY],[ORIGIN_TIME_ZONE],[DESTINATION_TIME_ZONE],[ORDER_SDUK],[ETL_BATCH_NUMBER] from dbo.fact_order_summary (nolock) ",
+		"mappings": [
+                        {
+                            "source": {
+                                "name": "UPS_ORDER_NUMBER",
+                                "type": "String",
+                                "physicalType": "varchar"
+                            },
+                            "sink": {
+                                "name": "UPS_ORDER_NUMBER",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "CUSTOMER_ORDER_NUMBER",
+                                "type": "String",
+                                "physicalType": "varchar"
+                            },
+                            "sink": {
+                                "name": "CUSTOMER_ORDER_NUMBER",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "SOURCE_SYSTEM_KEY",
+                                "type": "Int32",
+                                "physicalType": "int"
+                            },
+                            "sink": {
+                                "name": "SOURCE_SYSTEM_KEY",
+                                "type": "Int32",
+                                "physicalType": "INT_32"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "WAREHOUSE_KEY",
+                                "type": "Decimal",
+                                "physicalType": "decimal",
+                                "scale": 0,
+                                "precision": 18
+                            },
+                            "sink": {
+                                "name": "WAREHOUSE_KEY",
+                                "type": "Decimal",
+                                "physicalType": "DECIMAL"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "IS_INBOUND",
+                                "type": "Int32",
+                                "physicalType": "int"
+                            },
+                            "sink": {
+                                "name": "IS_INBOUND",
+                                "type": "Int32",
+                                "physicalType": "INT_32"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "CUSTOMER_PO_NUMBER",
+                                "type": "String",
+                                "physicalType": "varchar"
+                            },
+                            "sink": {
+                                "name": "CUSTOMER_PO_NUMBER",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "REFERENCE_ORDER_NUMBER",
+                                "type": "String",
+                                "physicalType": "varchar"
+                            },
+                            "sink": {
+                                "name": "REFERENCE_ORDER_NUMBER",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "SERVICE_KEY",
+                                "type": "Decimal",
+                                "physicalType": "decimal",
+                                "scale": 0,
+                                "precision": 18
+                            },
+                            "sink": {
+                                "name": "SERVICE_KEY",
+                                "type": "Decimal",
+                                "physicalType": "DECIMAL"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "CARRIER_LOS_KEY",
+                                "type": "Decimal",
+                                "physicalType": "decimal",
+                                "scale": 0,
+                                "precision": 18
+                            },
+                            "sink": {
+                                "name": "CARRIER_LOS_KEY",
+                                "type": "Decimal",
+                                "physicalType": "DECIMAL"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "ORIGIN_LOCATION_KEY",
+                                "type": "Decimal",
+                                "physicalType": "decimal",
+                                "scale": 0,
+                                "precision": 18
+                            },
+                            "sink": {
+                                "name": "ORIGIN_LOCATION_KEY",
+                                "type": "Decimal",
+                                "physicalType": "DECIMAL"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "DESTINATION_LOCATION_KEY",
+                                "type": "Decimal",
+                                "physicalType": "decimal",
+                                "scale": 0,
+                                "precision": 18
+                            },
+                            "sink": {
+                                "name": "DESTINATION_LOCATION_KEY",
+                                "type": "Decimal",
+                                "physicalType": "DECIMAL"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "CLIENT_KEY",
+                                "type": "Decimal",
+                                "physicalType": "decimal",
+                                "scale": 0,
+                                "precision": 18
+                            },
+                            "sink": {
+                                "name": "CLIENT_KEY",
+                                "type": "Decimal",
+                                "physicalType": "DECIMAL"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "ORDER_PLACED_DATE",
+                                "type": "DateTime",
+                                "physicalType": "datetime"
+                            },
+                            "sink": {
+                                "name": "ORDER_PLACED_DATE",
+                                "type": "DateTime",
+                                "physicalType": "INT_96"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "TRANSACTION_TYPE_ID",
+                                "type": "Int32",
+                                "physicalType": "int"
+                            },
+                            "sink": {
+                                "name": "TRANSACTION_TYPE_ID",
+                                "type": "Int32",
+                                "physicalType": "INT_32"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "IS_MANAGED",
+                                "type": "Int32",
+                                "physicalType": "int"
+                            },
+                            "sink": {
+                                "name": "IS_MANAGED",
+                                "type": "Int32",
+                                "physicalType": "INT_32"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "IS_ASN",
+                                "type": "Int32",
+                                "physicalType": "int"
+                            },
+                            "sink": {
+                                "name": "IS_ASN",
+                                "type": "Int32",
+                                "physicalType": "INT_32"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "SOURCE_ORDER_SUB_TYPE",
+                                "type": "String",
+                                "physicalType": "varchar"
+                            },
+                            "sink": {
+                                "name": "SOURCE_ORDER_SUB_TYPE",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "UTC_ORDER_PLACED_DATE",
+                                "type": "DateTime",
+                                "physicalType": "datetime"
+                            },
+                            "sink": {
+                                "name": "UTC_ORDER_PLACED_DATE",
+                                "type": "DateTime",
+                                "physicalType": "INT_96"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "ORDER_LATEST_ACTIVITY_DATE",
+                                "type": "DateTime",
+                                "physicalType": "datetime"
+                            },
+                            "sink": {
+                                "name": "ORDER_LATEST_ACTIVITY_DATE",
+                                "type": "DateTime",
+                                "physicalType": "INT_96"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "UTC_ORDER_LATEST_ACTIVITY_DATE",
+                                "type": "DateTime",
+                                "physicalType": "datetime"
+                            },
+                            "sink": {
+                                "name": "UTC_ORDER_LATEST_ACTIVITY_DATE",
+                                "type": "DateTime",
+                                "physicalType": "INT_96"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "ORDER_CANCELLED_FLAG",
+                                "type": "String",
+                                "physicalType": "char"
+                            },
+                            "sink": {
+                                "name": "ORDER_CANCELLED_FLAG",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "ORDER_CANCELLED_DATE",
+                                "type": "DateTime",
+                                "physicalType": "datetime"
+                            },
+                            "sink": {
+                                "name": "ORDER_CANCELLED_DATE",
+                                "type": "DateTime",
+                                "physicalType": "INT_96"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "UTC_ORDER_CANCELLED_DATE",
+                                "type": "DateTime",
+                                "physicalType": "datetime"
+                            },
+                            "sink": {
+                                "name": "UTC_ORDER_CANCELLED_DATE",
+                                "type": "DateTime",
+                                "physicalType": "INT_96"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "ORDER_SHIPPED_DATE",
+                                "type": "DateTime",
+                                "physicalType": "datetime"
+                            },
+                            "sink": {
+                                "name": "ORDER_SHIPPED_DATE",
+                                "type": "DateTime",
+                                "physicalType": "INT_96"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "UTC_ORDER_SHIPPED_DATE",
+                                "type": "DateTime",
+                                "physicalType": "datetime"
+                            },
+                            "sink": {
+                                "name": "UTC_ORDER_SHIPPED_DATE",
+                                "type": "DateTime",
+                                "physicalType": "INT_96"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "LOFST_ORDER_LATEST_ACTIVITY_DATE",
+                                "type": "DateTimeOffset",
+                                "physicalType": "datetimeoffset"
+                            },
+                            "sink": {
+                                "name": "LOFST_ORDER_LATEST_ACTIVITY_DATE",
+                                "type": "DateTimeOffset",
+                                "physicalType": "INT_96"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "SHIPMENT_COUNT",
+                                "type": "Int32",
+                                "physicalType": "int"
+                            },
+                            "sink": {
+                                "name": "SHIPMENT_COUNT",
+                                "type": "Int32",
+                                "physicalType": "INT_32"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "STO_ORDER_COUNT",
+                                "type": "Int32",
+                                "physicalType": "int"
+                            },
+                            "sink": {
+                                "name": "STO_ORDER_COUNT",
+                                "type": "Int32",
+                                "physicalType": "INT_32"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "ORDER_LATEST_ACTIVITY_DATE_KEY",
+                                "type": "Int32",
+                                "physicalType": "int"
+                            },
+                            "sink": {
+                                "name": "ORDER_LATEST_ACTIVITY_DATE_KEY",
+                                "type": "Int32",
+                                "physicalType": "INT_32"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "SOURCE_ORDER_STATUS",
+                                "type": "String",
+                                "physicalType": "varchar"
+                            },
+                            "sink": {
+                                "name": "SOURCE_ORDER_STATUS",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "SOURCE_ORDER_TYPE",
+                                "type": "String",
+                                "physicalType": "varchar"
+                            },
+                            "sink": {
+                                "name": "SOURCE_ORDER_TYPE",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "FREIGHT_CARRIER_CODE",
+                                "type": "String",
+                                "physicalType": "varchar"
+                            },
+                            "sink": {
+                                "name": "FREIGHT_CARRIER_CODE",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "WAYBILL_AIRBILL_NUM",
+                                "type": "String",
+                                "physicalType": "varchar"
+                            },
+                            "sink": {
+                                "name": "WAYBILL_AIRBILL_NUM",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "DONOT_SHIP_BEFORE_DATE",
+                                "type": "DateTime",
+                                "physicalType": "datetime"
+                            },
+                            "sink": {
+                                "name": "DONOT_SHIP_BEFORE_DATE",
+                                "type": "DateTime",
+                                "physicalType": "INT_96"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "GLD_ACCOUNT_MAPPED_KEY",
+                                "type": "String",
+                                "physicalType": "varchar"
+                            },
+                            "sink": {
+                                "name": "GLD_ACCOUNT_MAPPED_KEY",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "DP_SERVICELINE_KEY",
+                                "type": "String",
+                                "physicalType": "varchar"
+                            },
+                            "sink": {
+                                "name": "DP_SERVICELINE_KEY",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "DP_ORGENTITY_KEY",
+                                "type": "String",
+                                "physicalType": "varchar"
+                            },
+                            "sink": {
+                                "name": "DP_ORGENTITY_KEY",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "ORIGIN_TIME_ZONE",
+                                "type": "String",
+                                "physicalType": "varchar"
+                            },
+                            "sink": {
+                                "name": "ORIGIN_TIME_ZONE",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "DESTINATION_TIME_ZONE",
+                                "type": "String",
+                                "physicalType": "varchar"
+                            },
+                            "sink": {
+                                "name": "DESTINATION_TIME_ZONE",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "ORDER_SDUK",
+                                "type": "String",
+                                "physicalType": "varchar"
+                            },
+                            "sink": {
+                                "name": "ORDER_SDUK",
+                                "type": "String",
+                                "physicalType": "UTF8"
+                            }
+                        },
+                        {
+                            "source": {
+                                "name": "ETL_BATCH_NUMBER",
+                                "type": "Decimal",
+                                "physicalType": "decimal",
+                                "scale": 0,
+                                "precision": 18
+                            },
+                            "sink": {
+                                "name": "ETL_BATCH_NUMBER",
+                                "type": "Decimal",
+                                "physicalType": "DECIMAL"
+                            }
+                        }
+                    ]
+	},
+	"bronze": {
+		"processname": "fact_order_summary_src_to_bronze",
+		"container": "bronze",
+		"system": "gld360",
+		"landingPath": "gld360/inbound/landing_oth/fact_order_summary",
+		"processedPath": "gld360/inbound/processed/fact_order_summary",
+		"rejectedPath": "gld360/inbound/rejected/fact_order_summary",
+    	"partitioncolumn": "etl_update_date"
+	},
+	"silver": {
+		"processname": "fact_order_summary_brownze_to_silver",
+        "container": "silver",
+		"notebookpath": "/symphony-summary-layer/silver_zone/gld360-browze-to-silver",
+		"path": "gld360/inbound/fact_order_summary",
+        "errorpath": "gld360/error_files/fact_order_summary",
+        "insertColumns": [
+            "CUSTOMER_ORDER_NUMBER",
+            "WAREHOUSE_KEY",
+            "IS_INBOUND",
+            "CUSTOMER_PO_NUMBER",
+            "REFERENCE_ORDER_NUMBER",
+            "SERVICE_KEY",
+            "CARRIER_LOS_KEY",
+            "ORIGIN_LOCATION_KEY",
+            "DESTINATION_LOCATION_KEY",
+            "CLIENT_KEY",
+            "ORDER_PLACED_DATE",
+            "TRANSACTION_TYPE_ID",
+            "IS_MANAGED",
+            "IS_ASN",
+            "SOURCE_ORDER_SUB_TYPE",
+            "UTC_ORDER_PLACED_DATE",
+            "ORDER_LATEST_ACTIVITY_DATE",
+            "UTC_ORDER_LATEST_ACTIVITY_DATE",
+            "ORDER_CANCELLED_FLAG",
+            "ORDER_CANCELLED_DATE",
+            "UTC_ORDER_CANCELLED_DATE",
+            "ORDER_SHIPPED_DATE",
+            "UTC_ORDER_SHIPPED_DATE",
+            "LOFST_ORDER_LATEST_ACTIVITY_DATE",
+            "SHIPMENT_COUNT",
+            "STO_ORDER_COUNT",
+            "ORDER_LATEST_ACTIVITY_DATE_KEY",
+            "SOURCE_ORDER_STATUS",
+            "SOURCE_ORDER_TYPE",
+            "FREIGHT_CARRIER_CODE",
+            "WAYBILL_AIRBILL_NUM",
+            "DONOT_SHIP_BEFORE_DATE",
+            "GLD_ACCOUNT_MAPPED_KEY",
+            "DP_SERVICELINE_KEY",
+            "DP_ORGENTITY_KEY",
+            "ORIGIN_TIME_ZONE",
+            "DESTINATION_TIME_ZONE",
+            "ORDER_SDUK",
+            "ETL_BATCH_NUMBER"
+        ],
+		"updateColumns": [""],
+		"joinColumns": [
+            "UPS_ORDER_NUMBER",
+            "SOURCE_SYSTEM_KEY"
+        ]
+	},
+	"gold": {
+        "processname": "fact_order_summary_silver_to_gold",
+        "notebookpath": "/symphony-summary-layer/gold_zone/gld360-silver-to-gold",
+		"path": "gld360/inbound/fact_order_summary",
+		"errorpath": "gld360/error_files/fact_order_summary"
+	},
+	"controller": {
+		"schema": "controller",
+		"controlTable": "delta_control"
+	},
+	"email": {
+		"emailto" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtofail" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtosuccess" : ["gd000012732@ups.com","gd000012733@ups.com","gd000011505@ups.com"]
+	},
+	"log": {
+		"logtable":"logs.ups_application_audit_logs"
+	},
+	"processing": {
+		"logpath": "dbfs:/mnt/logs/ups/gld360",
+		"clusterversion": "7.2.x-scala2.12",
+		"nodetype": "standard_ds3_v2",
+		"workercount": "2"
+	},
+	"archive": {
+		"enabled": true,
+        "container": "data-layer",
+		"path": "bronze/gld360/archive/table_name/partition_column"
+	}
+}

@@ -1,0 +1,76 @@
+{
+    "name": "Pl-Email-Alter",
+    "properties": {
+        "activities": [
+            {
+                "name": "Send Email",
+                "type": "WebActivity",
+                "dependsOn": [
+                    {
+                        "activity": "Set Email Body",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "url": {
+                        "value": "@pipeline().globalParameters.gp_logapp_email_url",
+                        "type": "Expression"
+                    },
+                    "method": "POST",
+                    "body": {
+                        "value": "@variables('v_set_body')",
+                        "type": "Expression"
+                    }
+                }
+            },
+            {
+                "name": "Set Email Body",
+                "type": "SetVariable",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "variableName": "v_set_body",
+                    "value": {
+                        "value": "@string(pipeline().parameters.p_body)",
+                        "type": "Expression"
+                    }
+                }
+            }
+        ],
+        "parameters": {
+            "p_body": {
+                "type": "object",
+                "defaultValue": {
+                    "title": "Test Email",
+                    "message": "ADF Pipeline:pl-main-master is successfully completed.",
+                    "color": "green",
+                    "dataFactoryName": "@{pipeline().DataFactory}",
+                    "pipelineName": "@{pipeline().Pipeline}",
+                    "pipelineRunId": "@{pipeline().RunId}",
+                    "time": "@{utcNow('yyyy-MM-dd hh:mm:ss')}"
+                }
+            }
+        },
+        "variables": {
+            "v_set_body": {
+                "type": "String"
+            }
+        },
+        "folder": {
+            "name": "Base Pipelines"
+        },
+        "annotations": [],
+        "lastPublishTime": "2022-02-24T04:08:12Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

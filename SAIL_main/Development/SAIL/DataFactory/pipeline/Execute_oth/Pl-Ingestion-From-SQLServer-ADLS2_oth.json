@@ -1,0 +1,1009 @@
+{
+    "name": "Pl-Ingestion-From-SQLServer-ADLS2_oth",
+    "properties": {
+        "activities": [
+            {
+                "name": "Validate Metdata File Path",
+                "type": "Validation",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "dataset": {
+                        "referenceName": "ds_adls2_metadata_json",
+                        "type": "DatasetReference",
+                        "parameters": {
+                            "p_metadata_container": {
+                                "value": "@pipeline().parameters.p_metadata_container",
+                                "type": "Expression"
+                            },
+                            "p_metadata_folder_Path": {
+                                "value": "@pipeline().parameters.p_metadata_folder_path",
+                                "type": "Expression"
+                            },
+                            "p_metadata_file_name": {
+                                "value": "@pipeline().parameters.p_metadata_file_name",
+                                "type": "Expression"
+                            }
+                        }
+                    },
+                    "timeout": "0.00:02:00",
+                    "sleep": 10
+                }
+            },
+            {
+                "name": "Get Metadata",
+                "type": "Lookup",
+                "dependsOn": [
+                    {
+                        "activity": "Validate Metdata File Path",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    },
+                    {
+                        "activity": "Set Start Ticks",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    },
+                    {
+                        "activity": "Set Start Time",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.00:10:00",
+                    "retry": 3,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "JsonSource",
+                        "storeSettings": {
+                            "type": "AzureBlobFSReadSettings",
+                            "recursive": false,
+                            "enablePartitionDiscovery": false
+                        },
+                        "formatSettings": {
+                            "type": "JsonReadSettings"
+                        }
+                    },
+                    "dataset": {
+                        "referenceName": "ds_adls2_metadata_json",
+                        "type": "DatasetReference",
+                        "parameters": {
+                            "p_metadata_container": {
+                                "value": "@pipeline().parameters.p_metadata_container",
+                                "type": "Expression"
+                            },
+                            "p_metadata_folder_Path": {
+                                "value": "@pipeline().parameters.p_metadata_folder_path",
+                                "type": "Expression"
+                            },
+                            "p_metadata_file_name": {
+                                "value": "@pipeline().parameters.p_metadata_file_name",
+                                "type": "Expression"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "name": "If Debug",
+                "type": "IfCondition",
+                "dependsOn": [
+                    {
+                        "activity": "Set High Water Mark",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "expression": {
+                        "value": "@bool(pipeline().parameters.p_debug)",
+                        "type": "Expression"
+                    },
+                    "ifFalseActivities": [
+                        {
+                            "name": "Copy data SqlServer To ADLS2",
+                            "type": "Copy",
+                            "dependsOn": [
+                                {
+                                    "activity": "Set Select Query",
+                                    "dependencyConditions": [
+                                        "Succeeded"
+                                    ]
+                                }
+                            ],
+                            "policy": {
+                                "timeout": "0.05:00:00",
+                                "retry": 0,
+                                "retryIntervalInSeconds": 30,
+                                "secureOutput": false,
+                                "secureInput": false
+                            },
+                            "userProperties": [],
+                            "typeProperties": {
+                                "source": {
+                                    "type": "AzureSqlSource",
+                                    "sqlReaderQuery": {
+                                        "value": "@variables('v_select_query')",
+                                        "type": "Expression"
+                                    },
+                                    "queryTimeout": "02:00:00",
+                                    "partitionOption": "None"
+                                },
+                                "sink": {
+                                    "type": "ParquetSink",
+                                    "storeSettings": {
+                                        "type": "AzureBlobFSWriteSettings"
+                                    },
+                                    "formatSettings": {
+                                        "type": "ParquetWriteSettings"
+                                    }
+                                },
+                                "enableStaging": false,
+                                "parallelCopies": 32,
+                                "validateDataConsistency": true,
+                                "dataIntegrationUnits": 64,
+                                "translator": {
+                                    "value": "@activity('Get Metadata').output.firstRow.source.mappings",
+                                    "type": "Expression"
+                                }
+                            },
+                            "inputs": [
+                                {
+                                    "referenceName": "ds_gld_dw_new_tbl_query",
+                                    "type": "DatasetReference"
+                                }
+                            ],
+                            "outputs": [
+                                {
+                                    "referenceName": "ds_adls2_data_parquet_file",
+                                    "type": "DatasetReference",
+                                    "parameters": {
+                                        "p_container": {
+                                            "value": "@activity('Get Metadata').output.firstRow.bronze.container",
+                                            "type": "Expression"
+                                        },
+                                        "p_folder_path": {
+                                            "value": "@activity('Get Metadata').output.firstRow.bronze.landingPath",
+                                            "type": "Expression"
+                                        },
+                                        "p_file_name": {
+                                            "value": "@{concat(\nactivity('Get Metadata').output.firstRow.source.schema, '_',\nactivity('Get Metadata').output.firstRow.source.tblName, '_',\nformatDateTime(utcnow(), 'yyyyMMddHHmmss')\n)}",
+                                            "type": "Expression"
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Set Select Query",
+                            "type": "SetVariable",
+                            "dependsOn": [],
+                            "userProperties": [],
+                            "typeProperties": {
+                                "variableName": "v_select_query",
+                                "value": {
+                                    "value": "@{activity('Get Metadata').output.firstRow.source.selectQuery} where @{activity('Get Metadata').output.firstRow.source.partColumns}>'@{variables('v_hwm')}'",
+                                    "type": "Expression"
+                                }
+                            }
+                        },
+                        {
+                            "name": "Insert Audit Log Success",
+                            "type": "Lookup",
+                            "dependsOn": [
+                                {
+                                    "activity": "Set End Ticks",
+                                    "dependencyConditions": [
+                                        "Succeeded"
+                                    ]
+                                }
+                            ],
+                            "policy": {
+                                "timeout": "7.00:00:00",
+                                "retry": 0,
+                                "retryIntervalInSeconds": 30,
+                                "secureOutput": false,
+                                "secureInput": false
+                            },
+                            "userProperties": [],
+                            "typeProperties": {
+                                "source": {
+                                    "type": "AzureSqlSource",
+                                    "sqlReaderStoredProcedureName": "[controller].[insert_audit_record]",
+                                    "storedProcedureParameters": {
+                                        "dataRead_byte": {
+                                            "type": "Int64",
+                                            "value": {
+                                                "value": "@activity('Copy data SqlServer To ADLS2').output.dataRead",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "dataWritten_byte": {
+                                            "type": "Int64",
+                                            "value": {
+                                                "value": "@activity('Copy data SqlServer To ADLS2').output.dataWritten",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "end_time": {
+                                            "type": "DateTime",
+                                            "value": {
+                                                "value": "@formatDateTime(addToTime(activity('Copy data SqlServer To ADLS2').output.executionDetails[0].start\n,activity('Copy data SqlServer To ADLS2').output.copyDuration,'Second'\n),'yyyy-MM-dd HH:mm:ss.fff')",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "ERROR_MESSAGE": {
+                                            "type": "String",
+                                            "value": {
+                                                "value": "@activity('Copy data SqlServer To ADLS2').output.errors",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "executionTimeMs": {
+                                            "type": "Int64",
+                                            "value": {
+                                                "value": "@{sub(int(variables('v_end_ticks')), int(variables('v_start_ticks')))}",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "insert_timestamp": {
+                                            "type": "DateTime",
+                                            "value": {
+                                                "value": "@utcNow('yyyy-MM-dd HH:mm:ss.fff')",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "layer": {
+                                            "type": "String",
+                                            "value": {
+                                                "value": "@activity('Get Metadata').output.firstRow.bronze.container",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "numSourceRows": {
+                                            "type": "Int64",
+                                            "value": {
+                                                "value": "@activity('Copy data SqlServer To ADLS2').output.rowsRead",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "numTargetFilesAdded": {
+                                            "type": "Int64",
+                                            "value": {
+                                                "value": "@activity('Copy data SqlServer To ADLS2').output.filesWritten",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "numTargetFilesRemoved": {
+                                            "type": "Int64",
+                                            "value": null
+                                        },
+                                        "numTargetRowsCopied": {
+                                            "type": "Int64",
+                                            "value": {
+                                                "value": "@activity('Copy data SqlServer To ADLS2').output.rowsCopied",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "numTargetRowsDeleted": {
+                                            "type": "Int64",
+                                            "value": null
+                                        },
+                                        "numTargetRowsInserted": {
+                                            "type": "Int64",
+                                            "value": {
+                                                "value": "@activity('Copy data SqlServer To ADLS2').output.rowsCopied",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "numTargetRowsUpdated": {
+                                            "type": "Int64",
+                                            "value": null
+                                        },
+                                        "operation": {
+                                            "type": "String",
+                                            "value": "Data Factory Copy"
+                                        },
+                                        "operationParameters": {
+                                            "type": "String",
+                                            "value": {
+                                                "value": "@concat(\n    '{p_debug:',string(pipeline().parameters.p_debug),\n    'p_metadata_container:',string(pipeline().parameters.p_metadata_container),\n    'p_metadata_folder_path:',string(pipeline().parameters.p_metadata_folder_path),\n    'p_metadata_file_name:',string(pipeline().parameters.p_metadata_file_name),\n    'p_schedule_time:',string(pipeline().parameters.p_schedule_time),'}'\n)",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "process_date": {
+                                            "type": "DateTime",
+                                            "value": {
+                                                "value": "@utcNow('yyyy-MM-dd')",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "process_id": {
+                                            "type": "String",
+                                            "value": {
+                                                "value": "@pipeline().RunId",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "process_name": {
+                                            "type": "String",
+                                            "value": "datafactory_load"
+                                        },
+                                        "process_type": {
+                                            "type": "String",
+                                            "value": {
+                                                "value": "@concat('Data Factory;', pipeline().DataFactory)",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "rewriteTimeMs": {
+                                            "type": "Int64",
+                                            "value": null
+                                        },
+                                        "scanTimeMs": {
+                                            "type": "Int64",
+                                            "value": null
+                                        },
+                                        "start_time": {
+                                            "type": "DateTime",
+                                            "value": {
+                                                "value": "@formatDateTime(activity('Copy data SqlServer To ADLS2').output.executionDetails[0].start,\n'yyyy-MM-dd HH:mm:ss.fff')",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "status": {
+                                            "type": "String",
+                                            "value": {
+                                                "value": "@activity('Copy data SqlServer To ADLS2').output.executionDetails[0].status",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "table_name": {
+                                            "type": "String",
+                                            "value": {
+                                                "value": "@concat(activity('Get Metadata').output.firstRow.source.tblName,'_oth')",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "throughput": {
+                                            "type": "Decimal",
+                                            "value": {
+                                                "value": "@activity('Copy data SqlServer To ADLS2').output.throughput",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "update_timestamp": {
+                                            "type": "DateTime",
+                                            "value": {
+                                                "value": "@utcNow('yyyy-MM-dd HH:mm:ss.fff')",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "userName": {
+                                            "type": "String",
+                                            "value": null
+                                        }
+                                    },
+                                    "queryTimeout": "02:00:00",
+                                    "partitionOption": "None"
+                                },
+                                "dataset": {
+                                    "referenceName": "ds_sqlserver_controller_tbl",
+                                    "type": "DatasetReference",
+                                    "parameters": {
+                                        "p_control_tbl": {
+                                            "value": "@activity('Get Metadata').output.firstRow.controller.controlTable",
+                                            "type": "Expression"
+                                        },
+                                        "p_schema": {
+                                            "value": "@activity('Get Metadata').output.firstRow.controller.schema",
+                                            "type": "Expression"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "name": "Insert Audit Log Failure",
+                            "type": "Lookup",
+                            "dependsOn": [
+                                {
+                                    "activity": "Copy data SqlServer To ADLS2",
+                                    "dependencyConditions": [
+                                        "Failed"
+                                    ]
+                                }
+                            ],
+                            "policy": {
+                                "timeout": "7.00:00:00",
+                                "retry": 0,
+                                "retryIntervalInSeconds": 30,
+                                "secureOutput": false,
+                                "secureInput": false
+                            },
+                            "userProperties": [],
+                            "typeProperties": {
+                                "source": {
+                                    "type": "AzureSqlSource",
+                                    "sqlReaderStoredProcedureName": "[controller].[insert_audit_record]",
+                                    "storedProcedureParameters": {
+                                        "dataRead_byte": {
+                                            "type": "Int64",
+                                            "value": null
+                                        },
+                                        "dataWritten_byte": {
+                                            "type": "Int64",
+                                            "value": null
+                                        },
+                                        "end_time": {
+                                            "type": "DateTime",
+                                            "value": null
+                                        },
+                                        "ERROR_MESSAGE": {
+                                            "type": "String",
+                                            "value": {
+                                                "value": "@activity('Copy data SqlServer To ADLS2').output.errors",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "executionTimeMs": {
+                                            "type": "Int64",
+                                            "value": null
+                                        },
+                                        "insert_timestamp": {
+                                            "type": "DateTime",
+                                            "value": {
+                                                "value": "@utcNow('yyyy-MM-dd HH:mm:ss.fff')",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "layer": {
+                                            "type": "String",
+                                            "value": {
+                                                "value": "@activity('Get Metadata').output.firstRow.bronze.container",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "numSourceRows": {
+                                            "type": "Int64",
+                                            "value": null
+                                        },
+                                        "numTargetFilesAdded": {
+                                            "type": "Int64",
+                                            "value": null
+                                        },
+                                        "numTargetFilesRemoved": {
+                                            "type": "Int64",
+                                            "value": null
+                                        },
+                                        "numTargetRowsCopied": {
+                                            "type": "Int64",
+                                            "value": null
+                                        },
+                                        "numTargetRowsDeleted": {
+                                            "type": "Int64",
+                                            "value": null
+                                        },
+                                        "numTargetRowsInserted": {
+                                            "type": "Int64",
+                                            "value": null
+                                        },
+                                        "numTargetRowsUpdated": {
+                                            "type": "Int64",
+                                            "value": null
+                                        },
+                                        "operation": {
+                                            "type": "String",
+                                            "value": "Data Factory Copy"
+                                        },
+                                        "operationParameters": {
+                                            "type": "String",
+                                            "value": {
+                                                "value": "@concat(\n    '{p_debug:',string(pipeline().parameters.p_debug),\n    'p_metadata_container:',string(pipeline().parameters.p_metadata_container),\n    'p_metadata_folder_path:',string(pipeline().parameters.p_metadata_folder_path),\n    'p_metadata_file_name:',string(pipeline().parameters.p_metadata_file_name),\n    'p_schedule_time:',string(pipeline().parameters.p_schedule_time),'}'\n)",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "process_date": {
+                                            "type": "DateTime",
+                                            "value": {
+                                                "value": "@utcNow('yyyy-MM-dd')",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "process_id": {
+                                            "type": "String",
+                                            "value": {
+                                                "value": "@pipeline().RunId",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "process_name": {
+                                            "type": "String",
+                                            "value": "datafactory_load"
+                                        },
+                                        "process_type": {
+                                            "type": "String",
+                                            "value": {
+                                                "value": "@concat('Data Factory;', pipeline().DataFactory)",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "rewriteTimeMs": {
+                                            "type": "Int64",
+                                            "value": null
+                                        },
+                                        "scanTimeMs": {
+                                            "type": "Int64",
+                                            "value": null
+                                        },
+                                        "start_time": {
+                                            "type": "DateTime",
+                                            "value": {
+                                                "value": "@formatDateTime(activity('Copy data SqlServer To ADLS2').output.executionDetails[0].start,\n'yyyy-MM-dd HH:mm:ss.fff')",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "status": {
+                                            "type": "String",
+                                            "value": {
+                                                "value": "@activity('Copy data SqlServer To ADLS2').output.executionDetails[0].status",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "table_name": {
+                                            "type": "String",
+                                            "value": {
+                                                "value": "@concat(activity('Get Metadata').output.firstRow.source.tblName,'_oth')",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "throughput": {
+                                            "type": "Decimal",
+                                            "value": null
+                                        },
+                                        "update_timestamp": {
+                                            "type": "DateTime",
+                                            "value": {
+                                                "value": "@utcNow('yyyy-MM-dd HH:mm:ss.fff')",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "userName": {
+                                            "type": "String",
+                                            "value": null
+                                        }
+                                    },
+                                    "queryTimeout": "02:00:00",
+                                    "partitionOption": "None"
+                                },
+                                "dataset": {
+                                    "referenceName": "ds_sqlserver_controller_tbl",
+                                    "type": "DatasetReference",
+                                    "parameters": {
+                                        "p_control_tbl": {
+                                            "value": "@activity('Get Metadata').output.firstRow.controller.controlTable",
+                                            "type": "Expression"
+                                        },
+                                        "p_schema": {
+                                            "value": "@activity('Get Metadata').output.firstRow.controller.schema",
+                                            "type": "Expression"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "name": "Set End Ticks",
+                            "type": "SetVariable",
+                            "dependsOn": [
+                                {
+                                    "activity": "Insert hwm",
+                                    "dependencyConditions": [
+                                        "Succeeded"
+                                    ]
+                                }
+                            ],
+                            "userProperties": [],
+                            "typeProperties": {
+                                "variableName": "v_end_ticks",
+                                "value": {
+                                    "value": "@{string(div(ticks(utcNow()),10000))}",
+                                    "type": "Expression"
+                                }
+                            }
+                        },
+                        {
+                            "name": "Insert hwm",
+                            "type": "Lookup",
+                            "dependsOn": [
+                                {
+                                    "activity": "Copy data SqlServer To ADLS2",
+                                    "dependencyConditions": [
+                                        "Succeeded"
+                                    ]
+                                }
+                            ],
+                            "policy": {
+                                "timeout": "7.00:00:00",
+                                "retry": 0,
+                                "retryIntervalInSeconds": 30,
+                                "secureOutput": false,
+                                "secureInput": false
+                            },
+                            "userProperties": [],
+                            "typeProperties": {
+                                "source": {
+                                    "type": "AzureSqlSource",
+                                    "sqlReaderStoredProcedureName": "[controller].[insert_highwatermark]",
+                                    "storedProcedureParameters": {
+                                        "pipeline_id": {
+                                            "type": "String",
+                                            "value": {
+                                                "value": "@pipeline().RunId",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "delta_schema": {
+                                            "type": "String",
+                                            "value": {
+                                                "value": "@activity('Get Metadata').output.firstRow.bronze.container",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "table_name": {
+                                            "type": "String",
+                                            "value": {
+                                                "value": "@concat(activity('Get Metadata').output.firstRow.source.tblName,'_oth')",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "hwm": {
+                                            "type": "String",
+                                            "value": {
+                                                "value": "@variables('v_start_time')",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "adjustment_seconds": {
+                                            "type": "Int32",
+                                            "value": "3600"
+                                        },
+                                        "insert_ts": {
+                                            "type": "String",
+                                            "value": {
+                                                "value": "@utcNow('yyyy-MM-dd HH:mm:ss.fff')",
+                                                "type": "Expression"
+                                            }
+                                        },
+                                        "insert_date": {
+                                            "type": "String",
+                                            "value": {
+                                                "value": "@utcNow('yyyy-MM-dd')",
+                                                "type": "Expression"
+                                            }
+                                        }
+                                    },
+                                    "queryTimeout": "02:00:00",
+                                    "partitionOption": "None"
+                                },
+                                "dataset": {
+                                    "referenceName": "ds_sqlserver_controller_tbl",
+                                    "type": "DatasetReference",
+                                    "parameters": {
+                                        "p_control_tbl": "@activity('Get Metadata').output.firstRow.controller.controlTable",
+                                        "p_schema": "@activity('Get Metadata').output.firstRow.controller.schema"
+                                    }
+                                }
+                            }
+                        }
+                    ],
+                    "ifTrueActivities": [
+                        {
+                            "name": "Debug Copy From SqlServer to ADLS2",
+                            "type": "Copy",
+                            "dependsOn": [
+                                {
+                                    "activity": "Set Select Query Debug",
+                                    "dependencyConditions": [
+                                        "Succeeded"
+                                    ]
+                                }
+                            ],
+                            "policy": {
+                                "timeout": "7.00:00:00",
+                                "retry": 0,
+                                "retryIntervalInSeconds": 30,
+                                "secureOutput": false,
+                                "secureInput": false
+                            },
+                            "userProperties": [],
+                            "typeProperties": {
+                                "source": {
+                                    "type": "AzureSqlSource",
+                                    "sqlReaderQuery": {
+                                        "value": "@variables('v_select_query')",
+                                        "type": "Expression"
+                                    },
+                                    "queryTimeout": "02:00:00",
+                                    "partitionOption": "None"
+                                },
+                                "sink": {
+                                    "type": "ParquetSink",
+                                    "storeSettings": {
+                                        "type": "AzureBlobFSWriteSettings"
+                                    },
+                                    "formatSettings": {
+                                        "type": "ParquetWriteSettings"
+                                    }
+                                },
+                                "enableStaging": false,
+                                "translator": {
+                                    "value": "@activity('Get Metadata').output.firstRow.source.mappings",
+                                    "type": "Expression"
+                                }
+                            },
+                            "inputs": [
+                                {
+                                    "referenceName": "ds_gld_dw_new_tbl_query",
+                                    "type": "DatasetReference"
+                                }
+                            ],
+                            "outputs": [
+                                {
+                                    "referenceName": "ds_adls2_data_parquet_file",
+                                    "type": "DatasetReference",
+                                    "parameters": {
+                                        "p_container": {
+                                            "value": "@activity('Get Metadata').output.firstRow.bronze.container",
+                                            "type": "Expression"
+                                        },
+                                        "p_folder_path": {
+                                            "value": "@concat('debug/', activity('Get Metadata').output.firstRow.bronze.landingPath)",
+                                            "type": "Expression"
+                                        },
+                                        "p_file_name": {
+                                            "value": "@{concat(\nactivity('Get Metadata').output.firstRow.source.schema, '_',\nactivity('Get Metadata').output.firstRow.source.tblName, '_',\nformatDateTime(convertFromUtc(utcnow(), 'Eastern Standard Time' ), 'yyyyMMddHHmmss')\n)}",
+                                            "type": "Expression"
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Set Select Query Debug",
+                            "type": "SetVariable",
+                            "dependsOn": [],
+                            "userProperties": [],
+                            "typeProperties": {
+                                "variableName": "v_select_query",
+                                "value": {
+                                    "value": "@{activity('Get Metadata').output.firstRow.source.selectQuery}  where @{activity('Get Metadata').output.firstRow.source.partColumns}>'@{variables('v_hwm')}'",
+                                    "type": "Expression"
+                                }
+                            }
+                        },
+                        {
+                            "name": "Debug Set Latest High Water Mark_copy",
+                            "type": "SetVariable",
+                            "dependsOn": [
+                                {
+                                    "activity": "Debug Copy From SqlServer to ADLS2",
+                                    "dependencyConditions": [
+                                        "Succeeded"
+                                    ]
+                                }
+                            ],
+                            "userProperties": [],
+                            "typeProperties": {
+                                "variableName": "v_latest_water_mark",
+                                "value": {
+                                    "value": "@{\nformatDateTime(convertFromUtc(pipeline().parameters.p_schedule_time,'Eastern Standard Time'), 'yyyy-MM-dd HH:mm:ss')\n}",
+                                    "type": "Expression"
+                                }
+                            }
+                        },
+                        {
+                            "name": "Debug Insert Latest Hight Watermark",
+                            "type": "Lookup",
+                            "dependsOn": [
+                                {
+                                    "activity": "Debug Set Latest High Water Mark_copy",
+                                    "dependencyConditions": [
+                                        "Succeeded"
+                                    ]
+                                }
+                            ],
+                            "policy": {
+                                "timeout": "7.00:00:00",
+                                "retry": 0,
+                                "retryIntervalInSeconds": 30,
+                                "secureOutput": false,
+                                "secureInput": false
+                            },
+                            "userProperties": [],
+                            "typeProperties": {
+                                "source": {
+                                    "type": "AzureSqlSource",
+                                    "sqlReaderQuery": "insert into debug_controller.delta_control\nSELECT\n    '1234' as pipeline_id\n    , 'bronze' as delta_schema\n    , 'fact_order' as table_name\n    , '2022-01-01 00:01:00' as hwm\n    , 1000 as adjustment_seconds\n    , '2022-01-01 00:01:00' as insert_ts\n    ,'2022-01-01 00:01:00' as insert_date\n;\nselect 'x'",
+                                    "queryTimeout": "02:00:00",
+                                    "partitionOption": "None"
+                                },
+                                "dataset": {
+                                    "referenceName": "ds_sqlserver_controller_tbl",
+                                    "type": "DatasetReference",
+                                    "parameters": {
+                                        "p_control_tbl": "delta_control",
+                                        "p_schema": "debug_controller"
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "Set High Water Mark",
+                "type": "SetVariable",
+                "dependsOn": [
+                    {
+                        "activity": "Get High Watermark",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "variableName": "v_hwm",
+                    "value": {
+                        "value": "@if(or(equals(pipeline().parameters.p_override_high_watermark, ''), equals(pipeline().parameters.p_override_high_watermark, null)),if(or(equals(activity('Get High Watermark').output.firstRow.hwm, ''), equals(activity('Get High Watermark').output.firstRow.hwm, null)), pipeline().globalParameters.gp_low_datetime,activity('Get High Watermark').output.firstRow.hwm),pipeline().parameters.p_override_high_watermark)",
+                        "type": "Expression"
+                    }
+                }
+            },
+            {
+                "name": "Get High Watermark",
+                "type": "Lookup",
+                "dependsOn": [
+                    {
+                        "activity": "Get Metadata",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.00:10:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "AzureSqlSource",
+                        "sqlReaderStoredProcedureName": "[controller].[get_or_set_hwm]",
+                        "storedProcedureParameters": {
+                            "TableName": {
+                                "type": "String",
+                                "value": {
+                                    "value": "@concat(activity('Get Metadata').output.firstRow.source.tblName,'_oth')",
+                                    "type": "Expression"
+                                }
+                            }
+                        },
+                        "queryTimeout": "02:00:00",
+                        "partitionOption": "None"
+                    },
+                    "dataset": {
+                        "referenceName": "ds_sqlserver_controller_tbl",
+                        "type": "DatasetReference",
+                        "parameters": {
+                            "p_control_tbl": {
+                                "value": "@activity('Get Metadata').output.firstRow.controller.schema",
+                                "type": "Expression"
+                            },
+                            "p_schema": {
+                                "value": "@activity('Get Metadata').output.firstRow.controller.controlTable",
+                                "type": "Expression"
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Set Start Ticks",
+                "type": "SetVariable",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "variableName": "v_start_ticks",
+                    "value": {
+                        "value": "@{string(div(ticks(utcNow()),10000))}",
+                        "type": "Expression"
+                    }
+                }
+            },
+            {
+                "name": "Set Start Time",
+                "type": "SetVariable",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "variableName": "v_start_time",
+                    "value": {
+                        "value": "@utcNow('yyyy-MM-dd HH:mm:ss.fff')",
+                        "type": "Expression"
+                    }
+                }
+            }
+        ],
+        "parameters": {
+            "p_schedule_time": {
+                "type": "string",
+                "defaultValue": "2021-12-01T12:00:00Z"
+            },
+            "p_metadata_folder_path": {
+                "type": "string",
+                "defaultValue": "gld360/pipeline/pl_dim_customer/"
+            },
+            "p_metadata_file_name": {
+                "type": "string",
+                "defaultValue": "dim_customer.json"
+            },
+            "p_debug": {
+                "type": "bool",
+                "defaultValue": true
+            },
+            "p_metadata_container": {
+                "type": "string",
+                "defaultValue": "metadata"
+            },
+            "p_override_high_watermark": {
+                "type": "string"
+            }
+        },
+        "variables": {
+            "v_hwm": {
+                "type": "String"
+            },
+            "v_select_query": {
+                "type": "String"
+            },
+            "v_latest_water_mark": {
+                "type": "String"
+            },
+            "v_start_ticks": {
+                "type": "String"
+            },
+            "v_end_ticks": {
+                "type": "String"
+            },
+            "v_start_time": {
+                "type": "String"
+            }
+        },
+        "folder": {
+            "name": "Execute_oth"
+        },
+        "annotations": [
+            "pipeline",
+            "Sqlserver",
+            "adls2"
+        ],
+        "lastPublishTime": "2022-03-16T09:59:44Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,20 @@
+{
+    "name": "ds_gld_dw_new_tbl_query",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "ls_sqlserver_gld_dw_new",
+            "type": "LinkedServiceReference"
+        },
+        "folder": {
+            "name": "Source"
+        },
+        "annotations": [],
+        "type": "AzureSqlTable",
+        "schema": [],
+        "typeProperties": {
+            "schema": "dbo",
+            "table": "DIM_CUSTOMER"
+        }
+    },
+    "type": "Microsoft.DataFactory/factories/datasets"
+}

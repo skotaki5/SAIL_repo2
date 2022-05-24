@@ -1,0 +1,118 @@
+{
+	"source": {
+        "sourcetype": "rdms",
+        "database": "gld_dw_new",
+		"schema": "master_data",
+		"tblName": "local_courier_service",
+		"partColumns": "etl_update_date",
+		"starttms": "20211001120000",
+		"selectQuery": "SELECT [ID],[SOURCE_SYSTEM_KEY],[SERVICE_NAME],[CARRIERNAME],[SERVICELEVELNAME] FROM [master_data].[local_courier_service] (nolock)",
+		"mappings": [
+                     {
+                         "source": {
+                             "name": "ID",
+                             "type": "Int32",
+                             "physicalType": "int"
+                         },
+                         "sink": {
+                             "name": "ID",
+                             "type": "Int32",
+                             "physicalType": "INT_32"
+                         }
+                     },
+                     {
+                         "source": {
+                             "name": "SOURCE_SYSTEM_KEY",
+                             "type": "Int32",
+                             "physicalType": "int"
+                         },
+                         "sink": {
+                             "name": "SOURCE_SYSTEM_KEY",
+                             "type": "Int32",
+                             "physicalType": "INT_32"
+                         }
+                     },
+                     {
+                         "source": {
+                             "name": "SERVICE_NAME",
+                             "type": "String",
+                             "physicalType": "varchar"
+                         },
+                         "sink": {
+                             "name": "SERVICE_NAME",
+                             "type": "String",
+                             "physicalType": "UTF8"
+                         }
+                     },
+                     {
+                         "source": {
+                             "name": "CARRIERNAME",
+                             "type": "String",
+                             "physicalType": "varchar"
+                         },
+                         "sink": {
+                             "name": "CARRIERNAME",
+                             "type": "String",
+                             "physicalType": "UTF8"
+                         }
+                     },
+                     {
+                         "source": {
+                             "name": "SERVICELEVELNAME",
+                             "type": "String",
+                             "physicalType": "varchar"
+                         },
+                         "sink": {
+                             "name": "SERVICELEVELNAME",
+                             "type": "String",
+                             "physicalType": "UTF8"
+                         }
+                     }
+                ]
+	},
+	"bronze": {
+		"processname": "local_courier_service_src_to_bronze",
+		"container": "bronze",
+		"system": "gld360",
+		"landingPath": "gld360/inbound/landing/local_courier_service",
+		"processedPath": "gld360/inbound/processed/local_courier_service",
+		"rejectedPath": "gld360/inbound/rejected/local_courier_service",
+    	"partitioncolumn": "etl_update_date"
+	},
+	"silver": {
+		"processname": "local_courier_service_brownze_to_silver",
+        "container": "silver",
+		"notebookpath": "/symphony-summary-layer/silver_zone/gld360-browze-to-silver",
+		"path": "gld360/inbound/local_courier_service",
+        "errorpath": "gld360/error_files/local_courier_service"
+	},
+	"gold": {
+        "processname": "local_courier_service_silver_to_gold",
+        "notebookpath": "/symphony-summary-layer/gold_zone/gld360-silver-to-gold",
+		"path": "gld360/inbound/local_courier_service",
+		"errorpath": "gld360/error_files/local_courier_service"
+	},
+	"controller": {
+		"schema": "dbo",
+		"controlTable": "delta_control"
+	},
+	"email": {
+		"emailto" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtofail" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtosuccess" : ["gd000012732@ups.com","gd000012733@ups.com","gd000011505@ups.com"]
+	},
+	"log": {
+		"logtable":"logs.ups_application_audit_logs"
+	},
+	"processing": {
+		"logpath": "dbfs:/mnt/logs/ups/gld360",
+		"clusterversion": "7.2.x-scala2.12",
+		"nodetype": "standard_ds3_v2",
+		"workercount": "2"
+	},
+	"archive": {
+		"enabled": true,
+        "container": "data-layer",
+		"path": "bronze/gld360/archive/table_name/partition_column"
+	}
+}

@@ -1,0 +1,58 @@
+{
+    "name": "pl-cosmos-delete-main",
+    "properties": {
+        "activities": [
+            {
+                "name": "Execute Databricks Job",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "pl-transformation-db-job",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "adb_job_id": {
+                            "value": "@json(string(pipeline().globalParameters.gp_adb_job_id)).sail_cosmos_delete_id",
+                            "type": "Expression"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Send ADB Failure Mail",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Execute Databricks Job",
+                        "dependencyConditions": [
+                            "Failed"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Pl-Email-Alter",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_body": {
+                            "value": "{\n    \"title\": \"@{pipeline().globalParameters.gp_env_type}: @{pipeline().globalParameters.gp_adb_tag} PIPELINE RUN\",\n    \"message\":\"@{activity('Execute Databricks Job').error.message}\",\n    \"color\": \"red\",\n    \"dataFactoryName\":\"@{pipeline().DataFactory}\",\n    \"pipelineName\": \"@{pipeline().Pipeline}\",\n    \"pipelineRunId\": \"@{pipeline().RunId}\",\n    \"time\": \"@{utcNow('yyyy-MM-dd hh:mm:ss')}\"\n}",
+                            "type": "Expression"
+                        }
+                    }
+                }
+            }
+        ],
+        "folder": {
+            "name": "Main Pipelines"
+        },
+        "annotations": [],
+        "lastPublishTime": "2022-03-01T14:53:33Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

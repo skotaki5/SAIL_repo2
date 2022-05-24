@@ -1,0 +1,613 @@
+{
+	"source": {
+        "sourcetype": "rdms",
+        "database": "gld_dw_new",
+		"schema": "dbo",
+		"tblName": "dim_item",
+		"partColumns": "etl_update_date",
+		"starttms": "20211001120000",
+		"selectQuery": "select [ITEM_KEY],[SOURCE_SYSTEM_KEY],[ITEM_ID],[PART_NUMBER],[PART_DESCRIPTION],[CUSTOMER_ACCOUNT_NUMBER],[PRIMARY_CUSTOMER_ACCOUNT_NUMBER],[ITEM_DIMENSIONS],[ITEM_DIMENSIONS_UOM],[ITEM_LENGTH],[ITEM_WIDTH],[ITEM_HEIGHT],[ITEM_WEIGHT],[ITEM_WEIGHT_UOM],[ITEM_PRICE],[ITEM_PRICE_UOM],[HAZMAT_CODE],[HAZMAT_FLAG],[SERIAL_OR_LOT],[HARMONIZED_TARIFF_SCHEDULE_NUMBER],[UN_NUMBER],[ITEM_SDUK],[ACTIVE_FLAG],[STD_SKU_FLAG],[STD_CASE_FLAG],[CASE_HEIGHT],[CASE_WIDTH],[CASE_DEPTH],[CASE_WEIGHT],[STD_PALLET_FLAG],[PALLET_HEIGHT],[PALLET_DEPTH],[PALLET_WIDTH],[PALLET_WEIGHT],[UNIT_PER_CASE],[ETL_INSERT_DATE],[ETL_UPDATE_DATE],[ETL_BATCH_NUMBER],[ETL_OPS_DATE],[SKU_GRP11],[SKU_GRP1],[HAZMAT_CLASS],[STRATEGICGOODS_FLAG]FROM [dbo].[DIM_ITEM] (nolock)",
+		"mappings": [
+                    {
+                        "source": {
+                            "name": "ITEM_KEY",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 0,
+                            "precision": 18
+                        },
+                        "sink": {
+                            "name": "ITEM_KEY",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "SOURCE_SYSTEM_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "SOURCE_SYSTEM_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ITEM_ID",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "ITEM_ID",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "PART_NUMBER",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "PART_NUMBER",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "PART_DESCRIPTION",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "PART_DESCRIPTION",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CUSTOMER_ACCOUNT_NUMBER",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "CUSTOMER_ACCOUNT_NUMBER",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "PRIMARY_CUSTOMER_ACCOUNT_NUMBER",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "PRIMARY_CUSTOMER_ACCOUNT_NUMBER",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ITEM_DIMENSIONS",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "ITEM_DIMENSIONS",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ITEM_DIMENSIONS_UOM",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "ITEM_DIMENSIONS_UOM",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ITEM_LENGTH",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 4,
+                            "precision": 22
+                        },
+                        "sink": {
+                            "name": "ITEM_LENGTH",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ITEM_WIDTH",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 4,
+                            "precision": 22
+                        },
+                        "sink": {
+                            "name": "ITEM_WIDTH",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ITEM_HEIGHT",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 4,
+                            "precision": 22
+                        },
+                        "sink": {
+                            "name": "ITEM_HEIGHT",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ITEM_WEIGHT",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 4,
+                            "precision": 22
+                        },
+                        "sink": {
+                            "name": "ITEM_WEIGHT",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ITEM_WEIGHT_UOM",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "ITEM_WEIGHT_UOM",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ITEM_PRICE",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 4,
+                            "precision": 22
+                        },
+                        "sink": {
+                            "name": "ITEM_PRICE",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ITEM_PRICE_UOM",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "ITEM_PRICE_UOM",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "HAZMAT_CODE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "HAZMAT_CODE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "HAZMAT_FLAG",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "HAZMAT_FLAG",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "SERIAL_OR_LOT",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "SERIAL_OR_LOT",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "HARMONIZED_TARIFF_SCHEDULE_NUMBER",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "HARMONIZED_TARIFF_SCHEDULE_NUMBER",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "UN_NUMBER",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "UN_NUMBER",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ITEM_SDUK",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "ITEM_SDUK",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ACTIVE_FLAG",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "ACTIVE_FLAG",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "STD_SKU_FLAG",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "STD_SKU_FLAG",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "STD_CASE_FLAG",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "STD_CASE_FLAG",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CASE_HEIGHT",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 4,
+                            "precision": 22
+                        },
+                        "sink": {
+                            "name": "CASE_HEIGHT",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CASE_WIDTH",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 4,
+                            "precision": 22
+                        },
+                        "sink": {
+                            "name": "CASE_WIDTH",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CASE_DEPTH",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 4,
+                            "precision": 22
+                        },
+                        "sink": {
+                            "name": "CASE_DEPTH",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CASE_WEIGHT",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 4,
+                            "precision": 22
+                        },
+                        "sink": {
+                            "name": "CASE_WEIGHT",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "STD_PALLET_FLAG",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "STD_PALLET_FLAG",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "PALLET_HEIGHT",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 4,
+                            "precision": 22
+                        },
+                        "sink": {
+                            "name": "PALLET_HEIGHT",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "PALLET_DEPTH",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 4,
+                            "precision": 22
+                        },
+                        "sink": {
+                            "name": "PALLET_DEPTH",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "PALLET_WIDTH",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 4,
+                            "precision": 22
+                        },
+                        "sink": {
+                            "name": "PALLET_WIDTH",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "PALLET_WEIGHT",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 4,
+                            "precision": 22
+                        },
+                        "sink": {
+                            "name": "PALLET_WEIGHT",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "UNIT_PER_CASE",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 0,
+                            "precision": 22
+                        },
+                        "sink": {
+                            "name": "UNIT_PER_CASE",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ETL_INSERT_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "ETL_INSERT_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ETL_UPDATE_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "ETL_UPDATE_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ETL_BATCH_NUMBER",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 0,
+                            "precision": 18
+                        },
+                        "sink": {
+                            "name": "ETL_BATCH_NUMBER",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ETL_OPS_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "ETL_OPS_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "SKU_GRP11",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "SKU_GRP11",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "SKU_GRP1",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "SKU_GRP1",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "HAZMAT_CLASS",
+                            "type": "String",
+                            "physicalType": "nvarchar"
+                        },
+                        "sink": {
+                            "name": "HAZMAT_CLASS",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "STRATEGICGOODS_FLAG",
+                            "type": "String",
+                            "physicalType": "nvarchar"
+                        },
+                        "sink": {
+                            "name": "STRATEGICGOODS_FLAG",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    }
+                ]
+	},
+	"bronze": {
+		"processname": "dim_item_src_to_bronze",
+		"container": "bronze",
+		"system": "gld360",
+		"landingPath": "gld360/inbound/landing/dim_item",
+		"processedPath": "gld360/inbound/processed/dim_item",
+		"rejectedPath": "gld360/inbound/rejected/dim_item",
+    	"partitioncolumns": "etl_update_date"
+	},
+	"silver": {
+		"processname": "dim_item_brownze_to_silver",
+        "container": "silver",
+		"notebookpath": "/sail/silver/",
+		"path": "gld360/inbound/dim_item",
+        "errorpath": "gld360/error_files/dim_item",
+		"joinColumns": [
+		    "[ITEM_KEY]",
+			"[SOURCE_SYSTEM_KEY]",
+			"[ITEM_SDUK]"
+		],
+	    "partitioncolumns":"etl_update_date"
+	},
+	"gold": {
+        "processname": "dim_item_silver_to_gold",
+		"container": "gold",
+        "notebookpath": "/symphony-summary-layer/gold_zone/gld360-silver-to-gold",
+		"path": "gld360/inbound/dim_item",
+		"errorpath": "gld360/error_files/dim_item"
+	},
+	"controller": {
+		"schema": "controller",
+		"controlTable": "delta_control"
+	},
+	"email": {
+		"emailto" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtofail" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtosuccess" : ["gd000012732@ups.com","gd000012733@ups.com","gd000011505@ups.com"]
+	},
+	"log": {
+		"logtable":"logs.ups_application_audit_logs"
+	},
+	"processing": {
+		"logpath": "dbfs:/mnt/logs/ups/gld360",
+		"clusterversion": "7.2.x-scala2.12",
+		"nodetype": "standard_ds3_v2",
+		"workercount": "2"
+	},
+	"archive": {
+		"enabled": true,
+        "container": "bronze",
+		"path": "gld360/archive/dim_item"
+	}
+}

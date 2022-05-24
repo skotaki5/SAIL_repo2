@@ -1,0 +1,55 @@
+{
+    "name": "pl-ingestion-fact-inbound-line_oth",
+    "properties": {
+        "activities": [
+            {
+                "name": "Ingestion Fact Inbound Line",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Pl-Ingestion-From-SQLServer-ADLS2_oth",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_metadata_folder_path": "gld360/pipeline_oth/pl_fact_inbound_line/",
+                        "p_metadata_file_name": "fact_inbound_line.json",
+                        "p_debug": {
+                            "value": "@pipeline().parameters.p_debug",
+                            "type": "Expression"
+                        },
+                        "p_metadata_container": "metadata",
+                        "p_override_high_watermark": {
+                            "value": "@pipeline().parameters.p_override_high_watermark\n",
+                            "type": "Expression"
+                        }
+                    }
+                }
+            }
+        ],
+        "concurrency": 2,
+        "parameters": {
+            "p_debug": {
+                "type": "bool"
+            },
+            "p_schedule_time": {
+                "type": "string"
+            },
+            "p_override_high_watermark": {
+                "type": "string"
+            }
+        },
+        "folder": {
+            "name": "Execute_oth"
+        },
+        "annotations": [],
+        "lastPublishTime": "2022-03-16T10:28:00Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

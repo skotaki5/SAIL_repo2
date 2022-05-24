@@ -1,0 +1,255 @@
+{
+	"source": {
+        "sourcetype": "rdms",
+        "database": "gld_dw_new",
+		"schema": "dbo",
+		"tblName": "dim_warehouse",
+		"tblName_hwm": "dim_warehouse_oth",
+		"partColumns": "etl_update_date",
+		"starttms": "20211001120000",
+		"selectQuery": "SELECT [WAREHOUSE_KEY],[SOURCE_SYSTEM_KEY],[WAREHOUSE_CODE],[BUILDING_CODE],[ADDRESS_LINE_1],[ADDRESS_LINE_2],[CITY],[PROVINCE],[POSTAL_CODE],[COUNTRY],[WAREHOUSE_TIME_ZONE],[WAREHOUSE_SDUK],[GLD_WAREHOUSE_MAPPED_KEY],[ETL_INSERT_DATE],[ETL_UPDATE_DATE],[ETL_BATCH_NUMBER] FROM [dbo].[DIM_WAREHOUSE] (nolock) ",
+		"mappings": [
+                      {
+                          "source": {
+                              "name": "WAREHOUSE_KEY",
+                              "type": "Decimal",
+                              "physicalType": "decimal",
+                              "scale": 0,
+                              "precision": 18
+                          },
+                          "sink": {
+                              "name": "WAREHOUSE_KEY",
+                              "type": "Decimal",
+                              "physicalType": "DECIMAL"
+                          }
+                      },
+                      {
+                          "source": {
+                              "name": "SOURCE_SYSTEM_KEY",
+                              "type": "Int32",
+                              "physicalType": "int"
+                          },
+                          "sink": {
+                              "name": "SOURCE_SYSTEM_KEY",
+                              "type": "Int32",
+                              "physicalType": "INT_32"
+                          }
+                      },
+                      {
+                          "source": {
+                              "name": "WAREHOUSE_CODE",
+                              "type": "String",
+                              "physicalType": "varchar"
+                          },
+                          "sink": {
+                              "name": "WAREHOUSE_CODE",
+                              "type": "String",
+                              "physicalType": "UTF8"
+                          }
+                      },
+                      {
+                          "source": {
+                              "name": "BUILDING_CODE",
+                              "type": "String",
+                              "physicalType": "varchar"
+                          },
+                          "sink": {
+                              "name": "BUILDING_CODE",
+                              "type": "String",
+                              "physicalType": "UTF8"
+                          }
+                      },
+                      {
+                          "source": {
+                              "name": "ADDRESS_LINE_1",
+                              "type": "String",
+                              "physicalType": "nvarchar"
+                          },
+                          "sink": {
+                              "name": "ADDRESS_LINE_1",
+                              "type": "String",
+                              "physicalType": "UTF8"
+                          }
+                      },
+                      {
+                          "source": {
+                              "name": "ADDRESS_LINE_2",
+                              "type": "String",
+                              "physicalType": "nvarchar"
+                          },
+                          "sink": {
+                              "name": "ADDRESS_LINE_2",
+                              "type": "String",
+                              "physicalType": "UTF8"
+                          }
+                      },
+                      {
+                          "source": {
+                              "name": "CITY",
+                              "type": "String",
+                              "physicalType": "nvarchar"
+                          },
+                          "sink": {
+                              "name": "CITY",
+                              "type": "String",
+                              "physicalType": "UTF8"
+                          }
+                      },
+                      {
+                          "source": {
+                              "name": "PROVINCE",
+                              "type": "String",
+                              "physicalType": "nvarchar"
+                          },
+                          "sink": {
+                              "name": "PROVINCE",
+                              "type": "String",
+                              "physicalType": "UTF8"
+                          }
+                      },
+                      {
+                          "source": {
+                              "name": "POSTAL_CODE",
+                              "type": "String",
+                              "physicalType": "nvarchar"
+                          },
+                          "sink": {
+                              "name": "POSTAL_CODE",
+                              "type": "String",
+                              "physicalType": "UTF8"
+                          }
+                      },
+                      {
+                          "source": {
+                              "name": "COUNTRY",
+                              "type": "String",
+                              "physicalType": "nvarchar"
+                          },
+                          "sink": {
+                              "name": "COUNTRY",
+                              "type": "String",
+                              "physicalType": "UTF8"
+                          }
+                      },
+                      {
+                          "source": {
+                              "name": "WAREHOUSE_TIME_ZONE",
+                              "type": "String",
+                              "physicalType": "varchar"
+                          },
+                          "sink": {
+                              "name": "WAREHOUSE_TIME_ZONE",
+                              "type": "String",
+                              "physicalType": "UTF8"
+                          }
+                      },
+                      {
+                          "source": {
+                              "name": "WAREHOUSE_SDUK",
+                              "type": "String",
+                              "physicalType": "varchar"
+                          },
+                          "sink": {
+                              "name": "WAREHOUSE_SDUK",
+                              "type": "String",
+                              "physicalType": "UTF8"
+                          }
+                      },
+                      {
+                          "source": {
+                              "name": "GLD_WAREHOUSE_MAPPED_KEY",
+                              "type": "String",
+                              "physicalType": "varchar"
+                          },
+                          "sink": {
+                              "name": "GLD_WAREHOUSE_MAPPED_KEY",
+                              "type": "String",
+                              "physicalType": "UTF8"
+                          }
+                      },
+                      {
+                          "source": {
+                              "name": "ETL_INSERT_DATE",
+                              "type": "DateTime",
+                              "physicalType": "datetime"
+                          },
+                          "sink": {
+                              "name": "ETL_INSERT_DATE",
+                              "type": "DateTime",
+                              "physicalType": "INT_96"
+                          }
+                      },
+                      {
+                          "source": {
+                              "name": "ETL_UPDATE_DATE",
+                              "type": "DateTime",
+                              "physicalType": "datetime"
+                          },
+                          "sink": {
+                              "name": "ETL_UPDATE_DATE",
+                              "type": "DateTime",
+                              "physicalType": "INT_96"
+                          }
+                      },
+                      {
+                          "source": {
+                              "name": "ETL_BATCH_NUMBER",
+                              "type": "Decimal",
+                              "physicalType": "decimal",
+                              "scale": 0,
+                              "precision": 18
+                          },
+                          "sink": {
+                              "name": "ETL_BATCH_NUMBER",
+                              "type": "Decimal",
+                              "physicalType": "DECIMAL"
+                          }
+                      }
+                ]
+	},
+	"bronze": {
+		"processname": "dim_warehouse_src_to_bronze",
+		"container": "bronze",
+		"system": "gld360",
+		"landingPath": "gld360/inbound/landing_oth/dim_warehouse",
+		"processedPath": "gld360/inbound/processed/dim_warehouse",
+		"rejectedPath": "gld360/inbound/rejected/dim_warehouse",
+    	"partitioncolumns": "etl_update_date"
+	},
+	"silver": {
+		"processname": "dim_warehouse_brownze_to_silver",
+        "container": "silver",
+		"notebookpath": "/symphony-summary-layer/silver_zone/gld360-browze-to-silver",
+		"path": "/SAIL/silver/",
+        "errorpath": "gld360/error_files/dim_warehouse"
+	},
+	"gold": {
+        "processname": "dim_warehouse_silver_to_gold",
+        "notebookpath": "/symphony-summary-layer/gold_zone/gld360-silver-to-gold",
+		"path": "gld360/inbound/dim_warehouse",
+		"errorpath": "gld360/error_files/dim_warehouse"
+	},
+	"controller": {
+		"schema": "controller",
+		"controlTable": "delta_control"
+	},
+	"email": {
+		"emailto" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtofail" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtosuccess" : ["gd000012732@ups.com","gd000012733@ups.com","gd000011505@ups.com"]
+	},
+	"log": {
+		"logtable":"logs.ups_application_audit_logs"
+	},
+	"processing": {
+		"logpath": "dbfs:/mnt/logs/ups/gld360",
+		"clusterversion": "7.2.x-scala2.12",
+		"nodetype": "standard_ds3_v2",
+		"workercount": "2"
+	},
+	"archive": {
+		"enabled": true,
+        "container": "bronze",
+		"path": "gld360/archive/dim_warehouse"
+	}
+}

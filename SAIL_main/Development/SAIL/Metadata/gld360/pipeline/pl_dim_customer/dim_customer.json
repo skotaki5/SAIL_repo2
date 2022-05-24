@@ -1,0 +1,370 @@
+{
+	"source": {
+        "sourcetype": "rdms",
+        "database": "gld_dw_new",
+		"schema": "dbo",
+		"tblName": "dim_customer",
+		"partColumns": "etl_update_date",
+		"starttms": "20211001120000",
+		"selectQuery":
+	        "SELECT [SOURCE_SYSTEM_KEY],[INT_CUSTOMER_ACCOUNT_NUMBER],[INT_CUSTOMER_NUMBER],[DIVISION],[EXT_CUSTOMER_ACCOUNT_NUMBER],[CUSTOMER_ACCOUNT_NAME],[CUSTOMER_NAME],[ACCOUNT_TYPE],[ADDRESS_LINE_1],[ADDRESS_LINE_2],[CITY],[PROVINCE],[POSTAL_CODE],[COUNTRY],[CUSTOMER_ACCOUNT_SDUK],[GLD_ACCOUNT_MAPPED_KEY],[ENABLE_CARRIER_UPDATE_FLAG],[ETL_INSERT_DATE],[ETL_UPDATE_DATE],[ETL_BATCH_NUMBER],[CUSTOMERKEY],[DP_SERVICELINE_KEY],[DP_ORGENTITY_KEY],[MAPPED_WAREHOUSE_CODE],[CARRIER_HUB_FLAG] FROM [dbo].[DIM_CUSTOMER] (nolock)",
+	    "mappings": [
+                 {
+                     "source": {
+                         "name": "SOURCE_SYSTEM_KEY",
+                         "type": "Int32",
+                         "physicalType": "int"
+                     },
+                     "sink": {
+                         "name": "SOURCE_SYSTEM_KEY",
+                         "type": "Int32",
+                         "physicalType": "INT_32"
+                     }
+                 },
+                 {
+                     "source": {
+                         "name": "INT_CUSTOMER_ACCOUNT_NUMBER",
+                         "type": "String",
+                         "physicalType": "varchar"
+                     },
+                     "sink": {
+                         "name": "INT_CUSTOMER_ACCOUNT_NUMBER",
+                         "type": "String",
+                         "physicalType": "UTF8"
+                     }
+                 },
+                 {
+                     "source": {
+                         "name": "INT_CUSTOMER_NUMBER",
+                         "type": "String",
+                         "physicalType": "varchar"
+                     },
+                     "sink": {
+                         "name": "INT_CUSTOMER_NUMBER",
+                         "type": "String",
+                         "physicalType": "UTF8"
+                     }
+                 },
+                 {
+                     "source": {
+                         "name": "DIVISION",
+                         "type": "String",
+                         "physicalType": "varchar"
+                     },
+                     "sink": {
+                         "name": "DIVISION",
+                         "type": "String",
+                         "physicalType": "UTF8"
+                     }
+                 },
+                 {
+                     "source": {
+                         "name": "EXT_CUSTOMER_ACCOUNT_NUMBER",
+                         "type": "String",
+                         "physicalType": "nvarchar"
+                     },
+                     "sink": {
+                         "name": "EXT_CUSTOMER_ACCOUNT_NUMBER",
+                         "type": "String",
+                         "physicalType": "UTF8"
+                     }
+                 },
+                 {
+                     "source": {
+                         "name": "CUSTOMER_ACCOUNT_NAME",
+                         "type": "String",
+                         "physicalType": "nvarchar"
+                     },
+                     "sink": {
+                         "name": "CUSTOMER_ACCOUNT_NAME",
+                         "type": "String",
+                         "physicalType": "UTF8"
+                     }
+                 },
+                 {
+                     "source": {
+                         "name": "CUSTOMER_NAME",
+                         "type": "String",
+                         "physicalType": "nvarchar"
+                     },
+                     "sink": {
+                         "name": "CUSTOMER_NAME",
+                         "type": "String",
+                         "physicalType": "UTF8"
+                     }
+                 },
+                 {
+                     "source": {
+                         "name": "ACCOUNT_TYPE",
+                         "type": "String",
+                         "physicalType": "varchar"
+                     },
+                     "sink": {
+                         "name": "ACCOUNT_TYPE",
+                         "type": "String",
+                         "physicalType": "UTF8"
+                     }
+                 },
+                 {
+                     "source": {
+                         "name": "ADDRESS_LINE_1",
+                         "type": "String",
+                         "physicalType": "nvarchar"
+                     },
+                     "sink": {
+                         "name": "ADDRESS_LINE_1",
+                         "type": "String",
+                         "physicalType": "UTF8"
+                     }
+                 },
+                 {
+                     "source": {
+                         "name": "ADDRESS_LINE_2",
+                         "type": "String",
+                         "physicalType": "nvarchar"
+                     },
+                     "sink": {
+                         "name": "ADDRESS_LINE_2",
+                         "type": "String",
+                         "physicalType": "UTF8"
+                     }
+                 },
+                 {
+                     "source": {
+                         "name": "CITY",
+                         "type": "String",
+                         "physicalType": "nvarchar"
+                     },
+                     "sink": {
+                         "name": "CITY",
+                         "type": "String",
+                         "physicalType": "UTF8"
+                     }
+                 },
+                 {
+                     "source": {
+                         "name": "PROVINCE",
+                         "type": "String",
+                         "physicalType": "nvarchar"
+                     },
+                     "sink": {
+                         "name": "PROVINCE",
+                         "type": "String",
+                         "physicalType": "UTF8"
+                     }
+                 },
+                 {
+                     "source": {
+                         "name": "POSTAL_CODE",
+                         "type": "String",
+                         "physicalType": "nvarchar"
+                     },
+                     "sink": {
+                         "name": "POSTAL_CODE",
+                         "type": "String",
+                         "physicalType": "UTF8"
+                     }
+                 },
+                 {
+                     "source": {
+                         "name": "COUNTRY",
+                         "type": "String",
+                         "physicalType": "nvarchar"
+                     },
+                     "sink": {
+                         "name": "COUNTRY",
+                         "type": "String",
+                         "physicalType": "UTF8"
+                     }
+                 },
+                 {
+                     "source": {
+                         "name": "CUSTOMER_ACCOUNT_SDUK",
+                         "type": "String",
+                         "physicalType": "varchar"
+                     },
+                     "sink": {
+                         "name": "CUSTOMER_ACCOUNT_SDUK",
+                         "type": "String",
+                         "physicalType": "UTF8"
+                     }
+                 },
+                 {
+                     "source": {
+                         "name": "GLD_ACCOUNT_MAPPED_KEY",
+                         "type": "String",
+                         "physicalType": "varchar"
+                     },
+                     "sink": {
+                         "name": "GLD_ACCOUNT_MAPPED_KEY",
+                         "type": "String",
+                         "physicalType": "UTF8"
+                     }
+                 },
+                 {
+                     "source": {
+                         "name": "ENABLE_CARRIER_UPDATE_FLAG",
+                         "type": "Int32",
+                         "physicalType": "int"
+                     },
+                     "sink": {
+                         "name": "ENABLE_CARRIER_UPDATE_FLAG",
+                         "type": "Int32",
+                         "physicalType": "INT_32"
+                     }
+                 },
+                 {
+                     "source": {
+                         "name": "ETL_INSERT_DATE",
+                         "type": "DateTime",
+                         "physicalType": "datetime"
+                     },
+                     "sink": {
+                         "name": "ETL_INSERT_DATE",
+                         "type": "DateTime",
+                         "physicalType": "INT_96"
+                     }
+                 },
+                 {
+                     "source": {
+                         "name": "ETL_UPDATE_DATE",
+                         "type": "DateTime",
+                         "physicalType": "datetime"
+                     },
+                     "sink": {
+                         "name": "ETL_UPDATE_DATE",
+                         "type": "DateTime",
+                         "physicalType": "INT_96"
+                     }
+                 },
+                 {
+                     "source": {
+                         "name": "ETL_BATCH_NUMBER",
+                         "type": "Decimal",
+                         "physicalType": "decimal",
+                         "scale": 0,
+                         "precision": 18
+                     },
+                     "sink": {
+                         "name": "ETL_BATCH_NUMBER",
+                         "type": "Decimal",
+                         "physicalType": "DECIMAL"
+                     }
+                 },
+                 {
+                     "source": {
+                         "name": "CUSTOMERKEY",
+                         "type": "Decimal",
+                         "physicalType": "decimal",
+                         "scale": 0,
+                         "precision": 18
+                     },
+                     "sink": {
+                         "name": "CUSTOMERKEY",
+                         "type": "Decimal",
+                         "physicalType": "DECIMAL"
+                     }
+                 },
+                 {
+                     "source": {
+                         "name": "DP_SERVICELINE_KEY",
+                         "type": "String",
+                         "physicalType": "varchar"
+                     },
+                     "sink": {
+                         "name": "DP_SERVICELINE_KEY",
+                         "type": "String",
+                         "physicalType": "UTF8"
+                     }
+                 },
+                 {
+                     "source": {
+                         "name": "DP_ORGENTITY_KEY",
+                         "type": "String",
+                         "physicalType": "varchar"
+                     },
+                     "sink": {
+                         "name": "DP_ORGENTITY_KEY",
+                         "type": "String",
+                         "physicalType": "UTF8"
+                     }
+                 },
+                 {
+                     "source": {
+                         "name": "MAPPED_WAREHOUSE_CODE",
+                         "type": "String",
+                         "physicalType": "varchar"
+                     },
+                     "sink": {
+                         "name": "MAPPED_WAREHOUSE_CODE",
+                         "type": "String",
+                         "physicalType": "UTF8"
+                     }
+                 },
+                 {
+                     "source": {
+                         "name": "CARRIER_HUB_FLAG",
+                         "type": "String",
+                         "physicalType": "varchar"
+                     },
+                     "sink": {
+                         "name": "CARRIER_HUB_FLAG",
+                         "type": "String",
+                         "physicalType": "UTF8"
+                     }
+                 }
+        ]
+	},
+	"bronze": {
+		"processname": "dim_customer_src_to_bronze",
+		"container": "bronze",
+		"system": "gld360",
+		"landingPath": "gld360/inbound/landing/dim_customer",
+		"processedPath": "gld360/inbound/processed/dim_customer",
+		"rejectedPath": "gld360/inbound/rejected/dim_customer",
+    	"partitioncolumns": "etl_update_date"
+	},
+	"silver": {
+		"processname": "dim_customer_brownze_to_silver",
+        "container": "silver",
+		"notebookpath": "/sail/silver/",
+		"path": "gld360/inbound/dim_customer",
+        "errorpath": "gld360/error_files/dim_customer",
+		"joinColumns": [
+				"SOURCE_SYSTEM_KEY",
+				"CUSTOMER_ACCOUNT_SDUK",
+				"CUSTOMERKEY"
+		],
+		"partitioncolumns": "etl_update_date"
+	},
+	"gold": {
+        "processname": "dim_customer_silver_to_gold",
+		"container": "gold",
+        "notebookpath": "/symphony-summary-layer/gold_zone/gld360-silver-to-gold",
+		"path": "gld360/inbound/dim_customer",
+		"errorpath": "gld360/error_files/dim_customer"
+	},
+	"controller": {
+		"schema": "controller",
+		"controlTable": "delta_control"
+	},
+	"email": {
+		"emailto" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtofail" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtosuccess" : ["gd000012732@ups.com","gd000012733@ups.com","gd000011505@ups.com"]
+	},
+	"log": {
+		"logtable":"logs.ups_application_audit_logs"
+	},
+	"processing": {
+		"logpath": "dbfs:/mnt/logs/ups/gld360",
+		"clusterversion": "7.2.x-scala2.12",
+		"nodetype": "standard_ds3_v2",
+		"workercount": "2"
+	},
+	"archive": {
+		"enabled": true,
+        "container": "bronze",
+		"path": "gld360/archive/dim_customer"
+	}
+}

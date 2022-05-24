@@ -1,0 +1,178 @@
+{
+	"source": {
+        "sourcetype": "rdms",
+        "database": "gld_dw_new",
+		"schema": "master_data",
+		"tblName": "map_transactiontype_milestone",
+		"tblName_hwm": "map_transactiontype_milestone_oth",
+		"starttms": "20211001120000",
+		"selectQuery": "SELECT [TransactionTypeId],[TransactionTypeName],[MilestoneId],[MilestoneName],[MilestoneOrder],[Is_Managed],[Is_Inbound],[Is_International],[SOURCE_SYSTEM_KEY],[IS_FTZ] FROM [master_data].[Map_TransactionType_Milestone] (nolock) ",
+		"mappings": [
+                     {
+                         "source": {
+                             "name": "TransactionTypeId",
+                             "type": "Int32",
+                             "physicalType": "int"
+                         },
+                         "sink": {
+                             "name": "TransactionTypeId",
+                             "type": "Int32",
+                             "physicalType": "INT_32"
+                         }
+                     },
+                     {
+                         "source": {
+                             "name": "TransactionTypeName",
+                             "type": "String",
+                             "physicalType": "varchar"
+                         },
+                         "sink": {
+                             "name": "TransactionTypeName",
+                             "type": "String",
+                             "physicalType": "UTF8"
+                         }
+                     },
+                     {
+                         "source": {
+                             "name": "MilestoneId",
+                             "type": "Int32",
+                             "physicalType": "int"
+                         },
+                         "sink": {
+                             "name": "MilestoneId",
+                             "type": "Int32",
+                             "physicalType": "INT_32"
+                         }
+                     },
+                     {
+                         "source": {
+                             "name": "MilestoneName",
+                             "type": "String",
+                             "physicalType": "varchar"
+                         },
+                         "sink": {
+                             "name": "MilestoneName",
+                             "type": "String",
+                             "physicalType": "UTF8"
+                         }
+                     },
+                     {
+                         "source": {
+                             "name": "MilestoneOrder",
+                             "type": "Int32",
+                             "physicalType": "int"
+                         },
+                         "sink": {
+                             "name": "MilestoneOrder",
+                             "type": "Int32",
+                             "physicalType": "INT_32"
+                         }
+                     },
+                     {
+                         "source": {
+                             "name": "Is_Managed",
+                             "type": "Int32",
+                             "physicalType": "int"
+                         },
+                         "sink": {
+                             "name": "Is_Managed",
+                             "type": "Int32",
+                             "physicalType": "INT_32"
+                         }
+                     },
+                     {
+                         "source": {
+                             "name": "Is_Inbound",
+                             "type": "Int32",
+                             "physicalType": "int"
+                         },
+                         "sink": {
+                             "name": "Is_Inbound",
+                             "type": "Int32",
+                             "physicalType": "INT_32"
+                         }
+                     },
+                     {
+                         "source": {
+                             "name": "Is_International",
+                             "type": "Int32",
+                             "physicalType": "int"
+                         },
+                         "sink": {
+                             "name": "Is_International",
+                             "type": "Int32",
+                             "physicalType": "INT_32"
+                         }
+                     },
+                     {
+                         "source": {
+                             "name": "SOURCE_SYSTEM_KEY",
+                             "type": "Int32",
+                             "physicalType": "int"
+                         },
+                         "sink": {
+                             "name": "SOURCE_SYSTEM_KEY",
+                             "type": "Int32",
+                             "physicalType": "INT_32"
+                         }
+                     },
+                     {
+                         "source": {
+                             "name": "IS_FTZ",
+                             "type": "Int32",
+                             "physicalType": "int"
+                         },
+                         "sink": {
+                             "name": "IS_FTZ",
+                             "type": "Int32",
+                             "physicalType": "INT_32"
+                         }
+                     }
+                ]
+	  
+	},
+	"bronze": {
+		"processname": "map_transactiontype_milestone_src_to_bronze",
+		"container": "bronze",
+		"system": "gld360",
+		"landingPath": "gld360/inbound/landing_oth/map_transactiontype_milestone",
+		"processedPath": "gld360/inbound/processed/map_transactiontype_milestone",
+		"rejectedPath": "gld360/inbound/rejected/map_transactiontype_milestone"
+	},
+	"silver": {
+		"processname": "map_transactiontype_milestone_brownze_to_silver",
+        "container": "silver",
+		"notebookpath": "/symphony-summary-layer/silver_zone/gld360-browze-to-silver",
+		"path": "gld360/inbound/map_transactiontype_milestone",
+        "errorpath": "gld360/error_files/map_transactiontype_milestone"
+	},
+	"gold": {
+        "processname": "map_transactiontype_milestone_silver_to_gold",
+        "notebookpath": "/symphony-summary-layer/gold_zone/gld360-silver-to-gold",
+		"path": "gld360/inbound/map_transactiontype_milestone",
+		"errorpath": "gld360/error_files/map_transactiontype_milestone"
+	},
+	"controller": {
+		"schema": "dbo",
+		"controlTable": "delta_control"
+	},
+	"email": {
+		"emailto" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtofail" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtosuccess" : ["gd000012732@ups.com","gd000012733@ups.com","gd000011505@ups.com"]
+	},
+	"log": {
+		"logtable":"logs.ups_application_audit_logs"
+	},
+	"processing": {
+		"logpath": "dbfs:/mnt/logs/ups/gld360",
+		"clusterversion": "7.2.x-scala2.12",
+		"nodetype": "standard_ds3_v2",
+		"workercount": "2"
+	},
+	"archive": {
+		"enabled": true,
+        "container": "data-layer",
+		"path": "bronze/gld360/archive/table_name/partition_column"
+	}
+}

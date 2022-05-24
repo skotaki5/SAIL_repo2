@@ -1,0 +1,118 @@
+{
+	"source": {
+        "sourcetype": "rdms",
+        "database": "gld_dw_new",
+		"schema": "master_data",
+		"tblName": "map_ordersearchstatus",
+		"tblName_hwm": "map_ordersearchstatus_oth",
+		"partColumn": "etl_update_date",
+		"starttms": "20211001120000",
+		"selectQuery": "SELECT [SourceSystemName],[OrderStatusName],[OrderStatusCode],[SOURCE_SYSTEM_KEY] FROM [master_data].[Map_OrderSearchStatus] (nolock) ",
+		 "mappings": [
+                    {
+                        "source": {
+                            "name": "SourceSystemName",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "SourceSystemName",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "OrderStatusName",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "OrderStatusName",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "OrderStatusCode",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "OrderStatusCode",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "SOURCE_SYSTEM_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "SOURCE_SYSTEM_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    }
+                ]
+		},
+	"bronze": {
+		"processname": "map_ordersearchstatus_src_to_bronze",
+		"container": "bronze",
+		"system": "gld360",
+		"landingPath": "gld360/inbound/landing_oth/map_ordersearchstatus",
+		"processedPath": "gld360/inbound/processed/map_ordersearchstatus",
+		"rejectedPath": "gld360/inbound/rejected/map_ordersearchstatus",
+    	"partitioncolumn": "etl_update_date"
+	},
+	"silver": {
+		"processname": "map_ordersearchstatus_brownze_to_silver",
+        "container": "silver",
+		"notebookpath": "/symphony-summary-layer/silver_zone/gld360-browze-to-silver",
+		"path": "gld360/inbound/map_ordersearchstatus",
+        "errorpath": "gld360/error_files/map_ordersearchstatus",
+        "insertColumns": [
+            "SourceSystemName",
+            "OrderStatusName",
+            "OrderStatusCode",
+            "SOURCE_SYSTEM_KEY"    
+        ],
+		"updateColumns": [""],
+		"joinColumns": [
+            "OrderStatusCode", 
+            "SOURCE_SYSTEM_KEY"
+        ]
+	},
+	"gold": {
+        "processname": "map_ordersearchstatus_silver_to_gold",
+        "notebookpath": "/symphony-summary-layer/gold_zone/gld360-silver-to-gold",
+		"path": "gld360/inbound/map_ordersearchstatus",
+		"errorpath": "gld360/error_files/map_ordersearchstatus"
+	},
+	"controller": {
+		"schema": "dbo",
+		"controlTable": "delta_control"
+	},
+	"email": {
+		"emailto" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtofail" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtosuccess" : ["gd000012732@ups.com","gd000012733@ups.com","gd000011505@ups.com"]
+	},
+	"log": {
+		"logtable":"logs.ups_application_audit_logs"
+	},
+	"processing": {
+		"logpath": "dbfs:/mnt/logs/ups/gld360",
+		"clusterversion": "7.2.x-scala2.12",
+		"nodetype": "standard_ds3_v2",
+		"workercount": "2"
+	},
+	"archive": {
+		"enabled": true,
+        "container": "data-layer",
+		"path": "bronze/gld360/archive/table_name/partition_column"
+	}
+}

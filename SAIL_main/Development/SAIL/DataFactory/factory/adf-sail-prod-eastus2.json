@@ -1,0 +1,86 @@
+{
+    "name": "adf-sail-prod-eastus2",
+    "id": "/subscriptions/1014e3e6-e0cf-44c0-8efe-ba17d0c6e3ed/resourceGroups/rg-oa2-prd/providers/Microsoft.DataFactory/factories/adf-sail-prod-eastus2",
+    "type": "Microsoft.DataFactory/factories",
+    "properties": {
+        "provisioningState": "Succeeded",
+        "createTime": "2021-12-17T06:15:49.8308492Z",
+        "version": "2018-06-01",
+        "factoryStatistics": {
+            "totalResourceCount": 0,
+            "maxAllowedResourceCount": 0,
+            "factorySizeInGbUnits": 0,
+            "maxAllowedFactorySizeInGbUnits": 0
+        },
+        "globalParameters": {
+            "gp_low_datetime": {
+                "type": "string",
+                "value": "2022-01-26 00:00:00.000"
+            },
+            "gp_adb_job_id": {
+                "type": "string",
+                "value": {
+                    "sail_load_id": "189",
+                    "sail_inventory_load_id": "49",
+                    "sail_cosmos_delete_id": "53",
+                    "optimize_sail_load_id": "274"
+                }
+            },
+            "gp_akv_secret_adb_url": {
+                "type": "string",
+                "value": "https://akv-sail-prod-eastus2.vault.azure.net/secrets/AzureDatabricksUrl/6a49477787f54d8a914c77ae6e4bbb79?api-version=7.0"
+            },
+            "gp_akv_secret_adb_token": {
+                "type": "string",
+                "value": "https://akv-sail-prod-eastus2.vault.azure.net/secrets/AzureDatabricksBearerToken/b683187d7a814cfea08fee4022ca61b9?api-version=7.0"
+            },
+            "gp_env_type": {
+                "type": "string",
+                "value": "PROD"
+            },
+            "gp_logapp_email_url": {
+                "type": "string",
+                "value": "https://prod-12.eastus2.logic.azure.com:443/workflows/fc98f4a52722487e8251ab22291b9ac1/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=TMgtazPpQZiZkc5-MfxBtDh8AIHwuU5regL6hprftoA"
+            },
+            "gp_adf_tag": {
+                "type": "string",
+                "value": "Azure Data Factory"
+            },
+            "gp_adb_tag": {
+                "type": "string",
+                "value": "Azure Databricks"
+            },
+            "gp_source_system_keys": {
+                "type": "string",
+                "value": "(1002)"
+            },
+            "gp_source_system_obj_names": {
+                "type": "string",
+                "value": "('SPLUS_MASTER')"
+            }
+        },
+        "publicNetworkAccess": "Enabled"
+    },
+    "eTag": "\"6d02e58d-0000-0200-0000-6200ebdf0000\"",
+    "location": "eastus2",
+    "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+            "/subscriptions/230c211e-8a74-478c-9999-e92284ae6e59/resourcegroups/rg-oa2-uat/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-oa2-uat": {
+                "clientId": "b5057f2e-f9f1-4983-b927-e05b03fc98a8",
+                "principalId": "bb7a1bf8-bfb5-4fdc-96a4-b88b7badf528"
+            },
+            "/subscriptions/1014e3e6-e0cf-44c0-8efe-ba17d0c6e3ed/resourcegroups/rg-oa2-prd/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mi-oa2-prod": {
+                "clientId": "c3933edb-2012-45b6-bd6a-bb82f379c37a",
+                "principalId": "ff3df298-a92f-44db-b49f-9f6d703051ae"
+            }
+        }
+    },
+    "tags": {
+        "applicationCode": "OAM",
+        "departmentChargeCode": "805566",
+        "par": "43263",
+        "requestorADID": "ZLK4JPJ",
+        "requestorEmployeeID": "4206554"
+    }
+}

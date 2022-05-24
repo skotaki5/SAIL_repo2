@@ -1,0 +1,56 @@
+{
+    "name": "pl-ingestion-dim-warehouse",
+    "properties": {
+        "activities": [
+            {
+                "name": "Execute Ingestion Dim Warehouse",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Pl-Ingestion-From-SQLServer-ADLS2",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_metadata_folder_path": "gld360/pipeline/pl_dim_warehouse/",
+                        "p_metadata_file_name": "dim_warehouse.json",
+                        "p_debug": {
+                            "value": "@pipeline().parameters.p_debug",
+                            "type": "Expression"
+                        },
+                        "p_metadata_container": "metadata",
+                        "p_override_high_watermark": {
+                            "value": "@pipeline().parameters.p_override_high_watermark\n",
+                            "type": "Expression"
+                        }
+                    }
+                }
+            }
+        ],
+        "parameters": {
+            "p_schedule_time": {
+                "type": "string",
+                "defaultValue": "2021-11-12T10:12:00Z"
+            },
+            "p_debug": {
+                "type": "bool",
+                "defaultValue": true
+            },
+            "p_override_high_watermark": {
+                "type": "string"
+            }
+        },
+        "folder": {
+            "name": "Execute"
+        },
+        "annotations": [],
+        "lastPublishTime": "2022-02-24T04:16:36Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

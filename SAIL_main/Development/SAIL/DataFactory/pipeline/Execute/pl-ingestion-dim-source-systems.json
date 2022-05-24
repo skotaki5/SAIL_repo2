@@ -1,0 +1,49 @@
+{
+    "name": "pl-ingestion-dim-source-systems",
+    "properties": {
+        "activities": [
+            {
+                "name": "Execute Ingestion Dim Source Systems",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Pl-Ingestion-From-SQLServer-ADLS2-Full-Load",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_metadata_folder_path": "gld360/pipeline/pl_dim_source_system/",
+                        "p_metadata_file_name": "dim_source_system.json",
+                        "p_debug": {
+                            "value": "@pipeline().parameters.p_debug",
+                            "type": "Expression"
+                        },
+                        "p_metadata_container": "metadata"
+                    }
+                }
+            }
+        ],
+        "parameters": {
+            "p_schedule_time": {
+                "type": "string",
+                "defaultValue": "2021-12-01T12:00:00Z"
+            },
+            "p_debug": {
+                "type": "string",
+                "defaultValue": "true"
+            }
+        },
+        "folder": {
+            "name": "Execute"
+        },
+        "annotations": [],
+        "lastPublishTime": "2022-02-24T04:16:36Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

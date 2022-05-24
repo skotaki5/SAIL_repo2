@@ -1,0 +1,152 @@
+{
+	"source": {
+        "sourcetype": "rdms",
+        "database": "gld_dw_new",
+		"schema": "master_data",
+		"tblName": "map_temperature_range_details",
+		"starttms": "20211001120000",
+		"selectQuery": "SELECT [CarrierCode],[LevelOfService],[TemperatureThreshold],[TemperatureRange_Min],[TemperatureRange_Max],[TemperatureRange_UOM],[ETL_INSERT_DATE],[ETL_UPDATE_DATE] FROM [master_data].[Map_Temperature_Range_Details] (nolock)",
+		"mappings": [
+                            {
+                                "source": {
+                                    "name": "CarrierCode",
+                                    "type": "String",
+                                    "physicalType": "varchar"
+                                },
+                                "sink": {
+                                    "name": "CarrierCode",
+                                    "type": "String",
+                                    "physicalType": "UTF8"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "LevelOfService",
+                                    "type": "String",
+                                    "physicalType": "varchar"
+                                },
+                                "sink": {
+                                    "name": "LevelOfService",
+                                    "type": "String",
+                                    "physicalType": "UTF8"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "TemperatureThreshold",
+                                    "type": "String",
+                                    "physicalType": "varchar"
+                                },
+                                "sink": {
+                                    "name": "TemperatureThreshold",
+                                    "type": "String",
+                                    "physicalType": "UTF8"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "TemperatureRange_Min",
+                                    "type": "String",
+                                    "physicalType": "varchar"
+                                },
+                                "sink": {
+                                    "name": "TemperatureRange_Min",
+                                    "type": "String",
+                                    "physicalType": "UTF8"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "TemperatureRange_Max",
+                                    "type": "String",
+                                    "physicalType": "varchar"
+                                },
+                                "sink": {
+                                    "name": "TemperatureRange_Max",
+                                    "type": "String",
+                                    "physicalType": "UTF8"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "TemperatureRange_UOM",
+                                    "type": "String",
+                                    "physicalType": "varchar"
+                                },
+                                "sink": {
+                                    "name": "TemperatureRange_UOM",
+                                    "type": "String",
+                                    "physicalType": "UTF8"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "ETL_INSERT_DATE",
+                                    "type": "DateTime",
+                                    "physicalType": "datetime"
+                                },
+                                "sink": {
+                                    "name": "ETL_INSERT_DATE",
+                                    "type": "DateTime",
+                                    "physicalType": "INT_96"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "ETL_UPDATE_DATE",
+                                    "type": "DateTime",
+                                    "physicalType": "datetime"
+                                },
+                                "sink": {
+                                    "name": "ETL_UPDATE_DATE",
+                                    "type": "DateTime",
+                                    "physicalType": "INT_96"
+                                }
+                }
+        ]
+	},
+	"bronze": {
+		"processname": "Map_Temperature_Range_Details_src_to_bronze",
+		"container": "bronze",
+		"system": "gld360",
+		"landingPath": "gld360/inbound/landing/map_temperature_range_details",
+		"processedPath": "gld360/inbound/processed/map_temperature_range_details",
+		"rejectedPath": "gld360/inbound/rejected/map_temperature_range_details"
+	},
+	"silver": {
+		"processname": "Map_Temperature_Range_Details_brownze_to_silver",
+        "container": "silver",
+		"notebookpath": "/symphony-summary-layer/silver_zone/gld360-browze-to-silver",
+		"path": "gld360/inbound/map_temperature_range_details",
+        "errorpath": "gld360/error_files/map_temperature_range_details"
+	},
+	"gold": {
+        "processname": "Map_Temperature_Range_Details_silver_to_gold",
+        "notebookpath": "/symphony-summary-layer/gold_zone/gld360-silver-to-gold",
+		"path": "gld360/inbound/Map_Temperature_Range_Details",
+		"errorpath": "gld360/error_files/Map_Temperature_Range_Details"
+	},
+	"controller": {
+		"schema": "dbo",
+		"controlTable": "delta_control"
+	},
+	"email": {
+		"emailto" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtofail" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtosuccess" : ["gd000012732@ups.com","gd000012733@ups.com","gd000011505@ups.com"]
+	},
+	"log": {
+		"logtable":"logs.ups_application_audit_logs"
+	},
+	"processing": {
+		"logpath": "dbfs:/mnt/logs/ups/gld360",
+		"clusterversion": "7.2.x-scala2.12",
+		"nodetype": "standard_ds3_v2",
+		"workercount": "2"
+	},
+	"archive": {
+		"enabled": true,
+        "container": "data-layer",
+		"path": "bronze/gld360/archive/table_name/partition_column"
+	}
+}

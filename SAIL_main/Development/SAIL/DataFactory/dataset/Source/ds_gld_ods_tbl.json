@@ -1,0 +1,16 @@
+{
+    "name": "ds_gld_ods_tbl",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "ls_sqlserver_gld_ods",
+            "type": "LinkedServiceReference"
+        },
+        "folder": {
+            "name": "Source"
+        },
+        "annotations": [],
+        "type": "AzureSqlTable",
+        "schema": []
+    },
+    "type": "Microsoft.DataFactory/factories/datasets"
+}

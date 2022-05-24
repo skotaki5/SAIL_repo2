@@ -1,0 +1,292 @@
+{
+    "name": "sequential splus Main History pipeline",
+    "properties": {
+        "activities": [
+            {
+                "name": "Execute fact_inbound_line",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Execute fact_transportation_exception",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "automate history load",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_metadata_container": "metadata",
+                        "p_metadata_folder_path": "gld360/pipeline/pl_fact_inbound_line/",
+                        "p_metadata_file_name": "fact_inbound_line.json",
+                        "p_filter_condition": "SOURCE_SYSTEM_KEY=1002"
+                    }
+                }
+            },
+            {
+                "name": "Execute fact_transportation_exception",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "automate history load",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_metadata_container": "metadata",
+                        "p_metadata_folder_path": "gld360/pipeline/pl_fact_transportation_exception/",
+                        "p_metadata_file_name": "fact_transportation_exception.json",
+                        "p_filter_condition": "SOURCE_SYSTEM_KEY=1002"
+                    }
+                }
+            },
+            {
+                "name": "Execute dim_geo_location",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Execute fact_order_line",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "automate history load",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_metadata_container": "metadata",
+                        "p_metadata_folder_path": "gld360/pipeline/pl_dim_geo_location/",
+                        "p_metadata_file_name": "dim_geo_location.json",
+                        "p_filter_condition": "SOURCE_SYSTEM_KEY=1002 and ETL_UPDATE_DATE < convert(datetime,'2019-05-22 10:55:00',20) $ SOURCE_SYSTEM_KEY=1002 and ETL_UPDATE_DATE between convert(datetime,'2019-05-22 10:55:00',20) and convert(datetime,'2019-08-08 16:16:00',20) $ SOURCE_SYSTEM_KEY=1002 and ETL_UPDATE_DATE between convert(datetime,'2019-08-08 16:16:00',20) and convert(datetime,'2020-12-01 01:00:00',20) $ SOURCE_SYSTEM_KEY=1002 and ETL_UPDATE_DATE >= convert(datetime,'2020-12-01 01:00:00',20)"
+                    }
+                }
+            },
+            {
+                "name": "Execute fact_order_line_details",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Execute dim_geo_location",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "automate history load",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_metadata_container": "metadata",
+                        "p_metadata_folder_path": "gld360/pipeline/pl_fact_order_line_details/",
+                        "p_metadata_file_name": "fact_order_line_details.json",
+                        "p_filter_condition": "SOURCE_SYSTEM_KEY=1002 and ETL_UPDATE_DATE < convert(datetime,'2021-08-09 11:46:00',20) $ SOURCE_SYSTEM_KEY=1002 and ETL_UPDATE_DATE between convert(datetime,'2021-08-09 11:46:00',20) and convert(datetime,'2021-08-09 11:51:00',20) $ SOURCE_SYSTEM_KEY=1002 and ETL_UPDATE_DATE between convert(datetime,'2021-08-09 11:51:00',20) and convert(datetime,'2021-08-23 00:38:00',20) $ SOURCE_SYSTEM_KEY=1002 and ETL_UPDATE_DATE between convert(datetime,'2021-08-23 00:38:00',20) and convert(datetime,'2021-08-23 00:44:00',20) $ SOURCE_SYSTEM_KEY=1002 and ETL_UPDATE_DATE between convert(datetime,'2021-08-23 00:44:00',20) and convert(datetime,'2021-08-23 00:50:00',20) $ SOURCE_SYSTEM_KEY=1002 and ETL_UPDATE_DATE between convert(datetime,'2021-08-23 00:50:00',20) and convert(datetime,'2021-12-30 02:01:00',20) $ SOURCE_SYSTEM_KEY=1002 and ETL_UPDATE_DATE >= convert(datetime,'2021-12-30 02:01:00',20)"
+                    }
+                }
+            },
+            {
+                "name": "Execute dim_item",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Execute fact_inbound_line",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "automate history load",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_metadata_container": "metadata",
+                        "p_metadata_folder_path": "gld360/pipeline/pl_dim_item/",
+                        "p_metadata_file_name": "dim_item.json",
+                        "p_filter_condition": "SOURCE_SYSTEM_KEY=1002"
+                    }
+                }
+            },
+            {
+                "name": "Execute fact_shipment",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Execute dim_item",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "automate history load",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_metadata_container": "metadata",
+                        "p_metadata_folder_path": "gld360/pipeline/pl_fact_shipment/",
+                        "p_metadata_file_name": "fact_shipment.json",
+                        "p_filter_condition": "SOURCE_SYSTEM_KEY=1002"
+                    }
+                }
+            },
+            {
+                "name": "Execute fact_order_reference",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Execute fact_order_line_details",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "automate history load",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_metadata_container": "metadata",
+                        "p_metadata_folder_path": "gld360/pipeline/pl_fact_order_reference/",
+                        "p_metadata_file_name": "fact_order_reference.json",
+                        "p_filter_condition": "SOURCE_SYSTEM_KEY=1002 and ETL_UPDATE_DATE < convert(datetime,'2021-08-23 03:40:00',20) $ SOURCE_SYSTEM_KEY=1002 and ETL_UPDATE_DATE >= convert(datetime,'2021-08-23 03:40:00',20)"
+                    }
+                }
+            },
+            {
+                "name": "Execute fact_transportation",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Execute fact_shipment",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "automate history load",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_metadata_container": "metadata",
+                        "p_metadata_folder_path": "gld360/pipeline/pl_fact_transportation/",
+                        "p_metadata_file_name": "fact_transportation.json",
+                        "p_filter_condition": "SOURCE_SYSTEM_KEY=1002"
+                    }
+                }
+            },
+            {
+                "name": "Execute fact_order",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Execute fact_transportation",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "automate history load",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_metadata_container": "metadata",
+                        "p_metadata_folder_path": "gld360/pipeline/pl_fact_order/",
+                        "p_metadata_file_name": "fact_order.json",
+                        "p_filter_condition": "SOURCE_SYSTEM_KEY=1002"
+                    }
+                }
+            },
+            {
+                "name": "Execute fact_order_line",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Execute fact_order",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "automate history load",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_metadata_container": "metadata",
+                        "p_metadata_folder_path": "gld360/pipeline/pl_fact_order_line/",
+                        "p_metadata_file_name": "fact_order_line.json",
+                        "p_filter_condition": "SOURCE_SYSTEM_KEY=1002"
+                    }
+                }
+            },
+            {
+                "name": "Execute fact_milestone_activity",
+                "type": "ExecutePipeline",
+                "dependsOn": [
+                    {
+                        "activity": "Execute fact_order_reference",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "automate history load",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_metadata_container": "metadata",
+                        "p_metadata_folder_path": "gld360/pipeline/pl_fact_milestone_activity/",
+                        "p_metadata_file_name": "fact_milestone_activity.json",
+                        "p_filter_condition": "SOURCE_SYSTEM_KEY=1002 and ETL_UPDATE_DATE < convert(datetime,'2020-09-29 10:45:00',20) $ SOURCE_SYSTEM_KEY=1002 and ETL_UPDATE_DATE between convert(datetime,'2020-09-29 10:45:00',20) and convert(datetime,'2020-09-29 11:15:00',20) $ SOURCE_SYSTEM_KEY=1002 and ETL_UPDATE_DATE between convert(datetime,'2020-09-29 11:15:00',20) and convert(datetime,'2020-09-29 11:35:00',20) $ SOURCE_SYSTEM_KEY=1002 and ETL_UPDATE_DATE between convert(datetime,'2020-09-29 11:35:00',20) and convert(datetime,'2020-09-29 11:47:00',20) $ SOURCE_SYSTEM_KEY=1002 and ETL_UPDATE_DATE between convert(datetime,'2020-09-29 11:47:00',20) and convert(datetime,'2020-09-29 11:57:00',20) $ SOURCE_SYSTEM_KEY=1002 and ETL_UPDATE_DATE between convert(datetime,'2020-09-29 11:57:00',20) and convert(datetime,'2020-10-30 01:01:00',20) $ SOURCE_SYSTEM_KEY=1002 and ETL_UPDATE_DATE between convert(datetime,'2020-10-30 01:01:00',20) and convert(datetime,'2021-07-30 01:01:00',20) $ SOURCE_SYSTEM_KEY=1002 and ETL_UPDATE_DATE >= convert(datetime,'2021-07-30 01:01:00',20)"
+                    }
+                }
+            }
+        ],
+        "folder": {
+            "name": "History load"
+        },
+        "annotations": [],
+        "lastPublishTime": "2022-03-16T16:11:37Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

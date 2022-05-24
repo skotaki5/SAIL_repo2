@@ -1,0 +1,271 @@
+{
+	"source": {
+        "sourcetype": "rdms",
+        "database": "gld_dw_new",
+		"schema": "dbo",
+		"tblName": "dim_geo_location",
+		"tblName_hwm":"dim_geo_location_oth",
+		"partColumns": "etl_update_date",
+		"starttms": "20211001120000",
+		"selectQuery": "SELECT [GEO_LOCATION_KEY],[SOURCE_SYSTEM_KEY],[LOCATION_ID],[LOCATION_CODE],[LOCATION_NAME],[ADDRESS_LINE_1],[ADDRESS_LINE_2],[CITY],[PROVINCE],[POSTAL_CODE],[COUNTRY],[LOCATION_TYPE],[LOCATION_TIME_ZONE],[GEO_LOCATION_SDUK],[ETL_INSERT_DATE],[ETL_UPDATE_DATE],[ETL_BATCH_NUMBER] FROM [dbo].[DIM_GEO_LOCATION] (nolock) ",
+		"mappings": [
+                    {
+                        "source": {
+                            "name": "GEO_LOCATION_KEY",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 0,
+                            "precision": 18
+                        },
+                        "sink": {
+                            "name": "GEO_LOCATION_KEY",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "SOURCE_SYSTEM_KEY",
+                            "type": "Int32",
+                            "physicalType": "int"
+                        },
+                        "sink": {
+                            "name": "SOURCE_SYSTEM_KEY",
+                            "type": "Int32",
+                            "physicalType": "INT_32"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LOCATION_ID",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "LOCATION_ID",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LOCATION_CODE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "LOCATION_CODE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LOCATION_NAME",
+                            "type": "String",
+                            "physicalType": "nvarchar"
+                        },
+                        "sink": {
+                            "name": "LOCATION_NAME",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ADDRESS_LINE_1",
+                            "type": "String",
+                            "physicalType": "nvarchar"
+                        },
+                        "sink": {
+                            "name": "ADDRESS_LINE_1",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ADDRESS_LINE_2",
+                            "type": "String",
+                            "physicalType": "nvarchar"
+                        },
+                        "sink": {
+                            "name": "ADDRESS_LINE_2",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "CITY",
+                            "type": "String",
+                            "physicalType": "nvarchar"
+                        },
+                        "sink": {
+                            "name": "CITY",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "PROVINCE",
+                            "type": "String",
+                            "physicalType": "nvarchar"
+                        },
+                        "sink": {
+                            "name": "PROVINCE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "POSTAL_CODE",
+                            "type": "String",
+                            "physicalType": "nvarchar"
+                        },
+                        "sink": {
+                            "name": "POSTAL_CODE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "COUNTRY",
+                            "type": "String",
+                            "physicalType": "nvarchar"
+                        },
+                        "sink": {
+                            "name": "COUNTRY",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LOCATION_TYPE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "LOCATION_TYPE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "LOCATION_TIME_ZONE",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "LOCATION_TIME_ZONE",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "GEO_LOCATION_SDUK",
+                            "type": "String",
+                            "physicalType": "varchar"
+                        },
+                        "sink": {
+                            "name": "GEO_LOCATION_SDUK",
+                            "type": "String",
+                            "physicalType": "UTF8"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ETL_INSERT_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "ETL_INSERT_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ETL_UPDATE_DATE",
+                            "type": "DateTime",
+                            "physicalType": "datetime"
+                        },
+                        "sink": {
+                            "name": "ETL_UPDATE_DATE",
+                            "type": "DateTime",
+                            "physicalType": "INT_96"
+                        }
+                    },
+                    {
+                        "source": {
+                            "name": "ETL_BATCH_NUMBER",
+                            "type": "Decimal",
+                            "physicalType": "decimal",
+                            "scale": 0,
+                            "precision": 18
+                        },
+                        "sink": {
+                            "name": "ETL_BATCH_NUMBER",
+                            "type": "Decimal",
+                            "physicalType": "DECIMAL"
+                        }
+                    }
+                ]
+	     
+	},
+	"bronze": {
+		"processname": "dim_geo_location_src_to_bronze",
+		"container": "bronze",
+		"system": "gld360",
+		"landingPath": "gld360/inbound/landing_oth/dim_geo_location",
+		"processedPath": "gld360/inbound/processed/dim_geo_location",
+		"rejectedPath": "gld360/inbound/rejected/dim_geo_location",
+    	"partitioncolumns": "etl_update_date"
+	},
+	"silver": {
+		"processname": "dim_geo_location_brownze_to_silver",
+        "container": "silver",
+		"notebookpath": "/symphony-summary-layer/silver_zone/gld360-browze-to-silver",
+		"path": "gld360/inbound/dim_geo_location",
+        "errorpath": "gld360/error_files/dim_geo_location",
+		"joinColumns": "",
+		"partitioncolumns": "etl_update_date"
+	},
+	"gold": {
+        "processname": "dim_geo_location_silver_to_gold",
+		"container": "gold",
+        "notebookpath": "/symphony-summary-layer/gold_zone/gld360-silver-to-gold",
+		"path": "gld360/inbound/dim_geo_location",
+		"errorpath": "gld360/error_files/dim_geo_location"
+	},
+	"controller": {
+		"schema": "controller",
+		"controlTable": "delta_control"
+	},
+	"email": {
+		"emailto" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtofail" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtosuccess" : ["gd000012732@ups.com","gd000012733@ups.com","gd000011505@ups.com"]
+	},
+	"log": {
+		"logtable":"logs.ups_application_audit_logs"
+	},
+	"processing": {
+		"logpath": "dbfs:/mnt/logs/ups/gld360",
+		"clusterversion": "7.2.x-scala2.12",
+		"nodetype": "standard_ds3_v2",
+		"workercount": "2"
+	},
+	"archive": {
+		"enabled": true,
+        "container": "bronze",
+		"path": "gld360/archive/dim_geo_location"
+	}
+}

@@ -1,0 +1,38 @@
+{
+    "name": "ds_adls2_data_parquet",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "ls_adls2_user",
+            "type": "LinkedServiceReference"
+        },
+        "parameters": {
+            "p_container": {
+                "type": "string"
+            },
+            "p_folder_path": {
+                "type": "string"
+            }
+        },
+        "folder": {
+            "name": "Sink"
+        },
+        "annotations": [],
+        "type": "Parquet",
+        "typeProperties": {
+            "location": {
+                "type": "AzureBlobFSLocation",
+                "folderPath": {
+                    "value": "@dataset().p_folder_path",
+                    "type": "Expression"
+                },
+                "fileSystem": {
+                    "value": "@dataset().p_container",
+                    "type": "Expression"
+                }
+            },
+            "compressionCodec": "snappy"
+        },
+        "schema": []
+    },
+    "type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,112 @@
+{
+    "name": "pl-cleanup-controller",
+    "properties": {
+        "activities": [
+            {
+                "name": "Delete Logs",
+                "type": "Lookup",
+                "dependsOn": [
+                    {
+                        "activity": "Set Lag Time",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "AzureSqlSource",
+                        "sqlReaderStoredProcedureName": "[controller].[delete_audit_data]",
+                        "storedProcedureParameters": {
+                            "Table_Name": {
+                                "type": "String",
+                                "value": {
+                                    "value": "@pipeline().parameters.Table_Name",
+                                    "type": "Expression"
+                                }
+                            },
+                            "schemaName": {
+                                "type": "String",
+                                "value": {
+                                    "value": "@pipeline().parameters.schemaName",
+                                    "type": "Expression"
+                                }
+                            },
+                            "duration": {
+                                "type": "Datetime",
+                                "value": {
+                                    "value": "@variables('duration')",
+                                    "type": "Expression"
+                                }
+                            },
+                            "column_name": {
+                                "type": "String",
+                                "value": {
+                                    "value": "@pipeline().parameters.column_name",
+                                    "type": "Expression"
+                                }
+                            }
+                        },
+                        "queryTimeout": "02:00:00",
+                        "partitionOption": "None"
+                    },
+                    "dataset": {
+                        "referenceName": "ds_sqlserver_controller_tbl",
+                        "type": "DatasetReference",
+                        "parameters": {
+                            "p_control_tbl": "0",
+                            "p_schema": "0"
+                        }
+                    },
+                    "firstRowOnly": true
+                }
+            },
+            {
+                "name": "Set Lag Time",
+                "type": "SetVariable",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "variableName": "duration",
+                    "value": {
+                        "value": "@formatDateTime(addDays(utcnow(),-30))",
+                        "type": "Expression"
+                    }
+                }
+            }
+        ],
+        "parameters": {
+            "Table_Name": {
+                "type": "string",
+                "defaultValue": "etl_audit"
+            },
+            "schemaName": {
+                "type": "string",
+                "defaultValue": "controller"
+            },
+            "column_name": {
+                "type": "string",
+                "defaultValue": "insert_timestamp"
+            }
+        },
+        "variables": {
+            "duration": {
+                "type": "String"
+            }
+        },
+        "folder": {
+            "name": "Base Pipelines"
+        },
+        "annotations": [],
+        "lastPublishTime": "2022-02-24T04:08:11Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

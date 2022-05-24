@@ -1,0 +1,465 @@
+{
+	"source": {
+        "sourcetype": "rdms",
+        "database": "gld_dw_new",
+		"schema": "dbo",
+		"tblName": "fact_order_line_details",
+		"partColumns": "etl_update_date",
+		"starttms": "20211001120000",
+		"selectQuery": 
+           " select [SOURCE_SYSTEM_KEY],[CLIENT_KEY],[WAREHOUSE_KEY],[ITEM_KEY],[UPS_ORDER_NUMBER],[UPS_ORDER_LINE_NUMBER],[UPS_ORDER_LINE_DETAIL_NUMBER],[VENDOR_SERIAL_NUMBER],[VENDOR_LOT_NUMBER],[LPN_NUMBER],[DISPOSITION_VALUE],[ORDER_LINE_DETAILS_SDUK],[ORDER_LINE_SDUK],[CLIENT_SDUK],[WAREHOUSE_SDUK],[ITEM_SDUK],[ETL_INSERT_DATE],[ETL_UPDATE_DATE],[ETL_BATCH_NUMBER],[DML_DATE],[DML_DATE_KEY],[IS_INBOUND],[SHELF_LIFE],[EXPIRATION_DATE],[PRODUCT_STATUS],[STORAGE_TYPE],[UTC_EXPIRATION_DATE],[LOFST_EXPIRATION_DATE],[HOLD_CODE],[RECEIPT_NUMBER] from dbo.fact_order_line_details (nolock)",
+		"mappings": [
+                            {
+                                "source": {
+                                    "name": "SOURCE_SYSTEM_KEY",
+                                    "type": "Int32",
+                                    "physicalType": "int"
+                                },
+                                "sink": {
+                                    "name": "SOURCE_SYSTEM_KEY",
+                                    "type": "Int32",
+                                    "physicalType": "INT_32"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "CLIENT_KEY",
+                                    "type": "Decimal",
+                                    "physicalType": "decimal",
+                                    "scale": 0,
+                                    "precision": 18
+                                },
+                                "sink": {
+                                    "name": "CLIENT_KEY",
+                                    "type": "Decimal",
+                                    "physicalType": "DECIMAL"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "WAREHOUSE_KEY",
+                                    "type": "Decimal",
+                                    "physicalType": "decimal",
+                                    "scale": 0,
+                                    "precision": 18
+                                },
+                                "sink": {
+                                    "name": "WAREHOUSE_KEY",
+                                    "type": "Decimal",
+                                    "physicalType": "DECIMAL"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "ITEM_KEY",
+                                    "type": "Decimal",
+                                    "physicalType": "decimal",
+                                    "scale": 0,
+                                    "precision": 18
+                                },
+                                "sink": {
+                                    "name": "ITEM_KEY",
+                                    "type": "Decimal",
+                                    "physicalType": "DECIMAL"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "UPS_ORDER_NUMBER",
+                                    "type": "String",
+                                    "physicalType": "varchar"
+                                },
+                                "sink": {
+                                    "name": "UPS_ORDER_NUMBER",
+                                    "type": "String",
+                                    "physicalType": "UTF8"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "UPS_ORDER_LINE_NUMBER",
+                                    "type": "String",
+                                    "physicalType": "varchar"
+                                },
+                                "sink": {
+                                    "name": "UPS_ORDER_LINE_NUMBER",
+                                    "type": "String",
+                                    "physicalType": "UTF8"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "UPS_ORDER_LINE_DETAIL_NUMBER",
+                                    "type": "String",
+                                    "physicalType": "varchar"
+                                },
+                                "sink": {
+                                    "name": "UPS_ORDER_LINE_DETAIL_NUMBER",
+                                    "type": "String",
+                                    "physicalType": "UTF8"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "VENDOR_SERIAL_NUMBER",
+                                    "type": "String",
+                                    "physicalType": "varchar"
+                                },
+                                "sink": {
+                                    "name": "VENDOR_SERIAL_NUMBER",
+                                    "type": "String",
+                                    "physicalType": "UTF8"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "VENDOR_LOT_NUMBER",
+                                    "type": "String",
+                                    "physicalType": "varchar"
+                                },
+                                "sink": {
+                                    "name": "VENDOR_LOT_NUMBER",
+                                    "type": "String",
+                                    "physicalType": "UTF8"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "LPN_NUMBER",
+                                    "type": "String",
+                                    "physicalType": "varchar"
+                                },
+                                "sink": {
+                                    "name": "LPN_NUMBER",
+                                    "type": "String",
+                                    "physicalType": "UTF8"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "DISPOSITION_VALUE",
+                                    "type": "String",
+                                    "physicalType": "varchar"
+                                },
+                                "sink": {
+                                    "name": "DISPOSITION_VALUE",
+                                    "type": "String",
+                                    "physicalType": "UTF8"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "ORDER_LINE_DETAILS_SDUK",
+                                    "type": "String",
+                                    "physicalType": "varchar"
+                                },
+                                "sink": {
+                                    "name": "ORDER_LINE_DETAILS_SDUK",
+                                    "type": "String",
+                                    "physicalType": "UTF8"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "ORDER_LINE_SDUK",
+                                    "type": "String",
+                                    "physicalType": "varchar"
+                                },
+                                "sink": {
+                                    "name": "ORDER_LINE_SDUK",
+                                    "type": "String",
+                                    "physicalType": "UTF8"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "CLIENT_SDUK",
+                                    "type": "String",
+                                    "physicalType": "varchar"
+                                },
+                                "sink": {
+                                    "name": "CLIENT_SDUK",
+                                    "type": "String",
+                                    "physicalType": "UTF8"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "WAREHOUSE_SDUK",
+                                    "type": "String",
+                                    "physicalType": "varchar"
+                                },
+                                "sink": {
+                                    "name": "WAREHOUSE_SDUK",
+                                    "type": "String",
+                                    "physicalType": "UTF8"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "ITEM_SDUK",
+                                    "type": "String",
+                                    "physicalType": "varchar"
+                                },
+                                "sink": {
+                                    "name": "ITEM_SDUK",
+                                    "type": "String",
+                                    "physicalType": "UTF8"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "ETL_INSERT_DATE",
+                                    "type": "DateTime",
+                                    "physicalType": "datetime"
+                                },
+                                "sink": {
+                                    "name": "ETL_INSERT_DATE",
+                                    "type": "DateTime",
+                                    "physicalType": "INT_96"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "ETL_UPDATE_DATE",
+                                    "type": "DateTime",
+                                    "physicalType": "datetime"
+                                },
+                                "sink": {
+                                    "name": "ETL_UPDATE_DATE",
+                                    "type": "DateTime",
+                                    "physicalType": "INT_96"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "ETL_BATCH_NUMBER",
+                                    "type": "Decimal",
+                                    "physicalType": "decimal",
+                                    "scale": 0,
+                                    "precision": 18
+                                },
+                                "sink": {
+                                    "name": "ETL_BATCH_NUMBER",
+                                    "type": "Decimal",
+                                    "physicalType": "DECIMAL"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "DML_DATE",
+                                    "type": "DateTime",
+                                    "physicalType": "datetime2"
+                                },
+                                "sink": {
+                                    "name": "DML_DATE",
+                                    "type": "DateTime",
+                                    "physicalType": "INT_96"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "DML_DATE_KEY",
+                                    "type": "Int32",
+                                    "physicalType": "int"
+                                },
+                                "sink": {
+                                    "name": "DML_DATE_KEY",
+                                    "type": "Int32",
+                                    "physicalType": "INT_32"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "IS_INBOUND",
+                                    "type": "Int32",
+                                    "physicalType": "int"
+                                },
+                                "sink": {
+                                    "name": "IS_INBOUND",
+                                    "type": "Int32",
+                                    "physicalType": "INT_32"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "SHELF_LIFE",
+                                    "type": "Int32",
+                                    "physicalType": "int"
+                                },
+                                "sink": {
+                                    "name": "SHELF_LIFE",
+                                    "type": "Int32",
+                                    "physicalType": "INT_32"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "EXPIRATION_DATE",
+                                    "type": "DateTime",
+                                    "physicalType": "datetime"
+                                },
+                                "sink": {
+                                    "name": "EXPIRATION_DATE",
+                                    "type": "DateTime",
+                                    "physicalType": "INT_96"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "PRODUCT_STATUS",
+                                    "type": "String",
+                                    "physicalType": "varchar"
+                                },
+                                "sink": {
+                                    "name": "PRODUCT_STATUS",
+                                    "type": "String",
+                                    "physicalType": "UTF8"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "STORAGE_TYPE",
+                                    "type": "String",
+                                    "physicalType": "varchar"
+                                },
+                                "sink": {
+                                    "name": "STORAGE_TYPE",
+                                    "type": "String",
+                                    "physicalType": "UTF8"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "UTC_EXPIRATION_DATE",
+                                    "type": "DateTime",
+                                    "physicalType": "datetime"
+                                },
+                                "sink": {
+                                    "name": "UTC_EXPIRATION_DATE",
+                                    "type": "DateTime",
+                                    "physicalType": "INT_96"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "LOFST_EXPIRATION_DATE",
+                                    "type": "DateTimeOffset",
+                                    "physicalType": "datetimeoffset"
+                                },
+                                "sink": {
+                                    "name": "LOFST_EXPIRATION_DATE",
+                                    "type": "DateTimeOffset",
+                                    "physicalType": "INT_96"
+                                }
+                            },
+                            {
+                                "source": {
+                                    "name": "HOLD_CODE",
+                                    "type": "String",
+                                    "physicalType": "varchar"
+                                },
+                                "sink": {
+                                    "name": "HOLD_CODE",
+                                    "type": "String",
+                                    "physicalType": "UTF8"
+                                }
+                            },
+							{
+                                "source": {
+                                    "name": "RECEIPT_NUMBER",
+                                    "type": "String",
+                                    "physicalType": "varchar"
+                                },
+                                "sink": {
+                                    "name": "RECEIPT_NUMBER",
+                                    "type": "String",
+                                    "physicalType": "UTF8"
+                                }
+                            }
+                    ]
+	},
+	"bronze": {
+		"processname": "fact_order_line_details_src_to_bronze",
+		"container": "bronze",
+		"system": "gld360",
+		"landingPath": "gld360/inbound/landing/fact_order_line_details",
+		"processedPath": "gld360/inbound/processed/fact_order_line_details",
+		"rejectedPath": "gld360/inbound/rejected/fact_order_line_details",
+    	"partitioncolumn": "etl_update_date"
+	},
+	"silver": {
+		"processname": "fact_order_line_details_brownze_to_silver",
+        "container": "silver",
+		"notebookpath": "/symphony-summary-layer/silver_zone/gld360-browze-to-silver",
+		"path": "gld360/inbound/fact_order_line_details",
+        "errorpath": "gld360/error_files/fact_order_line_details",
+        "insertColumns": [
+            "SOURCE_SYSTEM_KEY",
+            "CLIENT_KEY",
+            "WAREHOUSE_KEY",
+            "ITEM_KEY",
+            "UPS_ORDER_NUMBER",
+            "UPS_ORDER_LINE_NUMBER",
+            "UPS_ORDER_LINE_DETAIL_NUMBER",
+            "VENDOR_SERIAL_NUMBER",
+            "VENDOR_LOT_NUMBER",
+            "LPN_NUMBER",
+            "DISPOSITION_VALUE",
+            "ORDER_LINE_DETAILS_SDUK",
+            "ORDER_LINE_SDUK",
+            "CLIENT_SDUK",
+            "WAREHOUSE_SDUK",
+            "ITEM_SDUK",
+            "ETL_INSERT_DATE",
+            "ETL_UPDATE_DATE",
+            "ETL_BATCH_NUMBER",
+            "DML_DATE",
+            "DML_DATE_KEY",
+            "IS_INBOUND",
+            "SHELF_LIFE",
+            "EXPIRATION_DATE",
+            "PRODUCT_STATUS",
+            "STORAGE_TYPE",
+            "UTC_EXPIRATION_DATE",
+            "LOFST_EXPIRATION_DATE",
+            "HOLD_CODE"
+        ],
+		"updateColumns": [
+
+        ],
+		"joinColumns": [
+            "SOURCE_SYSTEM_KEY", 
+            "ORDER_LINE_DETAILS_SDUK"
+        ]
+	},
+	"gold": {
+        "processname": "fact_order_line_details_silver_to_gold",
+        "notebookpath": "/symphony-summary-layer/gold_zone/gld360-silver-to-gold",
+		"path": "gld360/inbound/fact_order_line_details",
+		"errorpath": "gld360/error_files/fact_order_line_details"
+	},
+	"controller": {
+		"schema": "controller",
+		"controlTable": "delta_control"
+	},
+	"email": {
+		"emailto" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtofail" : ["gd000012732@ups.com","gd000012733@ups.com"],
+		"emailtosuccess" : ["gd000012732@ups.com","gd000012733@ups.com","gd000011505@ups.com"]
+	},
+	"log": {
+		"logtable":"logs.ups_application_audit_logs"
+	},
+	"processing": {
+		"logpath": "dbfs:/mnt/logs/ups/gld360",
+		"clusterversion": "7.2.x-scala2.12",
+		"nodetype": "standard_ds3_v2",
+		"workercount": "2"
+	},
+	"archive": {
+		"enabled": true,
+        "container": "data-layer",
+		"path": "bronze/gld360/archive/table_name/partition_column"
+	}
+}

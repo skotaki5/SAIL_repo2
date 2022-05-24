@@ -1,0 +1,47 @@
+{
+    "name": "pl-ingestion-fact-inventory-snapshot",
+    "properties": {
+        "activities": [
+            {
+                "name": "Execute Ingestion Fact Inventory Snapshot",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Pl-Ingestion-From-SQLServer-ADLS2-Full-Load",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_metadata_folder_path": "gld360/pipeline/pl_fact_inventory_snapshot",
+                        "p_metadata_file_name": "fact_inventory_snapshot.json",
+                        "p_debug": {
+                            "value": "@pipeline().parameters.p_debug",
+                            "type": "Expression"
+                        },
+                        "p_metadata_container": "metadata"
+                    }
+                }
+            }
+        ],
+        "parameters": {
+            "p_schedule_time": {
+                "type": "string"
+            },
+            "p_debug": {
+                "type": "string"
+            }
+        },
+        "folder": {
+            "name": "Execute"
+        },
+        "annotations": [],
+        "lastPublishTime": "2022-02-24T04:16:36Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

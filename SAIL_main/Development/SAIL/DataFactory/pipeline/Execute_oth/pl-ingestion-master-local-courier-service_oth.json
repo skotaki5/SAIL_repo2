@@ -1,0 +1,47 @@
+{
+    "name": "pl-ingestion-master-local-courier-service_oth",
+    "properties": {
+        "activities": [
+            {
+                "name": "Execute Ingestion Master Local Courier Service",
+                "type": "ExecutePipeline",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "pipeline": {
+                        "referenceName": "Pl-Ingestion-From-SQLServer-ADLS2-Full-Load_oth",
+                        "type": "PipelineReference"
+                    },
+                    "waitOnCompletion": true,
+                    "parameters": {
+                        "p_schedule_time": {
+                            "value": "@pipeline().parameters.p_schedule_time",
+                            "type": "Expression"
+                        },
+                        "p_metadata_folder_path": "gld360/pipeline_oth/pl_local_courier_service/",
+                        "p_metadata_file_name": "local_courier_service.json",
+                        "p_debug": {
+                            "value": "@pipeline().parameters.p_debug",
+                            "type": "Expression"
+                        },
+                        "p_metadata_container": "metadata"
+                    }
+                }
+            }
+        ],
+        "parameters": {
+            "p_schedule_time": {
+                "type": "string"
+            },
+            "p_debug": {
+                "type": "string"
+            }
+        },
+        "folder": {
+            "name": "Execute_oth"
+        },
+        "annotations": [],
+        "lastPublishTime": "2022-03-16T10:40:13Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

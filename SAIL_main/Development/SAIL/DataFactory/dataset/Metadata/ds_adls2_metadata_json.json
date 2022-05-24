@@ -1,0 +1,44 @@
+{
+    "name": "ds_adls2_metadata_json",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "ls_adls2_user",
+            "type": "LinkedServiceReference"
+        },
+        "parameters": {
+            "p_metadata_container": {
+                "type": "string"
+            },
+            "p_metadata_folder_Path": {
+                "type": "string"
+            },
+            "p_metadata_file_name": {
+                "type": "string"
+            }
+        },
+        "folder": {
+            "name": "Metadata"
+        },
+        "annotations": [],
+        "type": "Json",
+        "typeProperties": {
+            "location": {
+                "type": "AzureBlobFSLocation",
+                "fileName": {
+                    "value": "@dataset().p_metadata_file_name",
+                    "type": "Expression"
+                },
+                "folderPath": {
+                    "value": "@dataset().p_metadata_folder_Path",
+                    "type": "Expression"
+                },
+                "fileSystem": {
+                    "value": "@dataset().p_metadata_container",
+                    "type": "Expression"
+                }
+            }
+        },
+        "schema": {}
+    },
+    "type": "Microsoft.DataFactory/factories/datasets"
+}
